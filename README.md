@@ -5,9 +5,9 @@ Revisione PB
 
 Università degli Studi di Padova
 
-**Ingegneria del Software - Gruppo 15: 6Coders**
+**Ingegneria del Software - Gruppo 6Coders**
 
-Corso di Laurea in Informatica - A.A.: 2023/2024
+Corso di Laurea in Informatica - A.A. 2023/2024
 
 ## Componenti del Gruppo
 
