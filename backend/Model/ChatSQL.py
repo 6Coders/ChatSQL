@@ -1,6 +1,6 @@
 
-from ChatSQL.Core.Embedder import Embedder
-from ChatSQL.Core.Model import Model
+from Core.Embedder import Embedder
+from Core.Model import Model
 
 ######### Questo è temporaneo #########
 
