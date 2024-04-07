@@ -1,5 +1,6 @@
 import json
 import os
+import JSONValidator
 
 class DBsManager:
     def __init__(self):
