@@ -3,9 +3,9 @@ class JSONValidator:
     def is_valid_structure(json_data):
         expected_keys = ["tables_info", "primary_key", "foreign_keys"]
         if all(key in json_data for key in expected_keys):
-            if Validator.validate_tables_info(json_data["tables_info"]) and \
-               Validator.validate_primary_key(json_data["primary_key"]) and \
-               Validator.validate_foreign_keys(json_data["foreign_keys"]):
+            if JSONValidator.validate_tables_info(json_data["tables_info"]) and \
+               JSONValidator.validate_primary_key(json_data["primary_key"]) and \
+               JSONValidator.validate_foreign_keys(json_data["foreign_keys"]):
                 return True
         return False
 

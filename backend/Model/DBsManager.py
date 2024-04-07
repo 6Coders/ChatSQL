@@ -28,7 +28,7 @@ class DBsManager:
             raise FileNotFoundError(f"Error adding file: '{file_path}'. File does not exist.")
         with open(file_path, 'r') as json_file:
             data = json.load(json_file)
-        if not Validator.is_valid_structure(data):
+        if not JSONValidator.is_valid_structure(data):
             raise ValueError(f"Error adding file: '{file_path}'. Invalid JSON structure.")
         
         if file_path in self.file_paths:
