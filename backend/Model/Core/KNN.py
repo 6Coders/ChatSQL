@@ -1,3 +1,5 @@
+import SearchAlgorithm
+import torch
 #Cosine similarity come metrica per KNN
 
 class KNN(SearchAlgorithm):
