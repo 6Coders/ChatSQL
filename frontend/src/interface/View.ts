@@ -1,3 +1,3 @@
-interface View {   
+interface View {
     
 }
