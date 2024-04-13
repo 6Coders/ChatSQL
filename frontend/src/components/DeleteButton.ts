@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Button } from "../interface/Button";
+import { Button } from "@/interfaces/Button";
 
 export default class DeleteButton implements Button {
   label: string;
