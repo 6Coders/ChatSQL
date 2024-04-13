@@ -6,14 +6,10 @@
                 <h1 class="display-2">Benvenuto</h1>
                 <h2 class="text-body-secondary mb-5">Che tipo di utente sei?</h2>
                 <div>
-                  <button @click="redirectButton.onClick">{{ redirectButton.label }}</button>
+                  <button @click="toRequestButton.onClick">{{ toRequestButton.label }}</button>
+                  <button @click="toManagerButton.onClick">{{ toManagerButton.label }}</button>
                 </div>
             </div>
-            <div class="col-md-2">
-            </div>
-            <div class="col-md-4">
-                <img src="../assets/logo.png" alt="Descrizione dell'immagine" class="img-fluid">
-           </div>
         </div>
     </div>
 </template>
@@ -26,10 +22,11 @@ import { useRouter } from 'vue-router';
 export default {
  setup() {
   const router = useRouter();
-    const redirectButton = ref(new RedirectButton('Prova', '/request', router));
-
+    const toRequestButton = ref(new RedirectButton('Utente', '/request', router));
+    const toManagerButton = ref(new RedirectButton('Amministratore', '/manager', router));
     return {
-      redirectButton,
+      toRequestButton,
+      toManagerButton,
     };
   }
 }

@@ -2,7 +2,7 @@
     <div id="app" class="container mt-6">
             <div class="row">
                 <div class="col-md-6">
-                    <h1 class="display-2">Request</h1>
+                    <h1 class="display-2">Manager</h1>
                     <button @click="toHomeButton.onClick">{{ toHomeButton.label }}</button>
                 </div>
             </div>
@@ -16,7 +16,7 @@ import RedirectButton from './RedirectButton';
 import { useRouter } from 'vue-router';
 
 export default {
- name: 'RequestPage',
+ name: 'ManagerPage',
  setup() {
   const router = useRouter();
     const toHomeButton = ref(new RedirectButton('Home', '/', router));
