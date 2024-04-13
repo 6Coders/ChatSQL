@@ -1,4 +1,5 @@
-import RedirectButton from '../../src/components/RedirectButton';
+import router from '@/router';
+import RedirectButton from '@/components/RedirectButton';
 
 describe('RedirectButton', () => {
   it('should redirect to the specified path when clicked', () => {
@@ -7,7 +8,7 @@ describe('RedirectButton', () => {
     Object.defineProperty(window, 'location', { value: mockWindow });
 
     // Crea un'istanza della classe RedirectButton
-    const redirectButton = new RedirectButton("Go to Homepage", "/home");
+    const redirectButton = new RedirectButton("Go to Homepage", "/home", router);
 
     // Simula il clic sul pulsante
     redirectButton.onClick();

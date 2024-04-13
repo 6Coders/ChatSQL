@@ -19,14 +19,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { ref } from 'vue';
 import RedirectButton from './RedirectButton';
+import { useRouter } from 'vue-router';
 
-export default defineComponent({
-  data() {
+export default {
+ setup() {
+  const router = useRouter();
+    const redirectButton = ref(new RedirectButton('Prova', '/request', router));
+
     return {
-      redirectButton: new RedirectButton('Prova', '/request') // Passa le tue etichette e i tuoi percorsi desiderati qui
+      redirectButton,
     };
   }
-});
+}
 </script>
