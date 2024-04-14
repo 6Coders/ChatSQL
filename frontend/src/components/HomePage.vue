@@ -1,4 +1,3 @@
-
 <template>
 <div id="app" class="container mt-6">
         <div class="row">
@@ -21,7 +20,7 @@ import { useRouter } from 'vue-router';
 
 export default {
  setup() {
-  const router = useRouter();
+    const router = useRouter();
     const toRequestButton = ref(new RedirectButton('Utente', '/request', router));
     const toManagerButton = ref(new RedirectButton('Amministratore', '/manager', router));
     return {
