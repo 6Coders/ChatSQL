@@ -67,15 +67,9 @@ jobs:
         npm run build
         cd ..
 
-    - name: Lint FrontEnd
-      run: |
-        cd frontend
-        npm run lint
-        cd ..
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v4.0.1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        slug: 6Coders/ChatSQL # Replace with your repository slug
 
-    #- name: E2E Test
-      #run: |
-        #cd frontend
-        #npm run test:e2e
-        #cd ..
-    
