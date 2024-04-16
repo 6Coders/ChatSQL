@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/6Coders/ChatSQL/graph/badge.svg?token=6Z13U7H3RS)](https://codecov.io/gh/6Coders/ChatSQL)
+
 # ChatSQL
 ChatSQL - Capitolato [C9] - Proponente Zucchetti SpA
 
