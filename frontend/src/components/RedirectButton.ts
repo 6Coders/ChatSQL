@@ -23,7 +23,7 @@ class RedirectButton implements Button {
 
   // Funzione per verificare se il percorso è uno dei percorsi definiti
   private isValidPath(path: string): boolean {
-    const definedPaths = ['/home', '/request', '/manager']; // I tuoi percorsi definiti
+    const definedPaths = ['/', '/request', '/manager']; // I tuoi percorsi definiti
 
     return definedPaths.includes(path);
   }
