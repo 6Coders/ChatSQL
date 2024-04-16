@@ -67,6 +67,12 @@ jobs:
         npm run build
         cd ..
 
+    - name: Linting Codice Vue.js
+      run: |
+        cd frontend
+        npm run lint
+        cd ..
+
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v4.0.1
       with:

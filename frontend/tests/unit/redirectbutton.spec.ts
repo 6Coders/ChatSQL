@@ -8,7 +8,7 @@ describe('RedirectButton', () => {
     router.push = routerPushMock;
 
     // Define the paths to test
-    const paths = ['/home', '/manager', '/request'];
+    const paths = ['/', '/manager', '/request'];
 
     // Iterate over the paths
     paths.forEach((path, index) => {
