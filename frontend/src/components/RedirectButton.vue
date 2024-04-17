@@ -1,38 +1,33 @@
 <template>
-  <GenericButton :buttonClass="buttonClass" @clicked="handleClick">
+  <button :buttonClass="buttonClass" @click="handleClick">
     <slot></slot>
-  </GenericButton>
+  </button>
 </template>
 
 <script>
-import GenericButton from "./GenericButton.vue";
+import { useRouter } from 'vue-router';
 
 export default {
-  components: {
-    GenericButton
-  },
+  name: 'RedirectButton',
   props: {
-    buttonClass: {
-      type: String,
-      default: "generic-button"
-    },
-    destination: {
-      type: String,
-      validator: value => {
-        const validDestinations = ['/', '/request', '/manager'];
-        if (!validDestinations.includes(value)) {
-          console.error(`Invalid destination provided: ${value}`);
-          return false; // Validation failed
-        }
-        return true; // Validation passed
-      },
-      required: true
-    }
+    destination: String,
+    buttonClass: String
   },
-  methods: {
-    handleClick() {
-      window.location.href = this.destination;
+  setup(props) {
+    const router = useRouter();
+
+    function handleClick() {
+      try {
+        router.push({ path: props.destination });
+      } catch (error) {
+        console.error(error);
+      }
     }
+
+    return {
+      handleClick,
+      router
+    };
   }
 };
 </script>

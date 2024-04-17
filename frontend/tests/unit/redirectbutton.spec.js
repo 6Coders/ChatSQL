@@ -1,68 +1,79 @@
+import { createRouter, createWebHistory } from 'vue-router';
 import { mount } from '@vue/test-utils';
 import RedirectButton from '@/components/RedirectButton.vue';
+import HomePage from '@/views/HomePage.vue';
+import RequestPage from '@/views/RequestPage.vue';
+import ManagerPage from '@/views/ManagerPage.vue';
 
 describe('RedirectButton', () => {
-    /*
-    it('redirects to the correct destination when clicked', async () => {
-        const assignMock = jest.fn();
-        delete window.location;
-        window.location = { assign: assignMock };
-      
-        const wrapper = mount(RedirectButton, {
-          props: {
-            destination: '/manager'
-          }
-        });
-      
-        await wrapper.find('button').trigger('click');
-      
-        expect(assignMock).toHaveBeenCalledWith('http://localhost/manager');
-      });
-      */
-  it('renders the button with the correct class request', () => {
-    const wrapper = mount(RedirectButton, {
-      props: {
-        destination: '/request',
-        buttonClass: 'test-button-class'
-      }
-    });
+  let router;
 
-    expect(wrapper.find('button').classes()).toContain('test-button-class');
-  });
-  it('renders the button with the correct class manager', () => {
-    const wrapper = mount(RedirectButton, {
-      props: {
-        destination: '/manager',
-        buttonClass: 'test-button-class'
-      }
+  beforeEach(() => {
+    router = createRouter({
+      history: createWebHistory(),
+      routes: [
+        { path: '/', component: HomePage },
+        { path: '/request', component: RequestPage },
+        { path: '/manager', component: ManagerPage },
+      ],
     });
-
-    expect(wrapper.find('button').classes()).toContain('test-button-class');
-  });
-  it('renders the button with the correct class ', () => {
-    const wrapper = mount(RedirectButton, {
-      props: {
-        destination: '/',
-        buttonClass: 'test-button-class'
-      }
-    });
-
-    expect(wrapper.find('button').classes()).toContain('test-button-class');
   });
 
-
-  it('logs a warning to console when an invalid destination is provided', () => {
-    const consoleError = console.error;
-    console.error = jest.fn();
-
-    mount(RedirectButton, {
-      props: {
-        destination: '/invalid'
-      }
+  it('redirects to the home page on button click', async () => {
+    const wrapper = mount(RedirectButton, {
+      props: { destination: '/' },
+      global: { plugins: [router] },
     });
 
-    expect(console.error).toHaveBeenCalledWith('Invalid destination provided: /invalid');
+    await wrapper.find('button').trigger('click');
+    await router.isReady();
 
-    console.error = consoleError;
+    expect(router.currentRoute.value.path).toBe('/');
+  });
+
+  it('redirects to the request page on button click', async () => {
+    const wrapper = mount(RedirectButton, {
+      props: { destination: '/request' },
+      global: { plugins: [router] },
+    });
+
+    await wrapper.find('button').trigger('click');
+    await router.isReady();
+
+    expect(router.currentRoute.value.path).toBe('/request');
+  });
+
+  it('redirects to the manager page on button click', async () => {
+    const wrapper = mount(RedirectButton, {
+      props: { destination: '/manager' },
+      global: { plugins: [router] },
+    });
+
+    await wrapper.find('button').trigger('click');
+    await router.isReady();
+
+    expect(router.currentRoute.value.path).toBe('/manager');
+  });
+
+  it('throws an error when an invalid destination is provided', async () => {
+    const routerOrigPush = router.push;
+    const pushMock = jest.fn().mockImplementation(() => {
+      throw new Error('Invalid route');
+    });
+  
+    router.push = pushMock;
+  
+    const wrapper = mount(RedirectButton, {
+      props: { destination: '/invalid' },
+      global: { plugins: [router] },
+    });
+  
+    try {
+      await wrapper.find('button').trigger('click');
+    } catch (error) {
+      expect(error).toEqual(new Error('Invalid route'));
+    }
+  
+    router.push = routerOrigPush;
   });
 });
