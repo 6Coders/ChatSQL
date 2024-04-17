@@ -32,3 +32,13 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Jest
+```
+npx jest
+```
+
+## Copertura del codice
+```
+npx jest --coverage
+```
