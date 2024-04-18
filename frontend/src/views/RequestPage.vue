@@ -1,12 +1,17 @@
 <template>
-    <div>
-      <h1>Request Page</h1>
-      <p>Contenuto della pagina di richiesta...</p>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    // Logica del componente, se necessario
-  }
-  </script>
+  <div>
+    <h1>Request Page</h1>
+    <p>Contenuto della pagina di richiesta...</p>
+    <input-file></input-file>
+  </div>
+</template>
+
+<script>
+import InputFile from '../components/InputFile.vue';
+
+export default {
+  components: {
+    InputFile
+  },
+}
+</script>
