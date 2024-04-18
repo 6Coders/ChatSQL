@@ -2,23 +2,24 @@
   <div>
     <h1>Request Page</h1>
 
-    <MessageList :messages="messages" />
-    <RequestInput v-model="requestMessage"/>
+    <ViewGeneratedPrompts :messages="messages" />
+    <InputRequest v-model="requestMessage"/>
     <SendRequestButton :requestMessage="requestMessage" @submit="handleMessage" />
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
-import RequestInput from '@/components/RequestInput.vue'
+import InputRequest from '@/components/InputRequest.vue'
 import SendRequestButton from '@/components/SendRequestButton.vue'
-import MessageList from '@/components/MessageList.vue'
+import ViewGeneratedPrompts from '@/components/ViewGeneratedPrompts.vue'
 
 export default {
+  name: 'RequestPage',
   components: {
-    RequestInput,
+    InputRequest,
     SendRequestButton,
-    MessageList
+    ViewGeneratedPrompts
   },
   setup() {
     const requestMessage = ref('')

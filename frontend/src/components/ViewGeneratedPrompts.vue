@@ -10,6 +10,7 @@
   
   <script>
   export default {
+    name: 'ViewGeneratedPrompts',
     props: {
       messages: {
         type: Array,

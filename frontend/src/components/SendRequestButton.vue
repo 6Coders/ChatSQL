@@ -1,37 +1,44 @@
 <template>
-    <button type="button" @click="submitForm" v-if="!isSending">Send Message</button>
-    <button type="button" @click="stopSending" v-else>Ferma</button>
+    <button type="button" @click="submitForm" v-if="!isSending">Invia</button>
+    <button type="button" title="Interrompi" @click="stopSending" v-else>Interrompi</button>
 </template>
   
   <script>
   import { ref } from 'vue'
-  
+  import axios from 'axios'
   export default {
+    name: 'SendRequestButton',
     props: ['requestMessage'],
     setup(props, { emit }) {
       const isSending = ref(false)
-      let shouldStop = false
-  
-      const simulateAsyncCall = () => {
+      const CancelToken = axios.CancelToken
+      let cancel
+
+      async function generatePrompt() {
         return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            if (shouldStop) {
-              reject('Stopped')
-            } else {
-              //resolve('Richiesta inviata: ' + props.requestMessage)
-              resolve('Ricevuto')
-            }
-          }, 2000)
+          axios.post('/generateprompt', { userRequest: props.requestMessage }, {
+            cancelToken: new CancelToken(function executor(c) {
+              cancel = c
+            })
+          })
+            .then(response => {
+              resolve(response.data.result);
+            })
+            .catch(error => {
+              if (axios.isCancel(error)) {
+                reject('Request canceled')
+              } else {
+                reject(error)
+              }
+            })
         })
       }
   
       async function submitForm() {
         isSending.value = true
-        shouldStop = false
         try {
-          const responseMessage = await simulateAsyncCall()
+          const responseMessage = await generatePrompt()
           emit('submit', responseMessage)
-          console.log(responseMessage)
         } catch (error) {
             emit('submit', 'Stopped')
             console.error(error)
@@ -41,7 +48,9 @@
       }
   
       const stopSending = () => {
-        shouldStop = true
+        if (cancel) {
+          cancel('Request canceled')
+        }
       }
   
       return {

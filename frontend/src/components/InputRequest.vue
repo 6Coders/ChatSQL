@@ -6,6 +6,7 @@
   import { ref } from 'vue'
   
   export default {
+    name: 'InputRequest',
     setup() {
       const requestMessage = ref('')
   
