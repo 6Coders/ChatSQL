@@ -12,7 +12,7 @@
     components: {
       RedirectButton
     },
-    data() {
+    setup() {
       return {
         buttonClass: "specific-button",
         destinationManager: "/manager",
