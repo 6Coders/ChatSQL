@@ -3,6 +3,7 @@
     <h1>Manager Page</h1>
     <p>Contenuto della pagina di richiesta...</p>
     <input-file @file-selected="handleFileSelected"></input-file>
+    <p>{{ errorMessages }}</p>
   </div>
 </template>
 
@@ -14,10 +15,24 @@ export default {
   components: {
     InputFile
   },
+  data() {
+    return {
+      errorMessages: ''
+    };
+  },
   methods: {
-    handleFileSelected(file) {
-      console.log('File selezionato:', file);
-      VMManager.handleFileSelected(file);
+    handleFileSelected(file) 
+    {
+      this.resetFields('');
+      VMManager.handleFileSelected(file, this.handleFileError, this.resetFields);
+    },
+    handleFileError(errorMessage) 
+    {
+      this.errorMessages = errorMessage;
+    },
+    resetFields() 
+    {
+      this.errorMessages = '';
     }
   }
 };

@@ -1,11 +1,18 @@
 import MManager from '@/model/MManager.js';
 
-// VMManager.js
 const VMManager = {
-    handleFileSelected(file) {
-      console.log('File selezionato:', file);
-      MManager.uploadFile(file);
+  handleFileSelected(file, handleFileError, resetFields) {
+    if (!MManager.convalidateFile(file)) {
+      handleFileError('File non valido');
+    } else 
+    {
+      resetFields();
+      if(!MManager.uploadFile(file))
+      {
+        handleFileError('Errore interno al server , non è stato possibile caricare il file');
+      }
     }
-  };
-  
-  export default VMManager;
+  }
+};
+
+export default VMManager;
