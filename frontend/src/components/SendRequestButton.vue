@@ -1,6 +1,6 @@
 <template>
-  <button type="button" @click="submitForm" v-if="!isSending">Invia</button>
-  <button type="button" title="Interrompi" @click="stopSending" v-else>Interrompi</button>
+  <button :class="sendButtonClass" type="button" @click="submitForm" v-if="!isSending">Invia</button>
+  <button :class="stopSendButtonClass" type="button" title="Interrompi" @click="stopSending" v-else>Interrompi</button>
 </template>
 
 <script>
@@ -8,7 +8,11 @@ import { ref } from 'vue'
 import axios from 'axios'
 export default {
   name: 'SendRequestButton',
-  props: ['requestMessage'],
+  props: {
+    requestMessage: String,
+    sendButtonClass: String,
+    stopSendButtonClass: String,
+  },
   setup(props, { emit }) {
     const isSending = ref(false)
     const CancelToken = axios.CancelToken
@@ -36,6 +40,7 @@ export default {
 
     async function submitForm() {
       isSending.value = true
+      emit('request', props.requestMessage)
       try {
         const responseMessage = await generatePrompt()
         emit('submit', responseMessage)

@@ -2,6 +2,7 @@
 
 exports[`SendRequestButton.vue renders correctly 1`] = `
 <button
+  class=""
   type="button"
 >
   Invia

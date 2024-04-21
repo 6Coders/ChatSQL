@@ -1,9 +1,8 @@
 <template>
-    <ul>
+    <ul class="list-unstyled">
       <li v-for="(message, index) in messages" :key="index">
-        <span v-if="message.type === 'user'">User: </span>
-        <span v-else-if="message.type === 'response'">Response: </span>
-        {{ message.text }}
+        <span v-if="message.type === 'user'" class="bg-info">User: {{ message.text }} </span>
+        <span v-else-if="message.type === 'response'" class="bg-dark text-white">Response: {{ message.text }} </span>
       </li>
     </ul>
   </template>
