@@ -6,31 +6,26 @@
     <InputRequest v-model="requestMessage"/>
     <SendRequestButton :requestMessage="requestMessage" @submit="handleMessage" />
     <p>Torna alla home<RedirectButton :buttonClass="buttonClass" :destination="destinationHome">Torna alla home</RedirectButton></p>
-  </div>-->
+</div>-->
   <div class="container mt-5">
     <h1 class="display-2">Generazione Prompt</h1>
     <h3 class="mt-4">Dizionario dati caricato: prova</h3>
 
-    <div class="row mt-5">
-      <div class="col-md-6">
-        <label for="inputText" class="form-label">Inserisci del testo:</label>
-        <InputRequest v-model="requestMessage"/>
-      </div>
-      <div class="col-md-6">
-        <SendRequestButton :requestMessage="requestMessage" @submit="handleMessage" />
-      </div>
-    </div>
+  </div>
+  <div class="container mt-5">
+    <h1>Chat richieste</h1>
 
-    <!-- Seconda riga per il "Prompt generato" -->
-    <div class="row mt-4">
-      <div class="col-md-12">
-        <h2>Prompt generato</h2>
-        <ViewGeneratedPrompts :messages="messages" />
-      </div>
-    </div>
+    <!-- Messaggi chat -->
+    <ViewGeneratedPrompts :messages="messages" />
 
+    <!-- Input per l'utente -->
+    <div class="input-group mt-3">
+       <InputRequest v-model="requestMessage" :requestClass="requestClass"/>
+       <SendRequestButton :requestMessage="requestMessage" @submit="handleMessage" :sendButtonClass="sendButtonClass" :stopSendButtonClass="stopSendButtonClass"/>
+    </div>
   </div>
 
+  <!-- bottone home-->
   <div class="container-fluid fixed-bottom mb-5 ml-5">
     <RedirectButton :buttonClass="buttonClass" :destination="destinationHome">Torna alla home</RedirectButton>
   </div>
@@ -58,8 +53,18 @@ export default {
       requestMessage,
       messages,
       handleMessage,
+      destinationHome: "/",
+
+      /*ASPETTO COMPONENTI*/
+      //redirect button
       buttonClass: "btn btn-secondary",
-      destinationHome: "/"
+
+      //send button
+      sendButtonClass: "btn btn-primary",
+      stopSendButtonClass: "btn btn-warning",
+
+      //input request
+      requestClass: "form-control"
     }
   }
 }
