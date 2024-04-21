@@ -16,7 +16,9 @@
     <h1>Chat richieste</h1>
 
     <!-- Messaggi chat -->
-    <ViewGeneratedPrompts :messages="messages" />
+    <div class=" bg-light p-3 rounded overflow-auto" style="max-height: 300px; height: 300px">
+      <ViewGeneratedPrompts :messages="messages" />
+    </div>
 
     <!-- Input per l'utente -->
     <div class="input-group mt-3">
