@@ -5,6 +5,7 @@ export default function RequestPageViewModel() {
 
   const handleMessage = (responseMessage) => {
     if (responseMessage != 'Stopped') {
+      console.log('RequestPageViewModel.handleMessage')
       addMessage('user', requestMessage.value)
       addMessage('response', responseMessage)
     }

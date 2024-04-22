@@ -4,16 +4,19 @@
     <p>Contenuto della pagina di richiesta...</p>
     <input-file @file-selected="handleFileSelected"></input-file>
     <p>{{ errorMessages }}</p>
+    <view-dictonary></view-dictonary>
   </div>
 </template>
 
 <script>
 import InputFile from '@/components/InputFile.vue';
+import ViewDictonary from '@/components/ViewDictionary.vue';
 import VMManager from '../viewmodel/VMManager.js';
 
 export default {
   components: {
-    InputFile
+    InputFile,
+    ViewDictonary
   },
   data() {
     return {

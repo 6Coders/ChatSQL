@@ -10,16 +10,15 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       });
-      console.log('Risposta dal backend:', response.status);
-      
-      // Controllo se la richiesta è stata soddisfatta con successo
+      console.log('Risposta dal backend:', response.status);  
       if (response.status === 200 || response.status === 201) {
-        return true; // Operazione di caricamento del file riuscita
+        return true; 
       } else {
-        return false; // Operazione di caricamento del file fallita
+        return false;
       }
     } catch (error) {
-      return false; // Operazione di caricamento del file fallita
+      console.error('Errore durante l\'invio del file al backend:', error);
+      return false;
     }
   },
     convalidateFile(file) {
