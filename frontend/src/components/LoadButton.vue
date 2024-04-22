@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'LoadButton',  
   methods: {
     handleClick() {
       this.$emit('click');
