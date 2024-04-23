@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1713771661030" clover="3.2.0">
-  <project timestamp="1713771661030" name="All files">
-    <metrics statements="169" coveredstatements="110" conditionals="52" coveredconditionals="23" methods="38" coveredmethods="12" elements="259" coveredelements="145" complexity="0" loc="169" ncloc="169" packages="4" files="15" classes="15"/>
+<coverage generated="1713859469649" clover="3.2.0">
+  <project timestamp="1713859469649" name="All files">
+    <metrics statements="168" coveredstatements="110" conditionals="52" coveredconditionals="23" methods="38" coveredmethods="12" elements="258" coveredelements="145" complexity="0" loc="168" ncloc="168" packages="4" files="15" classes="15"/>
     <package name="components">
       <metrics statements="97" coveredstatements="82" conditionals="38" coveredconditionals="23" methods="23" coveredmethods="12"/>
       <file name="DeleteButton.vue" path="C:\Users\Yuri\OneDrive\Desktop\6coders\ChatSQL\ChatSQL\frontend\src\components\DeleteButton.vue">
@@ -23,9 +23,9 @@
         <line num="4" count="2" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
         <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="22" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
@@ -33,8 +33,8 @@
         <line num="31" count="2" type="stmt"/>
         <line num="34" count="2" type="stmt"/>
         <line num="35" count="2" type="stmt"/>
-        <line num="37" count="2" type="stmt"/>
-        <line num="40" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="40" count="1" type="cond" truecount="4" falsecount="0"/>
         <line num="44" count="0" type="cond" truecount="2" falsecount="2"/>
         <line num="46" count="2" type="stmt"/>
       </file>
@@ -55,14 +55,14 @@
         <line num="4" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="26" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="27" count="1" type="stmt"/>
       </file>
       <file name="RedirectButton.vue" path="C:\Users\Yuri\OneDrive\Desktop\6coders\ChatSQL\ChatSQL\frontend\src\components\RedirectButton.vue">
         <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
@@ -157,7 +157,7 @@
       </file>
     </package>
     <package name="viewmodel">
-      <metrics statements="12" coveredstatements="1" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <metrics statements="11" coveredstatements="1" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="VMManager.js" path="C:\Users\Yuri\OneDrive\Desktop\6coders\ChatSQL\ChatSQL\frontend\src\viewmodel\VMManager.js">
         <metrics statements="5" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="1" type="stmt"/>
@@ -167,14 +167,13 @@
         <line num="12" count="0" type="stmt"/>
       </file>
       <file name="VMRequest.js" path="C:\Users\Yuri\OneDrive\Desktop\6coders\ChatSQL\ChatSQL\frontend\src\viewmodel\VMRequest.js">
-        <metrics statements="7" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <metrics statements="6" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="4" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
       </file>
     </package>
     <package name="views">
