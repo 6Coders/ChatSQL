@@ -1,13 +1,18 @@
 <template>
-  <div>
-    <input type="file" ref="fileInput" @change="handleFileUpload">
-    <input type="button" value="Upload" @click="emitFile">
+  <div class="d-flex">
+    <input :class="inputFileClass" type="file" ref="fileInput" @change="handleFileUpload">
+    <input :class="uploadClass" type="button" value="Upload" @click="emitFile">
   </div>
 </template>
 
 <script>
 export default {
   name: 'InputFile',
+  props:{
+    //props per la grafica
+    inputFileClass: String,
+    uploadClass: String
+  },
   data() {
     return {
       file: null

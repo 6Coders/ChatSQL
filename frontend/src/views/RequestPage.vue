@@ -13,7 +13,7 @@
 
   </div>
   <div class="container mt-5">
-    <h1>Chat richieste</h1>
+    <h2>Chat richieste</h2>
 
     <!-- Messaggi chat -->
     <div class=" bg-light p-3 rounded overflow-auto" style="max-height: 300px; height: 300px">

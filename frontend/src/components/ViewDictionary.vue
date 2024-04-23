@@ -1,8 +1,8 @@
 <template>
-  <div> 
-    <button @click="addNewEntry('Nuova voce','2')">Aggiungi Riga</button>
+  <div>
     <h2>Dictionary View</h2>
-    <table>
+    <button class="btn btn-primary" @click="addNewEntry('Nuova voce','2')">Aggiungi Riga</button>
+    <table class="table">
       <thead>
         <tr>
           <th>Name</th>
@@ -59,7 +59,8 @@ export default {
       dictionaryEntries,
       addNewEntry,
       loadButtonClick,
-      deleteButtonClick
+      deleteButtonClick,
+
     };
   }
 };
