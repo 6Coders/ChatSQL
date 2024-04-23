@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.33% </span>
+                <span class="strong">61.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/15</span>
+                <span class='fraction'>11/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.33% </span>
+                <span class="strong">61.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/15</span>
+                <span class='fraction'>11/18</span>
             </div>
         
             
@@ -118,7 +118,18 @@
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -170,72 +181,94 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-    &lt;div&gt;
-      &lt;h2&gt;Dictionary View&lt;/h2&gt;
-      &lt;table&gt;
-        &lt;thead&gt;
-          &lt;tr&gt;
-            &lt;th&gt;Name&lt;/th&gt;
-            &lt;th&gt;Load&lt;/th&gt;
-            &lt;th&gt;Delete&lt;/th&gt;
-          &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-          &lt;tr v-for="(entry, index) in dictionaryEntries" :key="index"&gt;
-            &lt;td&gt;{{ entry.name }}&lt;/td&gt;
-            &lt;td&gt;
-              &lt;LoadButton :index="index" @clicked="handleButton1Clicked" /&gt;
-            &lt;/td&gt;
-            &lt;td&gt;
-              &lt;DeleteButton :index="index" @clicked="handleButton2Clicked" /&gt;
-            &lt;/td&gt;
-          &lt;/tr&gt;
-        &lt;/tbody&gt;
-      &lt;/table&gt;
-    &lt;/div&gt;
-  &lt;/template&gt;
-  
-  &lt;script&gt;
-  import LoadButton from '@/components/LoadButton.vue';
-  import DeleteButton from '@/components/DeleteButton.vue';
-  
-  export default {
-    name:'ViewDictionary',
-    components: {
-      LoadButton,
-      DeleteButton
-    },
-    data() {
-      return {
-        dictionaryEntries: [],
-        rowIndex: 0
-      };
-    },
-    methods: {
-      addNewRow() {
-        this.dictionaryEntries.push({ name: 'New Dictionary Entry', index: this.rowIndex });
-        this.rowIndex++;
-      },
-      handleButton1Clicked(index) {
-        console.log('LoadButton clicked for row index:', index);
-      },
-      handleButton2Clicked(index) {
-        console.log('DeleteButton clicked for row index:', index);
-      }
+  &lt;div&gt; 
+    &lt;button @click="addNewEntry('Nuova voce','2')"&gt;Aggiungi Riga&lt;/button&gt;
+    &lt;h2&gt;Dictionary View&lt;/h2&gt;
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Name&lt;/th&gt;
+          &lt;th&gt;Load&lt;/th&gt;
+          &lt;th&gt;Delete&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr v-for="(entry, index) in dictionaryEntries" :key="index"&gt;
+          &lt;td&gt;{{ entry.name }}&lt;/td&gt;
+          &lt;td&gt;
+            &lt;LoadButton :id="entry.id" :name="entry.name"  :class="loadButtonClass"  @load-click="loadButtonClick(entry.id)" /&gt;
+          &lt;/td&gt;
+          &lt;td&gt;
+            &lt;DeleteButton :id="entry.id" :name="entry.name" :class="deleteButtonClass" @delete-click="deleteButtonClick(entry.id)" /&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&nbsp;
+&lt;script&gt;
+import { ref } from 'vue';
+import LoadButton from '@/components/LoadButton.vue';
+import DeleteButton from '@/components/DeleteButton.vue';
+&nbsp;
+export default {
+  name: 'ViewDictionary',
+  components: {
+    LoadButton,
+    DeleteButton
+  },
+  props: {
+    loadButtonClass: String,
+    deleteButtonClass: String 
+  },
+  setup(props, { emit }) {
+    const dictionaryEntries = ref([]);
+&nbsp;
+    function addNewEntry(name, id) {
+      dictionaryEntries.value.push({ name: name, id: id });
     }
-  };
-  &lt;/script&gt;</pre></td></tr></table></pre>
+&nbsp;
+    function loadButtonClick(id) {
+      emit('load-button-clicked', id);
+    }
+&nbsp;
+    function deleteButtonClick(id) {
+      emit('delete-button-clicked', id);
+    }
+&nbsp;
+    return {
+      dictionaryEntries,
+      addNewEntry,
+      loadButtonClick,
+      deleteButtonClick
+    };
+  }
+};
+&lt;/script&gt;
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-23T08:04:29.574Z
+                at 2024-04-23T09:47:21.009Z
             </div>
         <script src="../prettify.js"></script>
         <script>

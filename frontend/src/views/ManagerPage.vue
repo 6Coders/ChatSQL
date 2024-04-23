@@ -4,38 +4,45 @@
     <p>Contenuto della pagina di richiesta...</p>
     <input-file @file-selected="handleFileSelected"></input-file>
     <p>{{ errorMessages }}</p>
-    <view-dictonary></view-dictonary>
+    <view-dictionary @load-button-clicked="handleLoadButtonClicked" @delete-button-clicked="handleDeleteButtonClicked"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass"></view-dictionary>
   </div>
 </template>
 
 <script>
 import InputFile from '@/components/InputFile.vue';
-import ViewDictonary from '@/components/ViewDictionary.vue';
+import ViewDictionary from '@/components/ViewDictionary.vue';
 import VMManager from '../viewmodel/VMManager.js';
 
 export default {
   components: {
     InputFile,
-    ViewDictonary
+    ViewDictionary
   },
   data() {
     return {
-      errorMessages: ''
+      errorMessages: '',
+      loadButtonClass: 'btn btn-primary mt-auto',
+      deleteButtonClass: 'btn btn-primary mt-auto'
     };
   },
   methods: {
-    handleFileSelected(file) 
-    {
+    handleFileSelected(file) {
       this.resetFields('');
       VMManager.handleFileSelected(file, this.handleFileError, this.resetFields);
     },
-    handleFileError(errorMessage) 
-    {
+    handleFileError(errorMessage) {
       this.errorMessages = errorMessage;
     },
-    resetFields() 
-    {
+    resetFields() {
       this.errorMessages = '';
+    },
+    handleLoadButtonClicked(index) {
+      console.log('LoadButton clicked for row index:', index);
+
+    },
+    handleDeleteButtonClicked(index) {
+      console.log('DeleteButton clicked for row index:', index);
+
     }
   }
 };

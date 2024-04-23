@@ -1,16 +1,23 @@
 <template>
-  <button @click="handleClick">
-    <slot></slot>
-  </button>
+  <button :class="LoadButtonClass" type="button" @click="loadDictionary">Load</button>
 </template>
 
 <script>
 export default {
-  name: 'LoadButton',  
-  methods: {
-    handleClick() {
-      this.$emit('click');
+  name: 'LoadButton',
+  props: {
+    LoadButtonClass: String,
+    id: String
+  },
+  setup(props, { emit }) {
+
+    function loadDictionary() {
+      emit('load-click', props.id);
     }
+
+    return {
+      loadDictionary
+    };
   }
 };
 </script>
