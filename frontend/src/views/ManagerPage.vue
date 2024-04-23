@@ -5,9 +5,14 @@
     <input-file ref="fileInput" @file-selected="handleFileSelected"></input-file>
     <view-dictionary @load-button-clicked="handleLoadButtonClicked" @delete-button-clicked="handleDeleteButtonClicked"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass"></view-dictionary>
   </div>
+
+  <div class="container-fluid fixed-bottom mb-5 ml-5">
+    <RedirectButton :buttonClass="buttonClass" :destination="destinationHome">Torna alla home</RedirectButton>
+  </div>
 </template>
 
 <script>
+import RedirectButton from '@/components/RedirectButton.vue';
 import InputFile from '@/components/InputFile.vue';
 import ViewDictionary from '@/components/ViewDictionary.vue';
 import VMManager from '@/viewmodel/VMManager.js';
@@ -15,6 +20,7 @@ import VMManager from '@/viewmodel/VMManager.js';
 export default {
   name: 'ManagerPage',
   components: {
+    RedirectButton,
     InputFile,
     ViewDictionary
   },

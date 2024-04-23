@@ -14,7 +14,6 @@
   </div>
   <div class="container mt-5">
     <h1>Chat richieste</h1>
-
     <!-- Messaggi chat -->
     <div class=" bg-light p-3 rounded overflow-auto" style="max-height: 300px; height: 300px">
       <ViewGeneratedPrompts :messages="messages" />
@@ -22,8 +21,8 @@
 
     <!-- Input per l'utente -->
     <div class="input-group mt-3">
-       <InputRequest v-model="requestMessage" :requestClass="requestClass"/>
-       <SendRequestButton :requestMessage="requestMessage" @submit="handleMessage" :sendButtonClass="sendButtonClass" :stopSendButtonClass="stopSendButtonClass"/>
+       <input type="text" class="form-control" v-model="requestMessage" name="requestMessage">
+       <SendRequestButton :submitMethod="submitForm" :stopSubmitMethod="stopSending" :sendButtonClass="sendButtonClass" :stopSendButtonClass="stopSendButtonClass" :status="isSending"/>
     </div>
   </div>
 
@@ -34,7 +33,6 @@
 </template>
 
 <script>
-import InputRequest from '@/components/InputRequest.vue'
 import SendRequestButton from '@/components/SendRequestButton.vue'
 import RedirectButton from '@/components/RedirectButton.vue'
 import ViewGeneratedPrompts from '@/components/ViewGeneratedPrompts.vue'
@@ -43,18 +41,22 @@ import RequestPageViewModel from '@/viewmodel/VMRequest'
 export default {
   name: 'RequestPage',
   components: {
-    InputRequest,
     RedirectButton,
     SendRequestButton,
     ViewGeneratedPrompts
   },
   setup() {
-    const { requestMessage, messages, handleMessage } = RequestPageViewModel()
+    const { 
+      requestMessage, messages, handleMessage, submitForm, stopSending, isSending
+    } = RequestPageViewModel()
 
     return {
       requestMessage,
       messages,
       handleMessage,
+      submitForm,
+      stopSending,
+      isSending,
       destinationHome: "/",
 
       /*ASPETTO COMPONENTI*/
