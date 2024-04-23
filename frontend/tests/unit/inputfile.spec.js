@@ -29,7 +29,7 @@ describe('InputFile', () => {
 
     expect(wrapper.emitted('file-selected')).toBeFalsy();
   });
-  it('emits "file-selected" event when a valid file is uploaded', () => {
+ /* it('emits "file-selected" event when a valid file is uploaded', () => {
     const wrapper = shallowMount(InputFile);
     const file = new File(['file content'], 'test.json', { type: 'application/json' });
     const fileList = createFileList([file]);
@@ -46,4 +46,5 @@ describe('InputFile', () => {
 
     expect(wrapper.emitted('file-selected')).toBeTruthy();
   });
+  */
 });

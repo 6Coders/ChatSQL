@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.19% </span>
+                <span class="strong">76.47% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/21</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>13/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">60% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>3/5</span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>6/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.19% </span>
+                <span class="strong">66.66% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>4/6</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">76.47% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/21</span>
+                <span class='fraction'>13/17</span>
             </div>
         
             
@@ -98,75 +98,75 @@
 <a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-    &lt;div&gt;
-      &lt;input type="file" @change="handleFileUpload"&gt;
-    &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="file" ref="fileInput" @change="handleFileUpload"&gt;
+    &lt;input type="button" value="Upload" @click="emitFile"&gt;
+  &lt;/div&gt;
 &lt;/template&gt;
-  
+&nbsp;
 &lt;script&gt;
-  export default {
-    name: 'InputFile',
-    methods: {
-      handleFileUpload(event) {
-        const file = event.target.files[0];
-        if (this.isExtensionAllowed(file) &amp;&amp; this.isSizeValid(file)) {
-          console.log("Il file è valido.");
-          this.$emit('file-selected', file);
-        } else {
-          console.error('Il file non è valido.');
-          return false;
-        }
-      },
-<span class="fstat-no" title="function not covered" ></span>      isExtensionAllowed(file) {
-        const allowedExtensions <span class="cstat-no" title="statement not covered" >= ['.json'</span>];
-        const extension <span class="cstat-no" title="statement not covered" >= file.name.split('.').pop().toLowerCase(</span>);
-<span class="cstat-no" title="statement not covered" >        return allowedExtensions.includes('.' + extension)</span>;
-      },
-<span class="fstat-no" title="function not covered" ></span>      isSizeValid(file) {
-        const maxSize <span class="cstat-no" title="statement not covered" >= 500 * 102</span>4; 
-<span class="cstat-no" title="statement not covered" >        return file.size &lt;= maxSize</span>;
+export default {
+  name: 'InputFile',
+  data() {
+    return {
+      file: null
+    }
+  },
+  methods: {
+    handleFileUpload(event) {
+      this.file = event.target.files[0];
+      console.log('File inserito:', this.file);
+<span class="fstat-no" title="function not covered" >    },</span>
+    em<span class="cstat-no" title="statement not covered" >itFile() {</span>
+      if<span class="cstat-no" title="statement not covered" > (this.file) </span>
+      {
+<span class="cstat-no" title="statement not covered" >        this.$emit('file-selected', this.file);</span>
+      } else 
+      {
+        console.error('Nessun file selezionato');
       }
     }
   }
+}
 &lt;/script&gt;
-  </pre></td></tr></table></pre>
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-19T10:23:20.787Z
+                at 2024-04-23T08:04:29.574Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -1,33 +1,32 @@
 <template>
-    <div>
-      <input type="file" @change="handleFileUpload">
-    </div>
+  <div>
+    <input type="file" ref="fileInput" @change="handleFileUpload">
+    <input type="button" value="Upload" @click="emitFile">
+  </div>
 </template>
-  
+
 <script>
-  export default {
-    name: 'InputFile',
-    methods: {
-      handleFileUpload(event) {
-        const file = event.target.files[0];
-        if (this.isExtensionAllowed(file) && this.isSizeValid(file)) {
-          console.log("Il file è valido.");
-          this.$emit('file-selected', file);
-        } else {
-          console.error('Il file non è valido.');
-          return false;
-        }
-      },
-      isExtensionAllowed(file) {
-        const allowedExtensions = ['.json'];
-        const extension = file.name.split('.').pop().toLowerCase();
-        return allowedExtensions.includes('.' + extension);
-      },
-      isSizeValid(file) {
-        const maxSize = 500 * 1024; 
-        return file.size <= maxSize;
+export default {
+  name: 'InputFile',
+  data() {
+    return {
+      file: null
+    }
+  },
+  methods: {
+    handleFileUpload(event) {
+      this.file = event.target.files[0];
+      console.log('File inserito:', this.file);
+    },
+    emitFile() {
+      if (this.file) 
+      {
+        this.$emit('file-selected', this.file);
+      } else 
+      {
+        console.error('Nessun file selezionato');
       }
     }
   }
+}
 </script>
-  
