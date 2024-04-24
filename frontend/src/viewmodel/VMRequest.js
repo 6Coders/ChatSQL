@@ -43,13 +43,20 @@ export default function RequestPageViewModel() {
   }
 
   // funzione di test per vedere se axios funziona
-  async function testCall() {
-    return axios
-    .get('https://catfact.ninja/fact')
-    .then((response) => {
-       return response.data.fact
-    })
-  }
+async function testCall() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      axios
+        .get('https://catfact.ninja/fact')
+        .then((response) => {
+          resolve(response.data.fact);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    }, 2000); // delay of 2 seconds
+  });
+}
 
 
   async function submitForm() {

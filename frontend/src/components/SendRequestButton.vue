@@ -1,9 +1,10 @@
 <template>
-  <button :class="sendButtonClass" type="button" @click="submitMethod" v-if="!status">Invia</button>
+  <button :class="sendButtonClass" type="button" @click="submitMethod" v-if="!isSending">Invia</button>
   <button :class="stopSendButtonClass" type="button" title="Interrompi" @click="stopSubmitMethod" v-else>Interrompi</button>
 </template>
 
 <script>
+import RequestPageViewModel from '@/viewmodel/VMRequest'
 export default {
   name: 'SendRequestButton',
   props: {
@@ -14,6 +15,12 @@ export default {
     status: {
       type: Boolean,
       default: false
+    }
+  },
+  setup() {
+    const { isSending } = RequestPageViewModel()
+    return {
+      isSending
     }
   }}
 </script>
