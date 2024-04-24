@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-column justify-content-center align-items-center">
-    <div v-if="messages.length === 0" class="text-center text-black py-10"  style="margin: 100px;">
+    <div v-if="messages.length === 0" class="text-center text-black py-5 mt-5">
       <img src="../assets/6Coders-logo-original.png" alt="Logo" class="img-fluid" style="max-width: 100px;">
       <h4 class="mt-5">Come ti possiamo aiutare?</h4>
     </div>

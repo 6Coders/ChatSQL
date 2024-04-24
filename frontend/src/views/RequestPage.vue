@@ -1,12 +1,12 @@
 <template>
-  <div class="d-flex flex-column vh-100">
+  <div class="d-flex flex-column vh-80">
     <!-- Messaggi chat -->
-    <div class="overflow-auto mt-5 flex-grow-1 px-5">
+    <div class="overflow-auto flex-grow-1 px-5 mb-5">
       <ViewGeneratedPrompts :messages="requestStore.messages" :status="requestStore.isSending" />
     </div>
 
     <!-- Input per l'utente -->
-    <div class="input-group mt-5 px-5 pb-5 bg-white rounded">
+    <div class="input-group mt-2 px-5 pb-5 bg-white rounded fixed-bottom">
       <input type="text" class="form-control" v-model="requestStore.requestMessage" name="requestMessage" autocomplete="off" placeholder="Inserisci un prompt qui...">
       <SendRequestButton :submitMethod="submitForm" :stopSubmitMethod="stopSending" :sendButtonClass="sendButtonClass"
         :stopSendButtonClass="stopSendButtonClass" :status="requestStore.isSending" />
