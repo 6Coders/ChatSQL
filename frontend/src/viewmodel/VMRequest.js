@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { requestPageStore } from '@/stores/requestStore'
 
 export default function RequestPageViewModel() {
@@ -15,52 +14,11 @@ export default function RequestPageViewModel() {
     requestStore.setRequestMessage('')
   }
 
-  async function generatePrompt() {
-    return new Promise((resolve, reject) => {
-      axios.post('/generateprompt', { userRequest: requestStore.requestMessage.value }, {
-        cancelToken: new requestStore.CancelToken(function executor(c) {
-          requestStore.cancelObj.cancel = c
-        })
-      })
-        .then(response => {
-          resolve(response.data.result)
-        })
-        .catch(error => {
-          if (axios.isCancel(error)) {
-            reject('Request canceled')
-          } else {
-            reject(error)
-          }
-        })
-    })
-  }
-
-  // funzione di test per vedere se axios funziona
-  async function testCall() {
-    const cancelTokenSource = axios.CancelToken.source()
-    requestStore.setCancelTokenSource(cancelTokenSource)
-  
-    try {
-      const response = await axios.get( 'https://catfact.ninja/fact', {
-        cancelToken: cancelTokenSource.token
-      })
-      return response.data.fact
-    } catch (error) {
-      if (axios.isCancel(error)) {
-        console.log('Request cancelled:', error.message)
-        return 'Stopped'
-      } else {
-        return 'Error'
-      }
-    }
-  }
-
-
   async function submitForm() {
     requestStore.setIsSending(true)
     console.log(requestStore.isSending)
     try {
-      const result = await testCall()
+      const result = await requestStore.testApiCall()
       handleMessage(result)
     } catch (error) {
       handleMessage('Stopped')
@@ -71,18 +29,12 @@ export default function RequestPageViewModel() {
   }
 
   function stopSending() {
-    if (requestStore.cancelTokenSource) {
-      requestStore.cancelTokenSource.cancel('Request cancelled.')
-      requestStore.setCancelTokenSource(null)
-    }
+    requestStore.cancelRequest()
   }
-
-
 
   return {
     requestStore,
     submitForm,
     stopSending,
-    generatePrompt
   }
 }

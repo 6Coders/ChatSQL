@@ -1,35 +1,27 @@
-<!-- Navbar.vue -->
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <div class="container-fluid d-flex justify-content-center">
-        <div class="collapse navbar-collapse d-flex justify-content-center">
-          <ul class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center justify-content-center">
-            <li class="nav-item">
-              <router-link class="nav-link" exact-active-class="active" to="/">Home</router-link>
-            </li>
-            <span class="mx-2">/</span>
-            <li class="nav-item">
-              <router-link class="nav-link" exact-active-class="active" to="/request">Chat</router-link>
-            </li>
-            <span class="mx-2">/</span>
-            <li class="nav-item">
-              <router-link class="nav-link" exact-active-class="active" to="/Manager">Admin</router-link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </template>
-  
-  <script>
-  export default {
-    name: 'NavbarComponent'
-  }
-  </script>
-  
-  <style scoped>
-  .nav-link.active {
-    text-decoration: underline;
-    text-decoration-color: blue;
-  }
-  </style>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light px-3 fixed-top">
+    <router-link class="navbar-brand" to="/">ChatSQL</router-link>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <router-link class="nav-link" :class="{ 'text-primary': $route.path === '/' }" to="/">Home</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" :class="{ 'text-primary': $route.path === '/request' }" to="/request">Request</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" :class="{ 'text-primary': $route.path === '/manager' }" to="/manager">Manager</router-link>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</template>
+
+<script>
+export default {
+  name: 'NavbarComponent'
+}
+</script>

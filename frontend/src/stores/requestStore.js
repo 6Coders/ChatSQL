@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import axios from 'axios'
 
 export const requestPageStore = defineStore({
   id: 'request',
@@ -26,6 +27,42 @@ export const requestPageStore = defineStore({
         this.cancelTokenSource.cancel('Request cancelled.')
         this.setCancelTokenSource(null)
       }
+    },
+    async testApiCall() {
+      const cancelTokenSource = axios.CancelToken.source()
+      this.setCancelTokenSource(cancelTokenSource)
+      try {
+        const response = await axios.get('https://catfact.ninja/fact', {
+          cancelToken: cancelTokenSource.token
+        })
+        return response.data.fact
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log('Request cancelled:', error.message)
+          return 'Stopped'
+        } else {
+          return 'Error'
+        }
+      }
+    },
+    async generatePrompt() {
+      return new Promise((resolve, reject) => {
+        axios.post('/generateprompt', { userRequest: this.requestMessage }, {
+          cancelToken: new this.CancelTokenSource(function executor(c) {
+            this.cancelTokenSource.cancel = c
+          })
+        })
+          .then(response => {
+            resolve(response.data.result)
+          })
+          .catch(error => {
+            if (axios.isCancel(error)) {
+              reject('Request canceled')
+            } else {
+              reject(error)
+            }
+          })
+      })
     }
   }
 })

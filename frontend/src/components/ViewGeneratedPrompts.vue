@@ -16,39 +16,39 @@
         <strong>Response</strong>
         <p>{{ message.text }}</p>
         <i class="bi bi-clipboard me-2 copy-icon" @click="copyToClipboard(message.text)"></i>
-        <div v-if="index === messages.length - 1" ref="lastMessage"></div>
+      </div>
+      
+    </div>   
+    <div v-if="status" class="w-100 text-center text-black">
+      <div class="spinner-border text-primary mt-2" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
     </div>
-    </div>
+  </div> 
   </div>
 </template>
 
 <script>
-import { ref, watch } from 'vue'
 export default {
   name: 'ViewGeneratedPrompts',
   props: {
     messages: {
       type: Array,
       required: true
+    },
+    status: {
+      type: Boolean,
+      required: true
     }
   },
-  setup(props) {
-    const lastMessage = ref(null)
-
+  setup() {
+    
     const copyToClipboard = (text) => {
       navigator.clipboard.writeText(text)
     }
 
-    watch(() => props.messages, () => {
-      if (lastMessage.value) {
-        lastMessage.value.scrollIntoView({ behavior: 'smooth' })
-      }
-    })
-
     return {
-      copyToClipboard,
-      lastMessage
+      copyToClipboard
     }
   }
 }
@@ -56,11 +56,11 @@ export default {
 
 <style scoped>
 .copy-icon {
-  color: #333;  /* grigio scuro */
+  color: #333;
   cursor: pointer;
 }
 
 .copy-icon:hover {
-  color: #007BFF;  /* blu Bootstrap per l'hover */
+  color: #007BFF;
 }
 </style>
