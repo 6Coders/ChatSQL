@@ -1,32 +1,25 @@
-import RequestPageModel from '@/model/MRequest'
 import axios from 'axios'
+import { requestPageStore } from '@/stores/requestStore'
 
 export default function RequestPageViewModel() {
-  const { 
-    requestMessage, 
-    messages, 
-    addMessage, 
-    CancelToken,
-    cancelObj,
-    isSending,
-   } = RequestPageModel()
+  const requestStore = requestPageStore()
 
   const handleMessage = (responseMessage) => {
     if (responseMessage != 'Stopped') {
-      addMessage('user', requestMessage.value)
-      addMessage('response', responseMessage)
+      requestStore.addMessage('user', requestStore.requestMessage)
+      requestStore.addMessage('response', responseMessage)
     }else{
-      addMessage('user', requestMessage.value)
-      addMessage('response', 'errore o stoppato') //il messaggio è di prova per test
+      requestStore.addMessage('user', requestStore.requestMessage)
+      requestStore.addMessage('response', 'errore o stoppato') //il messaggio è di prova per test
     }
-    requestMessage.value = ''
+    requestStore.setRequestMessage('')
   }
 
   async function generatePrompt() {
     return new Promise((resolve, reject) => {
-      axios.post('/generateprompt', { userRequest: requestMessage.value }, {
-        cancelToken: new CancelToken(function executor(c) {
-          cancelObj.cancel = c
+      axios.post('/generateprompt', { userRequest: requestStore.requestMessage.value }, {
+        cancelToken: new requestStore.CancelToken(function executor(c) {
+          requestStore.cancelObj.cancel = c
         })
       })
         .then(response => {
@@ -43,24 +36,29 @@ export default function RequestPageViewModel() {
   }
 
   // funzione di test per vedere se axios funziona
-async function testCall() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      axios
-        .get('https://catfact.ninja/fact')
-        .then((response) => {
-          resolve(response.data.fact);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    }, 2000); // delay of 2 seconds
-  });
-}
+  async function testCall() {
+    const cancelTokenSource = axios.CancelToken.source()
+    requestStore.setCancelTokenSource(cancelTokenSource)
+  
+    try {
+      const response = await axios.get( 'https://catfact.ninja/fact', {
+        cancelToken: cancelTokenSource.token
+      })
+      return response.data.fact
+    } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log('Request cancelled:', error.message)
+        return 'Stopped'
+      } else {
+        return 'Error'
+      }
+    }
+  }
 
 
   async function submitForm() {
-    isSending.value = true
+    requestStore.setIsSending(true)
+    console.log(requestStore.isSending)
     try {
       const result = await testCall()
       handleMessage(result)
@@ -68,25 +66,23 @@ async function testCall() {
       handleMessage('Stopped')
       console.error(error)
     } finally {
-      isSending.value = false
+      requestStore.setIsSending(false)
     }
   }
 
   function stopSending() {
-    if (cancelObj.cancel) {
-      cancelObj.cancel()
+    if (requestStore.cancelTokenSource) {
+      requestStore.cancelTokenSource.cancel('Request cancelled.')
+      requestStore.setCancelTokenSource(null)
     }
   }
 
 
 
   return {
-    requestMessage,
-    messages,
-    handleMessage,
-    generatePrompt,
-    testCall,
+    requestStore,
     submitForm,
     stopSending,
+    generatePrompt
   }
 }

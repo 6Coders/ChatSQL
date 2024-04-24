@@ -13,14 +13,14 @@
   <div class="d-flex flex-column vh-100">
     <!-- Messaggi chat -->
     <div class="overflow-auto mt-5 flex-grow-1 px-5">
-      <ViewGeneratedPrompts :messages="messages" />
+      <ViewGeneratedPrompts :messages="requestStore.messages" />
     </div>
 
     <!-- Input per l'utente -->
     <div class="input-group mt-3 px-5 pb-5 bg-white rounded">
-      <input type="text" class="form-control" v-model="requestMessage" name="requestMessage" autocomplete="off" placeholder="Inserisci un prompt qui...">
+      <input type="text" class="form-control" v-model="requestStore.requestMessage" name="requestMessage" autocomplete="off" placeholder="Inserisci un prompt qui...">
       <SendRequestButton :submitMethod="submitForm" :stopSubmitMethod="stopSending" :sendButtonClass="sendButtonClass"
-        :stopSendButtonClass="stopSendButtonClass" :status="isSending" />
+        :stopSendButtonClass="stopSendButtonClass" :status="requestStore.isSending" />
       <div class="w-100 text-center mt-2">
         <small>Dizionario dati caricato: <b>prova</b></small>
       </div>
@@ -41,16 +41,13 @@ export default {
   },
   setup() {
     const {
-      requestMessage, messages, handleMessage, submitForm, stopSending, isSending
+      requestStore, submitForm, stopSending
     } = RequestPageViewModel()
 
     return {
-      requestMessage,
-      messages,
-      handleMessage,
+     requestStore,
       submitForm,
       stopSending,
-      isSending,
       destinationHome: "/",
 
       /*ASPETTO COMPONENTI*/

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const requestPageModelStore = defineStore({
+export const requestPageStore = defineStore({
   id: 'request',
   state: () => ({
     requestMessage: '',
