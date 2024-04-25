@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column vh-80">
     <!-- Messaggi chat -->
-    <div class="overflow-auto flex-grow-1 px-md-5 mb-5" style="height: calc(100vh - 200px);">
+    <div class="overflow-auto flex-grow-1 px-md-5 mb-5 chat-height">
       <ViewGeneratedPrompts :messages="requestStore.messages" :status="requestStore.isSending" />
     </div>
 
@@ -57,9 +57,15 @@ export default {
 </script>
 
 <style scoped>
+.chat-height {
+  height: calc(100vh - 275px);
+}
 @media (min-width: 768px) {
   .no-border-radius {
     border-radius: 0;
+  }
+  .chat-height {
+    height: calc(100vh - 200px);
   }
 }
 </style>

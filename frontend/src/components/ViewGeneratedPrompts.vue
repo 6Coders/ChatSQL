@@ -11,7 +11,7 @@
         <strong>User</strong>
         <p>{{ message.text }}</p>
       </div>
-      <div v-else-if="message.type === 'response'" class="w-100 p-3 text-black bg-light">
+      <div v-else-if="message.type === 'response'" class="w-100 p-3 text-black bg-light border-start border-end">
         <i class="bi bi-robot me-2"></i>
         <strong>Response</strong>
         <p>{{ message.text }}</p>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import useClipboard from 'vue-clipboard3'
 export default {
   name: 'ViewGeneratedPrompts',
   props: {
@@ -42,9 +43,14 @@ export default {
     }
   },
   setup() {
+    const { toClipboard } = useClipboard()
     
-    const copyToClipboard = (text) => {
-      navigator.clipboard.writeText(text)
+    const copyToClipboard = async (text) => {
+      try {
+        await toClipboard(text)
+      } catch (e) {
+        console.error(e)
+      }
     }
 
     return {

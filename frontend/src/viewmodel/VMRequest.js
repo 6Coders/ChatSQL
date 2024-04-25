@@ -16,7 +16,6 @@ export default function RequestPageViewModel() {
 
   const submitForm = async () => {
     requestStore.setIsSending(true)
-    console.log(requestStore.isSending)
     try {
       const result = await requestStore.testApiCall()
       handleMessage(result)
