@@ -57,16 +57,4 @@ export default {
       copyToClipboard
     }
   }
-}
-</script>
-
-<style scoped>
-.copy-icon {
-  color: #333;
-  cursor: pointer;
-}
-
-.copy-icon:hover {
-  color: #007BFF;
-}
-</style>
+  </script>

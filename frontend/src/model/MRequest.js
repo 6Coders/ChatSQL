@@ -1,31 +1,23 @@
-import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import axios from 'axios'
 
-export const requestPageModelStore = defineStore({
-  id: 'request',
-  state: () => ({
-    requestMessage: '',
-    messages: [],
-    isSending: false,
-    CancelTokenSource: null
-  }),
-  actions: {
-    addMessage(type, text) {
-      this.messages.push({ type, text })
-    },
-    setRequestMessage(message) {
-      this.requestMessage = message
-    },
-    setIsSending(value) {
-      this.isSending = value
-    },
-    setCancelTokenSource(source) {
-      this.cancelTokenSource = source
-    },
-    cancelRequest() {
-      if (this.cancelTokenSource) {
-        this.cancelTokenSource.cancel('Request cancelled.')
-        this.setCancelTokenSource(null)
-      }
-    }
+export default function RequestPageModel() {
+  const requestMessage = ref('')
+  const messages = ref([])
+  const isSending = ref(false)
+  const CancelToken = axios.CancelToken
+  const cancelObj = { cancel: null }
+
+  const addMessage = (type, text) => {
+    messages.value.push({ type, text })
   }
-})
+
+  return {
+    requestMessage,
+    messages,
+    addMessage,
+    isSending,
+    CancelToken,
+    cancelObj
+  }
+}
