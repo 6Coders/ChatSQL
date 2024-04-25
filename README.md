@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/6Coders/ChatSQL/blob/main/.github/workflows/validate.yml/badge.svg)]
+
 [![codecov](https://codecov.io/gh/6Coders/ChatSQL/graph/badge.svg?token=6Z13U7H3RS)](https://codecov.io/gh/6Coders/ChatSQL)
 
 # ChatSQL
