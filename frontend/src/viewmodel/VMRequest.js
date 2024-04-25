@@ -1,45 +1,85 @@
-import { useRequestStore } from '@/stores/requestStore'
+import RequestPageModel from '@/model/MRequest'
+import axios from 'axios'
 
 export default function RequestPageViewModel() {
-  const requestStore = useRequestStore()
+  const { 
+    requestMessage, 
+    messages, 
+    addMessage, 
+    CancelToken,
+    cancelObj,
+    isSending,
+   } = RequestPageModel()
 
   const handleMessage = (responseMessage) => {
     if (responseMessage != 'Stopped') {
-      requestStore.addMessage('user', requestStore.requestMessage)
-      requestStore.addMessage('response', responseMessage)
+      addMessage('user', requestMessage.value)
+      addMessage('response', responseMessage)
     }else{
-      requestStore.addMessage('user', requestStore.requestMessage)
-      requestStore.addMessage('response', 'errore o stoppato') //il messaggio è di prova per test
+      addMessage('user', requestMessage.value)
+      addMessage('response', 'errore o stoppato') //il messaggio è di prova per test
     }
-    requestStore.setRequestMessage('')
+    requestMessage.value = ''
   }
 
-  const submitForm = async () => {
-    requestStore.setIsSending(true)
-    console.log(requestStore.isSending)
+  async function generatePrompt() {
+    return new Promise((resolve, reject) => {
+      axios.post('/generateprompt', { userRequest: requestMessage.value }, {
+        cancelToken: new CancelToken(function executor(c) {
+          cancelObj.cancel = c
+        })
+      })
+        .then(response => {
+          resolve(response.data.result)
+        })
+        .catch(error => {
+          if (axios.isCancel(error)) {
+            reject('Request canceled')
+          } else {
+            reject(error)
+          }
+        })
+    })
+  }
+
+  // funzione di test per vedere se axios funziona
+  async function testCall() {
+    return axios
+    .get('https://catfact.ninja/fact')
+    .then((response) => {
+       return response.data.fact
+    })
+  }
+
+
+  async function submitForm() {
+    isSending.value = true
     try {
-      const result = await requestStore.testApiCall()
+      const result = await testCall()
       handleMessage(result)
     } catch (error) {
       handleMessage('Stopped')
       console.error(error)
     } finally {
-      requestStore.setIsSending(false)
+      isSending.value = false
     }
   }
 
   function stopSending() {
-    requestStore.cancelRequest()
+    if (cancelObj.cancel) {
+      cancelObj.cancel()
+    }
   }
 
-  function clearMessages() {
-    requestStore.clearMessages()
-  }
+
 
   return {
-    requestStore,
+    requestMessage,
+    messages,
+    handleMessage,
+    generatePrompt,
+    testCall,
     submitForm,
     stopSending,
-    clearMessages
   }
 }

@@ -1,70 +1,55 @@
 import { shallowMount } from '@vue/test-utils'
+import axios from 'axios'
 import SendRequestButton from '@/components/SendRequestButton.vue'
 
+jest.mock('axios')
+
 describe('SendRequestButton.vue', () => {
-  it('renders the send button when the status is false', () => {
-    const wrapper = shallowMount(SendRequestButton, {
+  let wrapper
+
+  beforeEach(() => {
+    wrapper = shallowMount(SendRequestButton, {
       propsData: {
-        status: false,
-        disabled: false,
-        sendButtonClass: 'send',
-        stopSendButtonClass: 'stop',
-        submitMethod: () => {},
-        stopSubmitMethod: () => {}
+        requestMessage: 'test message'
       }
     })
-
-    expect(wrapper.find('button.send').exists()).toBe(true)
-    expect(wrapper.find('button.stop').exists()).toBe(false)
   })
 
-  it('renders the stop button when the status is true', () => {
-    const wrapper = shallowMount(SendRequestButton, {
-      propsData: {
-        status: true,
-        disabled: false,
-        sendButtonClass: 'send',
-        stopSendButtonClass: 'stop',
-        submitMethod: () => {},
-        stopSubmitMethod: () => {}
-      }
+  it('renders correctly', () => {
+    expect(wrapper.element).toMatchSnapshot()
+  })
+
+  it('sends request when "Invia" button is clicked', async () => {
+    const mockResponse = { data: { result: 'test result' } }
+    axios.post.mockResolvedValue(mockResponse)
+
+    await wrapper.find('button').trigger('click')
+
+    expect(axios.post).toHaveBeenCalledWith('/generateprompt', { userRequest: 'test message' }, expect.anything())
+    expect(wrapper.emitted().submit[0]).toEqual(['test result'])
+  })
+
+  /* it('stops sending when "Interrompi" button is clicked', async () => {
+    let resolvePromise
+    const promise = new Promise(resolve => {
+      resolvePromise = resolve
     })
-
-    expect(wrapper.find('button.send').exists()).toBe(false)
-    expect(wrapper.find('button.stop').exists()).toBe(true)
-  })
-
-  it('calls submitMethod when the send button is clicked', async () => {
-    const submitMethod = jest.fn()
-    const wrapper = shallowMount(SendRequestButton, {
-      propsData: {
-        status: false,
-        disabled: false,
-        sendButtonClass: 'send',
-        stopSendButtonClass: 'stop',
-        submitMethod,
-        stopSubmitMethod: () => {}
-      }
+  
+    const mockCancel = jest.fn(() => {
+      resolvePromise()
     })
-
-    await wrapper.find('button.send').trigger('click')
-    expect(submitMethod).toHaveBeenCalled()
-  })
-
-  it('calls stopSubmitMethod when the stop button is clicked', async () => {
-    const stopSubmitMethod = jest.fn()
-    const wrapper = shallowMount(SendRequestButton, {
-      propsData: {
-        status: true,
-        disabled: false,
-        sendButtonClass: 'send',
-        stopSendButtonClass: 'stop',
-        submitMethod: () => {},
-        stopSubmitMethod
-      }
-    })
-
-    await wrapper.find('button.stop').trigger('click')
-    expect(stopSubmitMethod).toHaveBeenCalled()
-  })
+  
+    axios.CancelToken.source = jest.fn(() => ({
+      token: {},
+      cancel: mockCancel
+    }))
+  
+    axios.post = jest.fn(() => promise)
+  
+    await wrapper.find('button').trigger('click')
+    await wrapper.vm.$nextTick()
+    await wrapper.find('button[title="Interrompi"]').trigger('click')
+  
+    expect(mockCancel).toHaveBeenCalled()
+  }) */
 })

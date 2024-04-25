@@ -1,65 +1,75 @@
 <template>
-  <div class="d-flex flex-column vh-80">
+<!--<div>
+    <h1>Request Page</h1>
+
+    <ViewGeneratedPrompts :messages="messages" />
+    <InputRequest v-model="requestMessage"/>
+    <SendRequestButton :requestMessage="requestMessage" @submit="handleMessage" />
+    <p>Torna alla home<RedirectButton :buttonClass="buttonClass" :destination="destinationHome">Torna alla home</RedirectButton></p>
+</div>-->
+  <div class="container mt-5">
+    <h1 class="display-2">Generazione Prompt</h1>
+    <h3 class="mt-4">Dizionario dati caricato: prova</h3>
+
+  </div>
+  <div class="container mt-5">
+    <h1>Chat richieste</h1>
     <!-- Messaggi chat -->
-    <div class="overflow-auto flex-grow-1 px-md-5 mb-5" style="height: calc(100vh - 200px);">
-      <ViewGeneratedPrompts :messages="requestStore.messages" :status="requestStore.isSending" />
+    <div class=" bg-light p-3 rounded overflow-auto" style="max-height: 300px; height: 300px">
+      <ViewGeneratedPrompts :messages="messages" />
     </div>
 
     <!-- Input per l'utente -->
-    <div class="input-group mt-2 px-md-5 pb-5 bg-white fixed-bottom" style="height: 100px;">
-      <input type="text" class="form-control" v-model="requestStore.requestMessage" name="requestMessage" autocomplete="off" placeholder="Inserisci un prompt qui...">
-      <SendRequestButton :submitMethod="submitForm" :stopSubmitMethod="stopSending" :sendButtonClass="sendButtonClass"
-        :stopSendButtonClass="stopSendButtonClass" :status="requestStore.isSending" :disabled="!requestStore.requestMessage" />
-        <button class="btn btn-secondary rounded mx-2" type="button" @click="clearMessages" v-if="requestStore.messages && requestStore.messages.length > 0">Cancella <i class="bi bi-trash"></i> </button>  <div class="w-100 text-center mt-2">
-        <small>Dizionario dati caricato: <b>prova</b></small>
-        <small class="d-block">Made by <a href="https://github.com/6Coders/ChatSQL">6Coders</a></small>
-      </div>
+    <div class="input-group mt-3">
+       <input type="text" class="form-control" v-model="requestMessage" name="requestMessage">
+       <SendRequestButton :submitMethod="submitForm" :stopSubmitMethod="stopSending" :sendButtonClass="sendButtonClass" :stopSendButtonClass="stopSendButtonClass" :status="isSending"/>
     </div>
-    
+  </div>
+
+  <!-- bottone home-->
+  <div class="container-fluid fixed-bottom mb-5 ml-5">
+    <RedirectButton :buttonClass="buttonClass" :destination="destinationHome">Torna alla home</RedirectButton>
   </div>
 </template>
 
 <script>
 import SendRequestButton from '@/components/SendRequestButton.vue'
+import RedirectButton from '@/components/RedirectButton.vue'
 import ViewGeneratedPrompts from '@/components/ViewGeneratedPrompts.vue'
 import RequestPageViewModel from '@/viewmodel/VMRequest'
 
 export default {
   name: 'RequestPage',
   components: {
+    RedirectButton,
     SendRequestButton,
     ViewGeneratedPrompts
   },
   setup() {
-    const {
-      requestStore, submitForm, stopSending, clearMessages
+    const { 
+      requestMessage, messages, handleMessage, submitForm, stopSending, isSending
     } = RequestPageViewModel()
 
     return {
-     requestStore,
+      requestMessage,
+      messages,
+      handleMessage,
       submitForm,
       stopSending,
-      clearMessages,
+      isSending,
+      destinationHome: "/",
 
       /*ASPETTO COMPONENTI*/
       //redirect button
-      buttonClass: "btn btn-secondary rounded-0 rounded-end no-border-radius mr-2",
+      buttonClass: "btn btn-secondary",
 
       //send button
-      sendButtonClass: "btn btn-primary rounded-0 rounded-end no-border-radius mr-2",
-      stopSendButtonClass: "btn btn-warning rounded-0 rounded-end no-border-radius mr-2",
+      sendButtonClass: "btn btn-primary",
+      stopSendButtonClass: "btn btn-warning",
 
       //input request
-      requestClass: "form-control no-border-radius"
+      requestClass: "form-control"
     }
   }
 }
 </script>
-
-<style scoped>
-@media (min-width: 768px) {
-  .no-border-radius {
-    border-radius: 0;
-  }
-}
-</style>
