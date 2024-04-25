@@ -21,16 +21,30 @@ export default {
       return false;
     }
   },
-    convalidateFile(file) {
-      return this.isExtensionAllowed(file) && this.isSizeValid(file);
-    },
-    isExtensionAllowed(file) {
-      const allowedExtensions = ['.json'];
-      const extension = file.name.split('.').pop().toLowerCase();
-      return allowedExtensions.includes('.' + extension);
-    },
-    isSizeValid(file) {
-      const maxSize = 500 * 1024; 
-      return file.size <= maxSize;
-    }
+  convalidateFile(file) {
+    console.log('Convalida del file:', file.name);
+    const flag = this.isExtensionAllowed(file) && this.isSizeValid(file);
+    console.log('Convalida completata:', flag);
+    return flag;
+  },
+  isExtensionAllowed(file) {
+    const allowedExtensions = ['.json'];
+    const extension = file.name.split('.').pop().toLowerCase();
+    return allowedExtensions.includes('.' + extension);
+  },
+  isSizeValid(file) {
+    const maxSize = 500 * 1024; 
+    return file.size <= maxSize;
+  },
+  async deleteDictionary(id) {
+    console.log('Eliminazione del dizionario con id:', id);
+    //implementazione della chiamata al backend
+    return true;
+  },
+  async loadDictionary(id) {
+    console.log('Caricamento del dizionario con id:', id);
+    //implementazione della chiamata al backend
+    return true;
+  }
+
   };

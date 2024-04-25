@@ -1,37 +1,54 @@
 <template>
-  <div class="d-flex">
-    <input :class="inputFileClass" type="file" ref="fileInput" @change="handleFileUpload">
-    <input :class="uploadClass" type="button" value="Upload" @click="emitFile">
+  <div>
+    <input type="file" ref="fileInput" @change="handleFileUpload">
+    <upload-button :class="uploadButtonClass" @upload-click="emitFile"/>
+    <p>{{ message }}</p>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue';
+import UploadButton from '@/components/UploadButton.vue';
+
 export default {
   name: 'InputFile',
-  props:{
-    //props per la grafica
-    inputFileClass: String,
-    uploadClass: String
+  components: { 
+    UploadButton
+   },
+  props: {
+    uploadButtonClass: String
   },
-  data() {
-    return {
-      file: null
+  setup(props, { emit }) {
+    const file = ref(null);
+    const message = ref('');
+
+    function handleFileUpload(event) {
+      if(message.value!='') {
+        message.value = '';
+      }
+      file.value = event.target.files[0];
+      console.log('File inserito:', file.value);
     }
-  },
-  methods: {
-    handleFileUpload(event) {
-      this.file = event.target.files[0];
-      console.log('File inserito:', this.file);
-    },
-    emitFile() {
-      if (this.file) 
-      {
-        this.$emit('file-selected', this.file);
-      } else 
-      {
-        console.error('Nessun file selezionato');
+
+    function emitFile() {
+      if (file.value) {
+        emit('file-selected', file.value);
+      } else {
+        message.value = 'Nessun file selezionato';
       }
     }
+
+    function changeMessage(newMessage) {
+      message.value = newMessage;
+    }
+
+    return {
+      file,
+      message,
+      handleFileUpload,
+      emitFile,
+      changeMessage
+    };
   }
-}
+};
 </script>

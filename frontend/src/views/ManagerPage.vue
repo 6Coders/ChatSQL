@@ -1,9 +1,8 @@
 <template>
-  <div class="container mt-5">
-    <h1 class="display-2">Manager Page</h1>
-    <h3 class="mt-4">Dizionario dati attualmente caricato: prova</h3>
-    <input-file @file-selected="handleFileSelected" :inputFileClass="inputFileClass" :uploadClass="uploadClass"></input-file>
-    <p>{{ errorMessages }}</p>
+  <div>
+    <h1>Manager Page</h1>
+    <p>Contenuto della pagina di richiesta...</p>
+    <input-file ref="fileInput" @file-selected="handleFileSelected"></input-file>
     <view-dictionary @load-button-clicked="handleLoadButtonClicked" @delete-button-clicked="handleDeleteButtonClicked"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass"></view-dictionary>
   </div>
 
@@ -16,9 +15,10 @@
 import RedirectButton from '@/components/RedirectButton.vue';
 import InputFile from '@/components/InputFile.vue';
 import ViewDictionary from '@/components/ViewDictionary.vue';
-import VMManager from '../viewmodel/VMManager.js';
+import VMManager from '@/viewmodel/VMManager.js';
 
 export default {
+  name: 'ManagerPage',
   components: {
     RedirectButton,
     InputFile,
@@ -26,35 +26,22 @@ export default {
   },
   data() {
     return {
-      errorMessages: '',
-      destination: '/',
-
-      //ASPETTO COMPONENTI
-      buttonClass: 'btn btn-secondary',
-      loadButtonClass: 'btn btn-success mt-auto',
-      deleteButtonClass: 'btn btn-danger mt-auto',
-      inputFileClass: 'form-control',
-      uploadClass: 'btn btn-primary ms-3'
+      loadButtonClass: 'btn btn-primary mt-auto',
+      deleteButtonClass: 'btn btn-primary mt-auto'
     };
   },
   methods: {
     handleFileSelected(file) {
-      this.resetFields('');
-      VMManager.handleFileSelected(file, this.handleFileError, this.resetFields);
-    },
-    handleFileError(errorMessage) {
-      this.errorMessages = errorMessage;
-    },
-    resetFields() {
-      this.errorMessages = '';
+      const message = VMManager.handleFileSelected(file);
+      this.$refs.fileInput.changeMessage(message);
     },
     handleLoadButtonClicked(index) {
       console.log('LoadButton clicked for row index:', index);
-
+      VMManager.handleLoadDictionary(index);
     },
     handleDeleteButtonClicked(index) {
       console.log('DeleteButton clicked for row index:', index);
-
+      VMManager.handleDeleteDictionary(index);
     }
   }
 };
