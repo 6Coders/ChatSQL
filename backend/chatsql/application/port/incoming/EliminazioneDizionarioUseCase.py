@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class InserimentoDizionarioUseCase(ABC):
+class EliminazioneDizionarioUseCase(ABC):
 
     @abstractmethod
     def remove(self, filename: str) -> bool:
