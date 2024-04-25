@@ -2,7 +2,7 @@
     <div class="container mt-5 px-5">
       <img src="../assets/6Coders-logo.png" alt="Logo" class="img-fluid mt-5 mb-5 mx-auto d-block" style="max-width: 100px;">
       <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
           <div class="card h-100">
             <div class="card-body">
               <h2 class="card-title">Gestione dizionario dati</h2>
@@ -13,7 +13,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
           <div class="card h-100">
             <div class="card-body">
               <h2 class="card-title">ChatSQL</h2>

@@ -16,6 +16,9 @@ export const requestPageStore = defineStore({
     setRequestMessage(message) {
       this.requestMessage = message
     },
+    clearMessages() {
+      this.messages = []
+    },
     setIsSending(value) {
       this.isSending = value
     },

@@ -32,9 +32,14 @@ export default function RequestPageViewModel() {
     requestStore.cancelRequest()
   }
 
+  function clearMessages() {
+    requestStore.clearMessages()
+  }
+
   return {
     requestStore,
     submitForm,
     stopSending,
+    clearMessages
   }
 }
