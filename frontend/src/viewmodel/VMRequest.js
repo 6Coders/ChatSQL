@@ -1,7 +1,7 @@
-import { requestPageStore } from '@/stores/requestStore'
+import { useRequestStore } from '@/stores/requestStore'
 
 export default function RequestPageViewModel() {
-  const requestStore = requestPageStore()
+  const requestStore = useRequestStore()
 
   const handleMessage = (responseMessage) => {
     if (responseMessage != 'Stopped') {
@@ -14,7 +14,7 @@ export default function RequestPageViewModel() {
     requestStore.setRequestMessage('')
   }
 
-  async function submitForm() {
+  const submitForm = async () => {
     requestStore.setIsSending(true)
     console.log(requestStore.isSending)
     try {

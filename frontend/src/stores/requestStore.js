@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-export const requestPageStore = defineStore({
+export const useRequestStore = defineStore({
   id: 'request',
   state: () => ({
     requestMessage: '',

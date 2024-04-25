@@ -11,13 +11,7 @@ export default {
     stopSendButtonClass: String,
     submitMethod: Function,
     stopSubmitMethod: Function,
-    status: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    }
+    status: Boolean,
+    disabled: Boolean
   }}
 </script>
