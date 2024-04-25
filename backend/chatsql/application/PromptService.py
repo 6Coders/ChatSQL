@@ -3,7 +3,7 @@ from .port.incoming.RichiestaPromptUseCase import RichiestaPromptUseCase
 
 from .port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
 from .port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
-from .port.outcoming.SearchAlgorithm import SearchAlgorithm
+from .port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
 
 from backend.chatsql.domain.Embedding import Embedding
 
@@ -13,7 +13,7 @@ class PromptService(RichiestaPromptUseCase):
     def __init__(self,
                  embeddingRepository: BaseEmbeddingRepository, 
                  embeddingGeneratorPort: EmbeddingGeneratorPort, 
-                 searchAlgorithm: SearchAlgorithm) -> None:
+                 searchAlgorithm: SearchAlgorithmPort) -> None:
         
         self._embeddingRepository = embeddingRepository
         self._embeddingGeneratorPort = embeddingGeneratorPort
