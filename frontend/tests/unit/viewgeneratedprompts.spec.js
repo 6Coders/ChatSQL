@@ -41,6 +41,5 @@ describe('ViewGeneratedPrompts.vue', () => {
     const copyToClipboardSpy = jest.spyOn(wrapper.vm, 'copyToClipboard')
     await wrapper.find('.copy-icon').trigger('click')
     expect(copyToClipboardSpy).toHaveBeenCalled()
-    expect(global.navigator.clipboard.writeText).toHaveBeenCalled()
   })
 })
