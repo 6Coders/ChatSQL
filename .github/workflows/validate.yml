@@ -57,12 +57,11 @@ jobs:
       run: |
         cd tests/frontend
         npm run test:unit
-        cd ..
     - name: Run Vue.js tests and generate coverage report
       run: |
         cd frontend
         npx jest --coverage
-        cd ..
+        cd ../..
     - name: Build FrontEnd
       run: |
         cd frontend
