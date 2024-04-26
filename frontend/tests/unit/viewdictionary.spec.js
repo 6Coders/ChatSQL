@@ -1,7 +1,5 @@
 import { mount } from '@vue/test-utils';
 import ViewDictionary from '@/components/ViewDictionary.vue';
-import LoadButton from '@/components/LoadButton.vue';
-import DeleteButton from '@/components/DeleteButton.vue';
 
 describe('ViewDictionary', () => {
     it('emits a "load-button-clicked" event when LoadButton is clicked', async () => {

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1714043507807" clover="3.2.0">
-  <project timestamp="1714043507807" name="All files">
-    <metrics statements="250" coveredstatements="198" conditionals="70" coveredconditionals="38" methods="60" coveredmethods="39" elements="380" coveredelements="275" complexity="0" loc="250" ncloc="250" packages="6" files="16" classes="16"/>
+<coverage generated="1714127448538" clover="3.2.0">
+  <project timestamp="1714127448539" name="All files">
+    <metrics statements="267" coveredstatements="198" conditionals="72" coveredconditionals="36" methods="62" coveredmethods="35" elements="401" coveredelements="269" complexity="0" loc="267" ncloc="267" packages="6" files="17" classes="17"/>
     <package name="assets">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="6Coders-logo-original.png" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/assets/6Coders-logo-original.png">
+      <file name="6Coders-logo-original.png" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\assets\6Coders-logo-original.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
       </file>
-      <file name="6Coders-logo.png" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/assets/6Coders-logo.png">
+      <file name="6Coders-logo.png" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\assets\6Coders-logo.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
       </file>
     </package>
     <package name="components">
-      <metrics statements="117" coveredstatements="112" conditionals="42" coveredconditionals="35" methods="29" coveredmethods="26"/>
-      <file name="DeleteButton.vue" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/components/DeleteButton.vue">
+      <metrics statements="119" coveredstatements="114" conditionals="40" coveredconditionals="33" methods="27" coveredmethods="22"/>
+      <file name="DeleteButton.vue" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\components\DeleteButton.vue">
         <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
         <line num="4" count="3" type="stmt"/>
         <line num="7" count="3" type="stmt"/>
@@ -30,28 +30,21 @@
         <line num="36" count="1" type="cond" truecount="4" falsecount="0"/>
         <line num="38" count="3" type="stmt"/>
       </file>
-      <file name="InputFile.vue" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/components/InputFile.vue">
-        <metrics statements="18" coveredstatements="14" conditionals="10" coveredconditionals="6" methods="6" coveredmethods="4"/>
+      <file name="InputFile.vue" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\components\InputFile.vue">
+        <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="4" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="26" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="34" count="2" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
-        <line num="40" count="2" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="45" count="1" type="stmt"/>
-        <line num="49" count="1" type="cond" truecount="4" falsecount="0"/>
-        <line num="54" count="0" type="cond" truecount="2" falsecount="2"/>
-        <line num="56" count="2" type="stmt"/>
+        <line num="71" count="2" type="stmt"/>
+        <line num="73" count="2" type="stmt"/>
+        <line num="76" count="2" type="stmt"/>
+        <line num="77" count="2" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="83" count="1" type="cond" truecount="4" falsecount="0"/>
+        <line num="88" count="2" type="stmt"/>
       </file>
-      <file name="LoadButton.vue" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/components/LoadButton.vue">
+      <file name="LoadButton.vue" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\components\LoadButton.vue">
         <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
         <line num="4" count="3" type="stmt"/>
         <line num="7" count="3" type="stmt"/>
@@ -66,7 +59,7 @@
         <line num="36" count="1" type="cond" truecount="4" falsecount="0"/>
         <line num="38" count="3" type="stmt"/>
       </file>
-      <file name="RedirectButton.vue" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/components/RedirectButton.vue">
+      <file name="RedirectButton.vue" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\components\RedirectButton.vue">
         <metrics statements="10" coveredstatements="10" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="4" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
@@ -79,7 +72,7 @@
         <line num="52" count="4" type="cond" truecount="4" falsecount="0"/>
         <line num="54" count="1" type="stmt"/>
       </file>
-      <file name="SendRequestButton.vue" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/components/SendRequestButton.vue">
+      <file name="SendRequestButton.vue" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\components\SendRequestButton.vue">
         <metrics statements="14" coveredstatements="14" conditionals="10" coveredconditionals="10" methods="3" coveredmethods="3"/>
         <line num="4" count="2" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
@@ -96,7 +89,22 @@
         <line num="45" count="1" type="cond" truecount="4" falsecount="0"/>
         <line num="47" count="2" type="stmt"/>
       </file>
-      <file name="ViewDictionary.vue" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/components/ViewDictionary.vue">
+      <file name="UploadButton.vue" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\components\UploadButton.vue">
+        <metrics statements="12" coveredstatements="8" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="37" count="2" type="stmt"/>
+      </file>
+      <file name="ViewDictionary.vue" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\components\ViewDictionary.vue">
         <metrics statements="19" coveredstatements="18" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="4"/>
         <line num="4" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
@@ -118,46 +126,43 @@
         <line num="98" count="1" type="stmt"/>
         <line num="101" count="2" type="stmt"/>
       </file>
-      <file name="ViewGeneratedPrompts.vue" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/components/ViewGeneratedPrompts.vue">
-        <metrics statements="32" coveredstatements="32" conditionals="8" coveredconditionals="5" methods="5" coveredmethods="5"/>
+      <file name="ViewGeneratedPrompts.vue" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\components\ViewGeneratedPrompts.vue">
+        <metrics statements="29" coveredstatements="29" conditionals="8" coveredconditionals="5" methods="3" coveredmethods="3"/>
         <line num="4" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
-        <line num="21" count="4" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="24" count="4" type="stmt"/>
-        <line num="29" count="2" type="stmt"/>
-        <line num="31" count="2" type="stmt"/>
-        <line num="32" count="2" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
-        <line num="37" count="2" type="stmt"/>
-        <line num="38" count="2" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="45" count="2" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
         <line num="53" count="2" type="stmt"/>
+        <line num="54" count="2" type="stmt"/>
+        <line num="55" count="2" type="stmt"/>
         <line num="56" count="2" type="stmt"/>
-        <line num="57" count="2" type="stmt"/>
-        <line num="61" count="2" type="stmt"/>
-        <line num="65" count="2" type="stmt"/>
-        <line num="68" count="2" type="stmt"/>
-        <line num="69" count="2" type="stmt"/>
-        <line num="73" count="2" type="stmt"/>
-        <line num="76" count="2" type="stmt"/>
-        <line num="77" count="2" type="stmt"/>
-        <line num="78" count="2" type="stmt"/>
-        <line num="82" count="2" type="stmt"/>
-        <line num="88" count="2" type="stmt"/>
-        <line num="90" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="91" count="8" type="stmt"/>
-        <line num="96" count="1" type="stmt"/>
-        <line num="99" count="2" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
+        <line num="71" count="2" type="stmt"/>
+        <line num="74" count="2" type="stmt"/>
+        <line num="75" count="2" type="stmt"/>
+        <line num="79" count="2" type="stmt"/>
+        <line num="83" count="2" type="stmt"/>
+        <line num="86" count="2" type="stmt"/>
+        <line num="87" count="2" type="stmt"/>
+        <line num="91" count="2" type="stmt"/>
+        <line num="94" count="2" type="stmt"/>
+        <line num="95" count="2" type="stmt"/>
+        <line num="96" count="2" type="stmt"/>
+        <line num="100" count="2" type="stmt"/>
+        <line num="106" count="2" type="stmt"/>
+        <line num="108" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="109" count="6" type="stmt"/>
+        <line num="114" count="1" type="stmt"/>
+        <line num="117" count="2" type="stmt"/>
       </file>
     </package>
     <package name="model">
-      <metrics statements="16" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="4" coveredmethods="0"/>
-      <file name="MManager.js" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/model/MManager.js">
-        <metrics statements="16" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <metrics statements="23" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="6" coveredmethods="0"/>
+      <file name="MManager.js" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\model\MManager.js">
+        <metrics statements="23" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -185,7 +190,7 @@
     </package>
     <package name="stores">
       <metrics statements="26" coveredstatements="13" conditionals="6" coveredconditionals="1" methods="13" coveredmethods="8"/>
-      <file name="requestStore.js" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/stores/requestStore.js">
+      <file name="requestStore.js" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\stores\requestStore.js">
         <metrics statements="26" coveredstatements="13" conditionals="6" coveredconditionals="1" methods="13" coveredmethods="8"/>
         <line num="4" count="3" type="stmt"/>
         <line num="6" count="8" type="stmt"/>
@@ -216,9 +221,9 @@
       </file>
     </package>
     <package name="viewmodel">
-      <metrics statements="25" coveredstatements="21" conditionals="6" coveredconditionals="2" methods="6" coveredmethods="5"/>
-      <file name="VMManager.js" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/viewmodel/VMManager.js">
-        <metrics statements="5" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="34" coveredstatements="20" conditionals="10" coveredconditionals="2" methods="8" coveredmethods="5"/>
+      <file name="VMManager.js" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\viewmodel\VMManager.js">
+        <metrics statements="15" coveredstatements="1" conditionals="8" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -235,8 +240,8 @@
         <line num="32" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
       </file>
-      <file name="VMRequest.js" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/viewmodel/VMRequest.js">
-        <metrics statements="20" coveredstatements="20" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="5"/>
+      <file name="VMRequest.js" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\viewmodel\VMRequest.js">
+        <metrics statements="19" coveredstatements="19" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="5"/>
         <line num="4" count="4" type="stmt"/>
         <line num="6" count="4" type="stmt"/>
         <line num="7" count="2" type="cond" truecount="2" falsecount="0"/>
@@ -249,19 +254,18 @@
         <line num="18" count="2" type="stmt"/>
         <line num="19" count="2" type="stmt"/>
         <line num="20" count="2" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="27" count="2" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="39" count="4" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="38" count="4" type="stmt"/>
       </file>
     </package>
     <package name="views">
-      <metrics statements="64" coveredstatements="50" conditionals="10" coveredconditionals="0" methods="8" coveredmethods="0"/>
-      <file name="HomePage.vue" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/views/HomePage.vue">
+      <metrics statements="63" coveredstatements="49" conditionals="10" coveredconditionals="0" methods="8" coveredmethods="0"/>
+      <file name="HomePage.vue" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\views\HomePage.vue">
         <metrics statements="29" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -293,27 +297,26 @@
         <line num="100" count="0" type="stmt"/>
         <line num="103" count="1" type="stmt"/>
       </file>
-      <file name="ManagerPage.vue" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/views/ManagerPage.vue">
-        <metrics statements="17" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="ManagerPage.vue" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\views\ManagerPage.vue">
+        <metrics statements="16" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
         <line num="74" count="1" type="stmt"/>
-        <line num="76" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
         <line num="79" count="1" type="stmt"/>
         <line num="80" count="1" type="stmt"/>
         <line num="81" count="1" type="stmt"/>
-        <line num="84" count="1" type="stmt"/>
-        <line num="87" count="1" type="stmt"/>
-        <line num="90" count="1" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="95" count="0" type="stmt"/>
-        <line num="96" count="0" type="stmt"/>
-        <line num="97" count="0" type="stmt"/>
-        <line num="110" count="0" type="stmt"/>
-        <line num="113" count="1" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="100" count="0" type="stmt"/>
+        <line num="103" count="1" type="stmt"/>
       </file>
-      <file name="RequestPage.vue" path="/Users/osama/Developer/SWE/ChatSQL/frontend/src/views/RequestPage.vue">
+      <file name="RequestPage.vue" path="C:\Users\Yuri\OneDrive\Desktop\6coders\chatSQL\ChatSQL\frontend\src\views\RequestPage.vue">
         <metrics statements="18" coveredstatements="13" conditionals="10" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -324,15 +327,15 @@
         <line num="68" count="1" type="stmt"/>
         <line num="69" count="1" type="stmt"/>
         <line num="72" count="1" type="stmt"/>
-        <line num="78" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
         <line num="84" count="1" type="stmt"/>
-        <line num="87" count="1" type="stmt"/>
-        <line num="95" count="0" type="stmt"/>
-        <line num="96" count="0" type="stmt"/>
-        <line num="97" count="0" type="stmt"/>
-        <line num="103" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="118" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="120" count="1" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="100" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="115" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="117" count="1" type="stmt"/>
       </file>
     </package>
   </project>
