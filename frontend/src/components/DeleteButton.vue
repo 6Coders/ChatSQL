@@ -1,5 +1,5 @@
 <template>
-    <button :class="DeleteButtonClass" type="button" @click="deleteDictionary">Delete</button>
+    <button :class="DeleteButtonClass" type="button" @click="deleteDictionary">Delete <i class="bi bi-trash"></i></button>
   </template>
   
   <script>

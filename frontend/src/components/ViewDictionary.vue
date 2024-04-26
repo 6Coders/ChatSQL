@@ -1,27 +1,31 @@
 <template>
-  <div>
-    <h2>Dictionary View</h2>
-    <button class="btn btn-primary" @click="addNewEntry('Nuova voce','2')">Aggiungi Riga</button>
-    <table class="table">
+  <div class="mt-5">
+    <button class="btn btn-primary mb-3" @click="addNewEntry('Nuova voce','2')">Aggiungi Riga <i class="bi bi-plus-lg"></i></button>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Load</th>
-          <th>Delete</th>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Data di caricamento</th>
+          <th scope="col">Dimensione</th>
+          <th scope="col">Azioni</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(entry, index) in dictionaryEntries" :key="index">
+          <th scope="row">{{ index + 1 }}</th>
           <td>{{ entry.name }}</td>
+          <td>01/01/2021</td>
+          <td>1 KB</td>
           <td>
-            <LoadButton :id="entry.id" :name="entry.name"  :class="loadButtonClass"  @load-click="loadButtonClick(entry.id)" />
-          </td>
-          <td>
+            <LoadButton :id="entry.id" :name="entry.name" :class="loadButtonClass" @load-click="loadButtonClick(entry.id)" />
             <DeleteButton :id="entry.id" :name="entry.name" :class="deleteButtonClass" @delete-click="deleteButtonClick(entry.id)" />
           </td>
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </template>
 
