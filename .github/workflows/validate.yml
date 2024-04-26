@@ -50,11 +50,12 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test Python
       run: |
-        cd backend
-        pytest
+        cd tests/backend
+        python -m unittest discover
+        cd ..
     - name: Build Unit Test
       run: |
-        cd frontend
+        cd tests/frontend
         npm run test:unit
         cd ..
     - name: Run Vue.js tests and generate coverage report

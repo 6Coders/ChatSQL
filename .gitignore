@@ -2,4 +2,5 @@ __pycache__/
 .vscode/
 .venv/
 .DS_Store
-node_modules
+node_modules/
+.coverage
