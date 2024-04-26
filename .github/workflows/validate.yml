@@ -23,12 +23,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest coverage
+        pip install flake8 unittest coverage
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Run Python tests and generate coverage report
       run: |
-        coverage run -m pytest
-        coverage xml -o backend/coverage.xml
+        coverage run -m unittest
+        coverage xml -o tests/results/coverage.xml
     - name: Installazione Node.js and NPM
       uses: actions/setup-node@v2
       with:
