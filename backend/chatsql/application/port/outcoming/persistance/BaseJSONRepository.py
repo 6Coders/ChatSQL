@@ -8,7 +8,7 @@ class BaseJsonRepository(ABC):
         pass
 
     @abstractmethod
-    def remove(self, filename: str) -> List[str]:
+    def remove(self, filename: str) -> bool:
         pass
     
     @abstractmethod

@@ -7,5 +7,4 @@ class VisualizzaDizionarioCorrenteUseCase(ABC):
     @abstractmethod
     def selected(self) -> str:
         pass
-
     

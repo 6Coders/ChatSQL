@@ -19,19 +19,24 @@ class JSONManagerService(
     
     def __init__(self, jsonRepository: BaseJsonRepository) -> None:
         
-        self._jsonRepository = jsonRepository
+        self._repository = jsonRepository
+        self._selectedFile = None
 
     def add(self, filename: str, stream: IO[bytes]) -> bool:
-        raise NotImplementedError()
+        return self._repository.save(filename=filename, stream=stream)
     
     def remove(self, filename: str) -> bool:
-        raise NotImplementedError()
+        if not self._repository.remove(filename=filename):
+            raise ValueError(f"`{filename}` non esistente")
+        return True
     
     def list_all(self) -> List[str]:
-        raise NotImplementedError()
-    
-    def selected(self) -> str:
-        raise NotImplementedError()
+        return self._repository.list_all()
     
     def load(self, filename: str) -> bool:
-        raise NotImplementedError()
+        self._selectedFile = filename
+        return True
+
+    def selected(self) -> str:
+        return self._selectedFile
+    

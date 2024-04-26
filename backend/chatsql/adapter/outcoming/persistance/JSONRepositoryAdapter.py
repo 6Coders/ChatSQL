@@ -4,8 +4,8 @@ from chatsql.application.port.outcoming.persistance.BaseJSONRepository import Ba
 from chatsql.utils.JSONValidator import JSONValidator
 
 import json
-from os import listdir
-from os.path import isfile, join, exists
+from os import listdir, remove
+from os.path import isfile, join
 
 from shutil import copy2
 from werkzeug.utils import secure_filename
@@ -21,9 +21,9 @@ class JSONRepositoryAdapter(BaseJsonRepository):
         if self.__is_valid(filename=filename, content=stream):
             raise ValueError(f"`{filename}` non rispetta la struttura")
 
-        filepath = join(self._folder, filename)
+        filename = secure_filename(filename)
 
-        dst = secure_filename(filepath)
+        dst = join(self._folder, filename)
         close_dst = False
 
         if isinstance(dst, str):
@@ -38,9 +38,14 @@ class JSONRepositoryAdapter(BaseJsonRepository):
                 dst.close()
             return False
 
-    def remove(self, filename: str):
-        raise NotImplementedError()
-    
+    def remove(self, filename: str) -> bool:
+        
+        if filename in self.list_all():
+            remove(filename)
+            return True
+
+        return False
+        
     def list_all(self) -> List[str]:
         return [filename for filename in listdir(self._folder) 
                 if isfile(join(self._folder, filename)) and
