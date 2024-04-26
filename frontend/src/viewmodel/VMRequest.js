@@ -1,8 +1,10 @@
 import { useRequestStore } from '@/stores/requestStore'
+import useRequestModel from '@/model/MRequest'
 
 export default function RequestPageViewModel() {
   const requestStore = useRequestStore()
-
+  const { testApiCall, cancelRequest } = useRequestModel()
+  
   const handleMessage = (responseMessage) => {
     if (responseMessage != 'Stopped') {
       requestStore.addMessage('user', requestStore.requestMessage)
@@ -17,7 +19,7 @@ export default function RequestPageViewModel() {
   const submitForm = async () => {
     requestStore.setIsSending(true)
     try {
-      const result = await requestStore.testApiCall()
+      const result = await testApiCall()
       handleMessage(result)
     } catch (error) {
       handleMessage('Stopped')
@@ -28,7 +30,7 @@ export default function RequestPageViewModel() {
   }
 
   function stopSending() {
-    requestStore.cancelRequest()
+    cancelRequest()
   }
 
   function clearMessages() {
