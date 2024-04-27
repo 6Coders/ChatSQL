@@ -13,7 +13,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: write
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python 3.10
@@ -33,6 +36,12 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20'
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+         path: ~/.npm
+         key: npm-${{ hashFiles('package-lock.json') }}
+         restore-keys: npm-
     - name: Installazione Vue CLI
       run: |
         npm install -g @vue/cli
