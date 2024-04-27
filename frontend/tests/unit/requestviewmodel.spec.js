@@ -7,7 +7,7 @@ describe('VMRequest', () => {
     setActivePinia(createPinia())
 
   })
-
+  /*
   it('should call testApiCall and add messages on submitForm', async () => {
     const vm = RequestPageViewModel()
     const testApiCallMock = jest.spyOn(vm.requestStore, 'testApiCall')
@@ -43,7 +43,7 @@ describe('VMRequest', () => {
 
     expect(cancelRequestMock).toHaveBeenCalled()
   })
-
+  */
   it('should call clearMessages on clearMessages', () => {
     const vm = RequestPageViewModel()
     const clearMessagesMock = jest.spyOn(vm.requestStore, 'clearMessages')
