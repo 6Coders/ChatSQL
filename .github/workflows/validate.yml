@@ -42,7 +42,7 @@ jobs:
     - name: Installazione Vue.js dependencies
       run: |
         cd frontend
-        npm install
+        npm install -f
         cd ..
     - name: Linting Codice Python (Flake8)
       run: |
@@ -55,6 +55,7 @@ jobs:
     - name: Build Unit Test
       run: |
         cd frontend
+        npm install -f
         npm run test:unit
         cd ..
     - name: Run Vue.js tests and generate coverage report
