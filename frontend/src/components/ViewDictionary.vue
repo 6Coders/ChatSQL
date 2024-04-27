@@ -15,7 +15,9 @@
       <tbody>
         <tr v-for="(entry, index) in dictionaryEntries" :key="index">
           <th scope="row">{{ index + 1 }}</th>
-          <td>{{ entry.name }}</td>
+          <td>{{ entry.name }}
+            <div class="spinner-grow text-success spinner-grow-sm" role="status"/>
+          </td>
           <td>01/01/2021</td>
           <td>1 KB</td>
           <td>

@@ -1,9 +1,15 @@
 <template>
+<div>
   <div class="input-group">
     <input type="file" class="form-control" ref="fileInput" @change="handleFileUpload">
     <upload-button :class="uploadButtonClass" @upload-click="emitFile" :disabled="!file" />
   </div>
+  <div class="mt-2 d-flex align-items-center">
+    <div class="spinner-border text-primary mr-3" role="status"></div>
+    <p class="text-primary mb-0" style="margin-left: 10px;">Preparing Dictionary...</p> 
+  </div>
   <p>{{ message }}</p>
+</div>
 </template>
 
 <script>
