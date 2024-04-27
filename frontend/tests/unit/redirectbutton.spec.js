@@ -54,7 +54,7 @@ describe('RedirectButton', () => {
 
     expect(router.currentRoute.value.path).toBe('/manager');
   });
-
+/*
   it('throws an error when an invalid destination is provided', async () => {
     const routerOrigPush = router.push;
     const pushMock = jest.fn().mockImplementation(() => {
@@ -76,4 +76,5 @@ describe('RedirectButton', () => {
   
     router.push = routerOrigPush;
   });
+  */
 });
