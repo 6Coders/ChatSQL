@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <input type="file" ref="fileInput" @change="handleFileUpload">
-    <upload-button :class="uploadButtonClass" @upload-click="emitFile"/>
-    <p>{{ message }}</p>
+  <div class="input-group">
+    <input type="file" class="form-control" ref="fileInput" @change="handleFileUpload">
+    <upload-button :class="uploadButtonClass" @upload-click="emitFile" :disabled="!file" />
   </div>
+  <p>{{ message }}</p>
 </template>
 
 <script>
@@ -12,9 +12,9 @@ import UploadButton from '@/components/UploadButton.vue';
 
 export default {
   name: 'InputFile',
-  components: { 
+  components: {
     UploadButton
-   },
+  },
   props: {
     uploadButtonClass: String
   },
@@ -23,7 +23,7 @@ export default {
     const message = ref('');
 
     function handleFileUpload(event) {
-      if(message.value!='') {
+      if (message.value != '') {
         message.value = '';
       }
       file.value = event.target.files[0];
