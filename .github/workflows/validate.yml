@@ -1,4 +1,4 @@
-name: Python WebApp
+name: Build
 
 on:
   push:
