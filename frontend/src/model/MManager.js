@@ -1,24 +1,51 @@
 import axios from 'axios';
 
 export default {
-  async uploadFile(file) {
-    try {
+  async uploadFile(file) 
+  {
+    try 
+    {
+      //Invio del file al backend
       const formData = new FormData();
       formData.append('file', file);
-      const response = await axios.post('URL_DEL_BACKEND', formData, {
+      const response = await axios.post('http://localhost:5000/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-      console.log('Risposta dal backend:', response.status);  
-      if (response.status === 200 || response.status === 201) {
-        return true; 
-      } else {
-        return false;
+      console.log('Backend response status:', response.status);  
+      if (response.status === 200 || response.status === 201) 
+      {
+        console.log('Backend response data:', response.data);  
+        return response.data;
+      } else 
+      {
+        return 'Internal Server Error';
       }
-    } catch (error) {
-      console.error('Errore durante l\'invio del file al backend:', error);
-      return false;
+    } catch (error) 
+    {
+      console.error('Internal Server Error:', error);
+      return 'Internal Server Error';
+    }
+  },
+  async getDictionaries()
+  {
+    try 
+    {
+      const response = await axios.get('http://localhost:5000/files');
+      console.log('Backend response status:', response.status);  
+      if (response.status === 200 || response.status === 201) 
+      {
+        console.log('Backend response data:', response.data);  
+        return response.data;
+      } else 
+      {
+        return 'Internal Server Error';
+      }
+    } catch (error) 
+    {
+      console.error('Internal Server Error:', error);
+      return 'Internal Server Error';
     }
   },
   convalidateFile(file) {
