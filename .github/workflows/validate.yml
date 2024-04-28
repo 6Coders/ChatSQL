@@ -13,9 +13,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: write
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
@@ -30,9 +33,15 @@ jobs:
         coverage run -m pytest
         coverage xml -o backend/coverage.xml
     - name: Installazione Node.js and NPM
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
-        node-version: '14'
+        node-version: '20'
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+         path: ~/.npm
+         key: npm-${{ hashFiles('package-lock.json') }}
+         restore-keys: npm-
     - name: Installazione Vue CLI
       run: |
         npm install -g @vue/cli
@@ -42,7 +51,7 @@ jobs:
     - name: Installazione Vue.js dependencies
       run: |
         cd frontend
-        npm install
+        npm install -f
         cd ..
     - name: Linting Codice Python (Flake8)
       run: |
@@ -55,6 +64,7 @@ jobs:
     - name: Build Unit Test
       run: |
         cd frontend
+        npm install -f
         npm run test:unit
         cd ..
     - name: Run Vue.js tests and generate coverage report
