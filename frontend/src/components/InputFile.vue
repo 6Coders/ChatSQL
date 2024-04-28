@@ -4,9 +4,11 @@
     <input type="file" class="form-control" ref="fileInput" @change="handleFileUpload">
     <upload-button :class="uploadButtonClass" @upload-click="emitFile" :disabled="!file" />
   </div>
-  <div class="mt-2 d-flex align-items-center">
-    <div class="spinner-border text-primary mr-3" role="status"></div>
-    <p class="text-primary mb-0" style="margin-left: 10px;">Preparing Dictionary...</p> 
+  <div v-if="isUploading">
+    <div class="mt-2 d-flex align-items-center">
+      <div class="spinner-border text-primary mr-3" role="status"></div>
+        <p class="text-primary mb-0" style="margin-left: 10px;">Preparing Dictionary...</p> 
+    </div>
   </div>
   <p>{{ message }}</p>
 </div>
@@ -27,6 +29,7 @@ export default {
   setup(props, { emit }) {
     const file = ref(null);
     const message = ref('');
+    const isUploading = ref(false);
 
     function handleFileUpload(event) {
       if (message.value != '') {
@@ -37,14 +40,16 @@ export default {
     }
 
     function emitFile() {
-      if (file.value) {
+      if (file.value) 
+      {
+        isUploading.value = true;
         emit('file-selected', file.value);
-      } else {
-        message.value = 'Nessun file selezionato';
-      }
+      } 
     }
 
-    function changeMessage(newMessage) {
+    function changeMessage(newMessage) 
+    {
+      isUploading.value = false;
       message.value = newMessage;
     }
 

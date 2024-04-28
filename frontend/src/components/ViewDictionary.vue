@@ -1,6 +1,6 @@
 <template>
   <div class="mt-5">
-    <button class="btn btn-primary mb-3" @click="addNewEntry('Nuova voce','2')">Aggiungi Riga <i class="bi bi-plus-lg"></i></button>
+    <button class="btn btn-primary mb-3" @click="addNewEntry('Nuova voce','2')">Aggiorna <i class="bi bi-arrow-clockwise"></i></button>
     <div class="table-responsive">
       <table class="table table-striped table-hover">
       <thead>

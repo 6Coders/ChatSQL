@@ -1,7 +1,7 @@
 import MManager from '@/model/MManager.js';
 
 const VMManager = {
-  handleFileSelected(file) {
+  async handleFileSelected(file) {
     var message='';
     if (!MManager.convalidateFile(file)) 
     {
@@ -9,13 +9,8 @@ const VMManager = {
     }
     else 
     {
-      if(!MManager.uploadFile(file))
-      {
-        message= 'Errore interno al server, non è stato possibile inviare il file';
-      }
-      message= 'File inviato con successo';
+      message= await MManager.uploadFile(file);
     }
-    console.log(message);
     return message;
   },
   handleDeleteDictionary(id) {
