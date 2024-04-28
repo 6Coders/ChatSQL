@@ -2,7 +2,7 @@
   <div class="container">
     <h1>Gestione dizionario dati</h1>
     <input-file ref="fileInput" @file-selected="handleFileSelected" :uploadButtonClass="uploadButtonClass"></input-file>
-    <view-dictionary @load-button-clicked="handleLoadButtonClicked" @delete-button-clicked="handleDeleteButtonClicked"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass"></view-dictionary>
+    <view-dictionary ref="Dictionary" @load-button-clicked="handleLoadButtonClicked" @delete-button-clicked="handleDeleteButtonClicked" @update-entry="handleUpdateEntry"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass"></view-dictionary>
   </div>
 </template>
 
@@ -24,10 +24,15 @@ export default {
       uploadButtonClass: 'btn btn-outline-secondary',
     };
   },
+  mounted() 
+  {
+    this.handleDictionary();
+  },
   methods: {
-    handleFileSelected(file) {
-      const message = VMManager.handleFileSelected(file);
-      this.$refs.fileInput.changeMessage(message);
+    async handleFileSelected(file) {
+    const message = await VMManager.handleFileSelected(file);
+    console.log('Message:', message);
+    this.$refs.fileInput.changeMessage(message);
     },
     handleLoadButtonClicked(index) {
       console.log('LoadButton clicked for row index:', index);
@@ -36,6 +41,23 @@ export default {
     handleDeleteButtonClicked(index) {
       console.log('DeleteButton clicked for row index:', index);
       VMManager.handleDeleteDictionary(index);
+    },
+    handleUpdateEntry() {
+      this.handleDictionary();
+    },
+    async handleDictionary(){
+      const response = await VMManager.handleDictionary();
+      if(response.length > 0)
+      {
+        for(const row of response)
+        {
+          /*
+          Sotituire appena ci sarà la funzionalità nel backend
+          this.$refs.Dictionary.addNewEntry(row.id,row.name,row.extension,row.date,row.size,row.loaded);
+          */
+          this.$refs.Dictionary.addNewEntry(1,row.name,row.extension,row.date,row.size,row.loaded);
+        }
+      }
     }
   }
 };

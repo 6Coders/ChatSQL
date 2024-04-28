@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export default {
-  //Metodo per l'upload del file
   async uploadFile(file) 
   {
     try 
@@ -18,7 +17,7 @@ export default {
       if (response.status === 200 || response.status === 201) 
       {
         console.log('Backend response data:', response.data);  
-        return response.data; 
+        return response.data;
       } else 
       {
         return 'Internal Server Error';
@@ -29,7 +28,26 @@ export default {
       return 'Internal Server Error';
     }
   },
-
+  async getDictionaries()
+  {
+    try 
+    {
+      const response = await axios.get('http://localhost:5000/files');
+      console.log('Backend response status:', response.status);  
+      if (response.status === 200 || response.status === 201) 
+      {
+        console.log('Backend response data:', response.data);  
+        return response.data;
+      } else 
+      {
+        return 'Internal Server Error';
+      }
+    } catch (error) 
+    {
+      console.error('Internal Server Error:', error);
+      return 'Internal Server Error';
+    }
+  },
   convalidateFile(file) {
     console.log('Convalida del file:', file.name);
     const flag = this.isExtensionAllowed(file) && this.isSizeValid(file);

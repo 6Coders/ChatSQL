@@ -2,16 +2,16 @@ import MManager from '@/model/MManager.js';
 
 const VMManager = {
   async handleFileSelected(file) {
-    var message='';
     if (!MManager.convalidateFile(file)) 
     {
-      message= 'Estensione non valida o file troppo grande (max 500KB)';
+      return 'Estensione non valida o file troppo grande (max 500KB)';
     }
     else 
     {
-      message= await MManager.uploadFile(file);
+      const message = await MManager.uploadFile(file);
+      console.log('Messaggio:', message);
+      return message;
     }
-    return message;
   },
   handleDeleteDictionary(id) {
     if (!MManager.deleteDictionary(id)) {
@@ -30,6 +30,12 @@ const VMManager = {
     {
       console.log('Dizionario caricato con successo');
     }
+  },
+  async handleDictionary(){
+    console.log('Richiesta di caricamento dei dizionari');
+    const response = await MManager.getDictionaries();
+    console.log('Dizionari:', response[0].name);
+    return response;
   }
 };
 
