@@ -1,5 +1,7 @@
 from typing import List
 
+from sklearn.metrics.pairwise import cosine_similarity
+
 from backend.chatsql.application.port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
 
 from backend.chatsql.domain.Embedding import Embedding
@@ -18,4 +20,11 @@ class KNN(SearchAlgorithmPort):
         self._top_k = top_k
 
     def search(self, query: Embedding, context: List[Embedding]) -> List[Embedding]:
-        raise NotImplementedError()
+        query_embedding = query.data.reshape(1, -1)
+        similarities = cosine_similarity(query_embedding, [emb.data for emb in context])
+        indices = np.argsort(similarities[0])[-self._top_k:][::-1]
+        return [context[idx] for idx in indices]
+    #ES. per utilizzo
+    #match = KNN(top_k=3)
+    #match = match.search(query, context)
+    #for emb in match: \n print(emb.text)

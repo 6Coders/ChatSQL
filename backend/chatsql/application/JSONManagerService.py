@@ -35,6 +35,9 @@ class JSONManagerService(
     
     def load(self, filename: str) -> bool:
         self._selectedFile = filename
+        loaded = self._repository.load(filename)
+        if not loaded:
+            raise ValueError(f"`{filename}` non esistente")
         return True
 
     def selected(self) -> str:
