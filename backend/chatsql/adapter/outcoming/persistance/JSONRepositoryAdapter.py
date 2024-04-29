@@ -16,7 +16,7 @@ class JSONRepositoryAdapter(BaseJsonRepository):
         
         self._folder = folder
 
-    def save(self, filename: str, stream: List[bytes]) -> bool:
+    def save(self, filename: str, stream: List[str]) -> bool:
 
         if self.__is_valid(filename=filename, content=stream):
             raise ValueError(f"`{filename}` non rispetta la struttura")
@@ -52,7 +52,7 @@ class JSONRepositoryAdapter(BaseJsonRepository):
                     filename.split('.')[-1] == 'json']
 
 
-    def __is_valid(self, filename: str, content: List[bytes]) -> bool:
+    def __is_valid(self, filename: str, content: List[str]) -> bool:
         content = json.loads(content)
         return JSONValidator.is_valid_structure(content)
     
