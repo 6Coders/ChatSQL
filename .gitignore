@@ -1,4 +1,6 @@
 __pycache__/
+.vscode/
+.venv/
 .DS_Store
-node_modules
-.vscode
+node_modules/
+.coverage
