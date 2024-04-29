@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class BaseJsonRepository(ABC):
 
     @abstractmethod
-    def save(self, filename: str, stream: List[str]) -> bool:
+    def save(self, filename: str, stream: List[bytes]) -> bool:
         pass
 
     @abstractmethod
