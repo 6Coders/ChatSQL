@@ -1,7 +1,5 @@
 from typing import List
-
 from chatsql.application.port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
-
 from chatsql.domain.Embedding import Embedding
 
 class EmbeddingRepositoryAdapter(BaseEmbeddingRepository):
