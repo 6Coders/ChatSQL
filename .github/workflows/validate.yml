@@ -55,7 +55,7 @@ jobs:
         cd ..
     - name: Build Unit Test
       run: |
-        cd tests/frontend
+        cd frontend
         npm run test:unit
     - name: Run Vue.js tests and generate coverage report
       run: |
