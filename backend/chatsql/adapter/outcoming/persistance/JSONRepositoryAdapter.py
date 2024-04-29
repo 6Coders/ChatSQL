@@ -1,3 +1,4 @@
+from asyncio import streams
 from typing import List
 from chatsql.application.port.outcoming.persistance.BaseJSONRepository import BaseJsonRepository
 
@@ -57,7 +58,7 @@ class JSONRepositoryAdapter(BaseJsonRepository):
         return JSONValidator.is_valid_structure(content)
     
     def load(self, filename: str):
-        if self.__is_valid(filename=filename, content=stream):
+        if self.__is_valid(filename=filename, content=streams):
             raise ValueError(f"`{filename}` non rispetta la struttura")
         with open(join(self._folder, filename), "r") as file:
             return json.load(file)
