@@ -1,4 +1,4 @@
-from typing import IO, List
+from typing import List
 
 from .port.incoming.InserimentoDizionarioUseCase import InserimentoDizionarioUseCase
 from .port.incoming.EliminazioneDizionarioUseCase import EliminazioneDizionarioUseCase
@@ -22,7 +22,7 @@ class JSONManagerService(
         self._repository = jsonRepository
         self._selectedFile = None
 
-    def add(self, filename: str, stream: IO[bytes]) -> bool:
+    def add(self, filename: str, stream: List[bytes]) -> bool:
         return self._repository.save(filename=filename, stream=stream)
     
     def remove(self, filename: str) -> bool:

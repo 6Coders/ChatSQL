@@ -1,10 +1,10 @@
-from typing import List, IO
+from typing import List
 from abc import ABC, abstractmethod
 
 class BaseJsonRepository(ABC):
 
     @abstractmethod
-    def save(self, filename: str, stream: IO[bytes]) -> bool:
+    def save(self, filename: str, stream: List[bytes]) -> bool:
         pass
 
     @abstractmethod

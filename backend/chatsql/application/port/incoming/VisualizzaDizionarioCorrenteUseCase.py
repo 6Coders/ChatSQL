@@ -1,4 +1,3 @@
-from typing import IO
 from abc import ABC, abstractmethod
 
 
