@@ -18,14 +18,10 @@ const VMManager = {
       return message;
     }
   },
-  handleDeleteDictionary(id) {
-    if (!MManager.deleteDictionary(id)) {
-      console.log('Errore interno al server, non è stato possibile eliminare il dizionario');
-    }
-    else
-    {
-      console.log('Dizionario eliminato con successo');
-    }
+  async handleDeleteDictionary(id) {
+    const response = await MManager.deleteDictionary(id);
+    vueComponent. setToastMessage(response);
+    vueComponent.scrollToTop('top');
   },
   handleLoadDictionary(id) {
     if (!MManager.loadDictionary(id)) {
