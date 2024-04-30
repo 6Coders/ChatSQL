@@ -32,5 +32,26 @@ if __name__ == '__main__':
 
 
     app.register_blueprint(managerController.blueprint)
+
+    uploads_folder = os.path.join(os.getcwd(), 'uploads')
+
+    jsonRepository = JSONRepositoryAdapter()
+    jsonRepository.folder = uploads_folder
+    
+    jsonService = JSONManagerService(jsonRepository)
+
+    managerController = ManagerController(
+        inserimentoDizionarioUseCase=jsonService,
+        eliminazioneDizionarioUseCase=jsonService,
+        visualizzaListaDizionariUseCase=jsonService,
+        visualizzaDizionarioCorrenteUseCase=jsonService,
+        loadDizionarioUseCase=jsonService
+    )
+
+
+
+    app.register_blueprint(managerController.blueprint)
     app.run(debug=True)
+
+
 
