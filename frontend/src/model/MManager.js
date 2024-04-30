@@ -66,24 +66,22 @@ export default {
     const maxSize = 500 * 1024; 
     return file.size <= maxSize;
   },
-  
+
   async deleteDictionary(id) {
     try {
       const response = await axios.delete(`http://localhost:5000/files/${id}`);
       console.log('Backend response status:', response.status);  
       if (response.status === 200 || response.status === 204) {
         // Se lo stato 200 o 204 indica che la richiesta è andata a buon fine
-        console.log('File eliminato con successo');
-        return true; // Oppure potresti restituire un messaggio di successo
+        return response.data;
       } else {
         // Altrimenti ritorna false o un messaggio di errore
         console.error('Errore durante l\'eliminazione del file');
-        return false; // Oppure potresti gestire diversamente l'errore
+        return 'Internal server error'; // Oppure potresti gestire diversamente l'errore
       }
     } catch (error) {
-      // Errore interno al server o errore di rete
       console.error('Internal Server Error:', error);
-      return false; // Oppure potresti gestire diversamente l'errore
+      return 'Internal server error'; 
     }
   },
   async loadDictionary(id) {
