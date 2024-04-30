@@ -1,4 +1,5 @@
 from typing import List, IO
+
 from chatsql.application.port.outcoming.persistance.BaseJSONRepository import BaseJsonRepository
 
 from chatsql.utils.JSONValidator import JSONValidator
@@ -88,7 +89,7 @@ class JSONRepositoryAdapter(BaseJsonRepository):
         self.__create_folder()
 
     def load(self, filename: str):
-        if self.__is_valid(filename=filename, content=stream):
+        if self.__is_valid(filename=filename, content=streams):
             raise ValueError(f"`{filename}` non rispetta la struttura")
         with open(join(self._folder, filename), "r") as file:
             return json.load(file)

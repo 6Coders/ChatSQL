@@ -1,6 +1,7 @@
 from typing import List
 
 from sklearn.metrics.pairwise import cosine_similarity
+from transformers.tokenization_utils_base import np
 
 from backend.chatsql.application.port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
 

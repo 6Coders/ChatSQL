@@ -4,13 +4,17 @@ from flask_cors import CORS
 from chatsql.adapter.incoming.web.ManagerController import ManagerController
 from chatsql.adapter.outcoming.persistance.JSONRepositoryAdapter import JSONRepositoryAdapter
 
-
 from chatsql.application.JSONManagerService import JSONManagerService
 
 import os
 
 app = Flask(__name__, static_url_path='', template_folder='../frontend/src/views')
 CORS(app, resources={r'/*': {'origins': '*'}})
+
+@app.route('/heartbeat')
+def heartbeat():
+    return True
+
 
 if __name__ == '__main__':
 
