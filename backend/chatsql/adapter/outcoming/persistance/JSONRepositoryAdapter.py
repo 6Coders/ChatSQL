@@ -1,10 +1,8 @@
 from typing import List, IO
-from typing import List, IO
+
 from chatsql.application.port.outcoming.persistance.BaseJSONRepository import BaseJsonRepository
 
 from chatsql.utils.JSONValidator import JSONValidator
-
-from chatsql.utils import Exceptions
 
 from chatsql.utils import Exceptions
 
@@ -13,37 +11,19 @@ from os import listdir, remove
 from os.path import isfile, join
 
 from shutil import copyfileobj
-from shutil import copyfileobj
 from werkzeug.utils import secure_filename
-import os
 import os
 
 class JSONRepositoryAdapter(BaseJsonRepository):
 
     def __init__(self) -> None:
-    def __init__(self) -> None:
         
-        self._folder = 'uploads'
-        self.__create_folder()
-
         self._folder = 'uploads'
         self.__create_folder()
 
 
     def save(self, filename: str, stream: IO[bytes]) -> bool:
-    def save(self, filename: str, stream: IO[bytes]) -> bool:
 
-        if self.__already_present(filename=filename):
-            raise Exceptions.FileAlreadyUploaded(f"`{filename}` è già stato caricato precedentemente")
-
-        content = ''.join([chunk.decode() for chunk in stream])
-        if not self.__is_valid(content=content):
-            raise Exceptions.InvalidStructure(f"`{filename}` non rispetta la struttura")
-        
-        secured_filename = secure_filename(filename=filename)
-        stream.seek(0)
-        
-        dst = join(self._folder, secured_filename)
         if self.__already_present(filename=filename):
             raise Exceptions.FileAlreadyUploaded(f"`{filename}` è già stato caricato precedentemente")
 
@@ -59,13 +39,9 @@ class JSONRepositoryAdapter(BaseJsonRepository):
 
         if isinstance(dst, str):
             dst = open(dst, "w+b")
-            dst = open(dst, "w+b")
             close_dst = True
 
         try:
-            
-            copyfileobj(stream, dst, 1024)
-
             
             copyfileobj(stream, dst, 1024)
 
@@ -90,7 +66,6 @@ class JSONRepositoryAdapter(BaseJsonRepository):
 
 
     def __is_valid(self, content: List[str]) -> bool:
-    def __is_valid(self, content: List[str]) -> bool:
         content = json.loads(content)
         return JSONValidator.is_valid_structure(content)
 
@@ -99,7 +74,6 @@ class JSONRepositoryAdapter(BaseJsonRepository):
         return secured_filename in self.list_all()
 
     def __create_folder(self) -> bool:
-
         if not os.path.exists(self._folder):
             os.mkdir(self._folder)
 
@@ -112,9 +86,3 @@ class JSONRepositoryAdapter(BaseJsonRepository):
     def folder(self, folder: str):
         self._folder = folder
         self.__create_folder()
-
-    def load(self, filename: str):
-        if self.__is_valid(filename=filename, content=stream):
-            raise ValueError(f"`{filename}` non rispetta la struttura")
-        with open(join(self._folder, filename), "r") as file:
-            return json.load(file)
