@@ -1,11 +1,9 @@
 <template>
   <div class="container">
-    
     <h1 id="top">Gestione dizionario dati</h1>
-    <input-file ref="fileInput" @file-selected="handleFileSelected" :uploadButtonClass="uploadButtonClass"></input-file>
+    <input-file ref="fileInput" @file-selected="handleFileSelected" :uploadButtonClass="uploadButtonClass"/>
     <toast-popup ref="Toast" id="toast"/> 
-    <view-dictionary ref="Dictionary" @load-button-clicked="handleLoadButtonClicked" @delete-button-clicked="handleDeleteButtonClicked" @update-entry="handleUpdateEntry"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass"/>
-    
+    <view-dictionary ref="Dictionary" @load-button-clicked="handleLoadButtonClicked" @delete-button-clicked="handleDeleteButtonClicked" @update-entry="handleUpdateEntry"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass"/>  
   </div>
 </template>
 
@@ -37,6 +35,7 @@ export default {
     this.handleUpdateEntry();
   },
   methods: {
+
     async handleFileSelected(file) {
       const message = await VMManager.handleFileSelected(file);
       console.log('Message:', message);
@@ -47,9 +46,13 @@ export default {
       console.log('LoadButton clicked for row index:', index);
       VMManager.handleLoadDictionary(index);
     },
+    /**
+     * Handles the event when the delete button is clicked.
+     * @param {number} index - The index of the item to be deleted.
+     */
     handleDeleteButtonClicked(index) {
-      console.log('DeleteButton clicked for row index:', index);
-      VMManager.handleDeleteDictionary(index);
+      if(index)
+        VMManager.handleDeleteDictionary(index);
     },
     handleUpdateEntry(){
       VMManager.handleDictionary();
@@ -58,7 +61,7 @@ export default {
       if(response && response.length > 0)
       {
         //elimino le entry attuali (possibile ottimizzazione ma complesso da implementare)
-        this.$refs.Dictionary.deleteEntry();
+        this.$refs.Dictionary.resetEntry();
         /*Se ci sono dizionari presenti allora li aggiungo alla tabella*/
         for(const row of response)
         {
@@ -70,6 +73,7 @@ export default {
         }
         const currentTime = new Date().toLocaleTimeString();
         const message = `Update success at: ${currentTime}`;
+        this.$refs.Dictionary.isRefreshingStop();
         this.$refs.Dictionary.setAlertMessage(message);
       }
     },
@@ -95,7 +99,7 @@ export default {
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
-    }
+    },
   }
 };
 </script>

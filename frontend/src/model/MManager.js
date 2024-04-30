@@ -67,21 +67,25 @@ export default {
     return file.size <= maxSize;
   },
 
+  /**
+   * Deletes a dictionary with the specified ID.
+   * @param {number} id - The ID of the dictionary to delete.
+   * @returns {Promise<boolean|any>} - A promise that resolves to either the deleted dictionary data or false if the deletion fails.
+   */
   async deleteDictionary(id) {
     try {
       const response = await axios.delete(`http://localhost:5000/files/${id}`);
       console.log('Backend response status:', response.status);  
       if (response.status === 200 || response.status === 204) {
-        // Se lo stato 200 o 204 indica che la richiesta è andata a buon fine
         return response.data;
-      } else {
-        // Altrimenti ritorna false o un messaggio di errore
-        console.error('Errore durante l\'eliminazione del file');
-        return 'Internal server error'; // Oppure potresti gestire diversamente l'errore
+      } 
+      else 
+      {
+        return false; 
       }
     } catch (error) {
       console.error('Internal Server Error:', error);
-      return 'Internal server error'; 
+      return false; 
     }
   },
   async loadDictionary(id) {
