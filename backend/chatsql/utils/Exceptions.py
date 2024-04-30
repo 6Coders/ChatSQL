@@ -14,3 +14,8 @@ class InvalidStructure(CustomException):
 
     def __init__(self, message="Invalid file structure"):
         super().__init__(message)
+
+class FileAlreadyUploaded(CustomException):
+
+    def __init__(self, message="File Already uploaded"):
+        super().__init__(message)
