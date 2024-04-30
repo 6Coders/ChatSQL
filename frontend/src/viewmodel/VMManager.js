@@ -1,6 +1,11 @@
 import MManager from '@/model/MManager.js';
 
+let vueComponent = null;
+
 const VMManager = {
+  setVueComponent(component) {
+    vueComponent = component;
+  },
   async handleFileSelected(file) {
     if (!MManager.convalidateFile(file)) 
     {
@@ -31,11 +36,20 @@ const VMManager = {
       console.log('Dizionario caricato con successo');
     }
   },
+  /*Ritorna la lista dei dizionari presenti a sistema*/
   async handleDictionary(){
-    console.log('Richiesta di caricamento dei dizionari');
     const response = await MManager.getDictionaries();
-    console.log('Dizionari:', response[0].name);
-    return response;
+    if(response && response.length > 0)
+    {
+      vueComponent.printDictionary(response);
+    }
+    else
+    {
+      vueComponent.resetEntry();
+      const currentTime = new Date().toLocaleTimeString();
+      const message = `No dictionaries found at: ${currentTime}`;
+      vueComponent.alertmsgDictionary(message);
+    }
   }
 };
 

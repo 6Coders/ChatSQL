@@ -1,7 +1,15 @@
 <template ref="Dictionary">
   <div class="mt-5">
-    <button class="btn btn-primary mb-3" @click="updateEntry">Aggiorna <i class="bi bi-arrow-clockwise"></i></button>
+    <div>
+      <button class="btn btn-primary mb-3" @click="updateEntry">Aggiorna 
+        <i v-if="!isRefreshing" class="bi bi-arrow-clockwise"></i>
+        <span v-else class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+      </button>
+      <div v-if="alertMessage.value!=''" style="display: inline-block; margin-left: 10px;">
+        <p class="text-secondary">{{ alertMessage.value }}</p>
+      </div>
     <div class="table-responsive">
+    </div>
       <table class="table table-striped table-hover">
       <thead>
         <tr>
@@ -16,9 +24,7 @@
       <tbody>
         <tr v-for="(entry, index) in dictionaryEntries" :key="index" :class="{'table-success':entry.load}">
           <th scope="row">{{ index + 1 }}</th>
-          <td>{{ entry.name }}
-            <div class="spinner-grow text-success spinner-grow-sm" role="status"/>
-          </td>
+          <td>{{ entry.name }}</td>
           <td>{{entry.extension}}</td>
           <td>{{entry.date}}</td>
           <td>{{entry.size}}</td>
@@ -35,6 +41,7 @@
 
 <script>
 import { ref } from 'vue';
+import { reactive } from 'vue';
 import LoadButton from '@/components/LoadButton.vue';
 import DeleteButton from '@/components/DeleteButton.vue';
 
@@ -46,12 +53,15 @@ export default {
   },
   props: {
     loadButtonClass: String,
-    deleteButtonClass: String 
+    deleteButtonClass: String,
   },
   setup(props, { emit }) {
     const dictionaryEntries = ref([]);
+    const alertMessage = reactive({ value: '' });
+    const isRefreshing=ref(false);
 
-    function addNewEntry(id,name,extension,date,size,load) {
+    function addNewEntry(id,name,extension,date,size,load) 
+    {
       dictionaryEntries.value.push({id:id , name: name, extension:extension , date: date, size: size , load: load});
     }
 
@@ -64,8 +74,28 @@ export default {
     }
 
     function updateEntry(){
-      dictionaryEntries.value = [];
+      this.setAlertMessage('');
+      isRefreshing.value=true;
       emit('update-entry');
+    }
+
+    function deleteEntry(){
+      dictionaryEntries.value = [];
+    
+    }
+
+    function resetEntry(){
+      console.log('Resetting entry');
+      dictionaryEntries.value=[];
+    }
+
+    function setAlertMessage(message){
+      this.isRefreshingStop();
+      alertMessage.value = message;
+    }
+
+    function isRefreshingStop(){
+      isRefreshing.value=false;
     }
 
     return {
@@ -73,7 +103,13 @@ export default {
       addNewEntry,
       loadButtonClick,
       deleteButtonClick,
-      updateEntry
+      updateEntry,
+      deleteEntry,
+      resetEntry,
+      setAlertMessage,
+      alertMessage,
+      isRefreshing,
+      isRefreshingStop
 
     };
   }

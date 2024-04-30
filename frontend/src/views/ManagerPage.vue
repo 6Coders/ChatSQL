@@ -26,13 +26,17 @@ export default {
   },
   mounted() 
   {
-    this.handleDictionary();
+    //Dependency Injection
+    VMManager.setVueComponent(this);
+    //Aggiorno la tabella con i dizionari presenti
+    this.handleUpdateEntry();
   },
   methods: {
     async handleFileSelected(file) {
-    const message = await VMManager.handleFileSelected(file);
-    console.log('Message:', message);
-    this.$refs.fileInput.changeMessage(message);
+      const message = await VMManager.handleFileSelected(file);
+      console.log('Message:', message);
+      this.$refs.fileInput.setIsUploading(false);
+      this.$refs.fileInput.changeMessage(message);
     },
     handleLoadButtonClicked(index) {
       console.log('LoadButton clicked for row index:', index);
@@ -42,13 +46,15 @@ export default {
       console.log('DeleteButton clicked for row index:', index);
       VMManager.handleDeleteDictionary(index);
     },
-    handleUpdateEntry() {
-      this.handleDictionary();
+    handleUpdateEntry(){
+      VMManager.handleDictionary();
     },
-    async handleDictionary(){
-      const response = await VMManager.handleDictionary();
-      if(response.length > 0)
+    printDictionary(response) {
+      if(response && response.length > 0)
       {
+        //elimino le entry attuali (possibile ottimizzazione ma complesso da implementare)
+        this.$refs.Dictionary.deleteEntry();
+        /*Se ci sono dizionari presenti allora li aggiungo alla tabella*/
         for(const row of response)
         {
           /*
@@ -57,7 +63,20 @@ export default {
           */
           this.$refs.Dictionary.addNewEntry(1,row.name,row.extension,row.date,row.size,row.loaded);
         }
+        const currentTime = new Date().toLocaleTimeString();
+        const message = `Update success at: ${currentTime}`;
+        this.$refs.Dictionary.setAlertMessage(message);
       }
+    },
+    alertmsgDictionary(message){
+      if(message)
+      {
+        this.$refs.Dictionary.setAlertMessage(message);
+      }
+
+    },
+    resetEntry(){
+      this.$refs.Dictionary.resetEntry();
     }
   }
 };
