@@ -1,21 +1,26 @@
 <template>
   <div class="container">
-    <h1>Gestione dizionario dati</h1>
+    
+    <h1 id="top">Gestione dizionario dati</h1>
     <input-file ref="fileInput" @file-selected="handleFileSelected" :uploadButtonClass="uploadButtonClass"></input-file>
-    <view-dictionary ref="Dictionary" @load-button-clicked="handleLoadButtonClicked" @delete-button-clicked="handleDeleteButtonClicked" @update-entry="handleUpdateEntry"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass"></view-dictionary>
+    <toast-popup ref="Toast" id="toast"/> 
+    <view-dictionary ref="Dictionary" @load-button-clicked="handleLoadButtonClicked" @delete-button-clicked="handleDeleteButtonClicked" @update-entry="handleUpdateEntry"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass"/>
+    
   </div>
 </template>
 
 <script>
 import InputFile from '@/components/InputFile.vue';
 import ViewDictionary from '@/components/ViewDictionary.vue';
+import ToastPopup from '@/components/ToastPopup.vue';
 import VMManager from '@/viewmodel/VMManager.js';
 
 export default {
   name: 'ManagerPage',
   components: {
     InputFile,
-    ViewDictionary
+    ViewDictionary,
+    ToastPopup
   },
   data() {
     return {
@@ -26,13 +31,17 @@ export default {
   },
   mounted() 
   {
-    this.handleDictionary();
+    //Dependency Injection
+    VMManager.setVueComponent(this);
+    //Aggiorno la tabella con i dizionari presenti
+    this.handleUpdateEntry();
   },
   methods: {
     async handleFileSelected(file) {
-    const message = await VMManager.handleFileSelected(file);
-    console.log('Message:', message);
-    this.$refs.fileInput.changeMessage(message);
+      const message = await VMManager.handleFileSelected(file);
+      console.log('Message:', message);
+      this.$refs.fileInput.setIsUploading(false);
+      this.setToastMessage(message);
     },
     handleLoadButtonClicked(index) {
       console.log('LoadButton clicked for row index:', index);
@@ -42,13 +51,15 @@ export default {
       console.log('DeleteButton clicked for row index:', index);
       VMManager.handleDeleteDictionary(index);
     },
-    handleUpdateEntry() {
-      this.handleDictionary();
+    handleUpdateEntry(){
+      VMManager.handleDictionary();
     },
-    async handleDictionary(){
-      const response = await VMManager.handleDictionary();
-      if(response.length > 0)
+    printDictionary(response) {
+      if(response && response.length > 0)
       {
+        //elimino le entry attuali (possibile ottimizzazione ma complesso da implementare)
+        this.$refs.Dictionary.deleteEntry();
+        /*Se ci sono dizionari presenti allora li aggiungo alla tabella*/
         for(const row of response)
         {
           /*
@@ -57,6 +68,32 @@ export default {
           */
           this.$refs.Dictionary.addNewEntry(1,row.name,row.extension,row.date,row.size,row.loaded);
         }
+        const currentTime = new Date().toLocaleTimeString();
+        const message = `Update success at: ${currentTime}`;
+        this.$refs.Dictionary.setAlertMessage(message);
+      }
+    },
+    alertmsgDictionary(message){
+      if(message)
+      {
+        this.$refs.Dictionary.setAlertMessage(message);
+      }
+
+    },
+    resetEntry(){
+      this.$refs.Dictionary.resetEntry();
+    },
+    alert(message){
+      alert(message);
+    },
+    setToastMessage(message){
+      this.$refs.Toast.setTest(message);
+      this.$refs.Toast.showToast();
+    },
+    scrollToTop(elementId) {
+      const element = document.getElementById(elementId); 
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
       }
     }
   }

@@ -2,13 +2,7 @@
 <div>
   <div class="input-group">
     <input type="file" class="form-control" ref="fileInput" @change="handleFileUpload">
-    <upload-button :class="uploadButtonClass" @upload-click="emitFile" :disabled="!file" />
-  </div>
-  <div v-if="isUploading">
-    <div class="mt-2 d-flex align-items-center">
-      <div class="spinner-border text-primary mr-3" role="status"></div>
-        <p class="text-primary mb-0" style="margin-left: 10px;">Preparing Dictionary...</p> 
-    </div>
+    <upload-button ref="uploadbtn" :class="uploadButtonClass" @upload-click="emitFile" :disabled="!file" :isuploading="isUploading" />
   </div>
   <p>{{ message }}</p>
 </div>
@@ -28,13 +22,11 @@ export default {
   },
   setup(props, { emit }) {
     const file = ref(null);
-    const message = ref('');
+    const message = ref(' ');
     const isUploading = ref(false);
 
     function handleFileUpload(event) {
-      if (message.value != '') {
-        message.value = '';
-      }
+      this.changeMessage('');
       file.value = event.target.files[0];
       console.log('File inserito:', file.value);
     }
@@ -49,8 +41,12 @@ export default {
 
     function changeMessage(newMessage) 
     {
-      isUploading.value = false;
       message.value = newMessage;
+    }
+
+    function setIsUploading(value) 
+    {
+      isUploading.value = value;
     }
 
     return {
@@ -58,7 +54,9 @@ export default {
       message,
       handleFileUpload,
       emitFile,
-      changeMessage
+      changeMessage,
+      isUploading,
+      setIsUploading
     };
   }
 };

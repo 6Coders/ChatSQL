@@ -1,5 +1,5 @@
 <template>
-  <button :class="LoadButtonClass" class="mx-2" type="button" @click="loadDictionary">Load</button>
+  <button :class="LoadButtonClass" class="mx-2" type="button" @click="loadDictionary">Load <i class="bi bi-file-earmark-plus"></i></button>
 </template>
 
 <script>
