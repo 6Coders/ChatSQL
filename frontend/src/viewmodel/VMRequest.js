@@ -3,7 +3,7 @@ import useRequestModel from '@/model/MRequest'
 
 export default function RequestPageViewModel() {
   const requestStore = useRequestStore()
-  const { testApiCall, cancelRequest } = useRequestModel()
+  const { generatePrompt, cancelRequest } = useRequestModel()
   
   const handleMessage = (responseMessage) => {
     if (responseMessage != 'Stopped') {
@@ -19,7 +19,7 @@ export default function RequestPageViewModel() {
   const submitForm = async () => {
     requestStore.setIsSending(true)
     try {
-      const result = await testApiCall()
+      const result = await generatePrompt(requestStore.requestMessage)
       handleMessage(result)
     } catch (error) {
       handleMessage('Stopped')
@@ -41,6 +41,7 @@ export default function RequestPageViewModel() {
     requestStore,
     submitForm,
     stopSending,
-    clearMessages
+    clearMessages,
+    handleMessage
   }
 }
