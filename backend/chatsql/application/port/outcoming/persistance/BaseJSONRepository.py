@@ -14,8 +14,3 @@ class BaseJsonRepository(ABC):
     @abstractmethod
     def list_all(self) -> List[str]:
         pass
-    
-    @abstractmethod
-    def load(self, filename: str):
-        pass
-    

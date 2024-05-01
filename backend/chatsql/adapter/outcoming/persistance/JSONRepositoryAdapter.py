@@ -73,7 +73,6 @@ class JSONRepositoryAdapter(BaseJsonRepository):
         return secured_filename in self.list_all()
 
     def __create_folder(self) -> bool:
-
         if not os.path.exists(self._folder):
             os.mkdir(self._folder)
 
@@ -86,9 +85,3 @@ class JSONRepositoryAdapter(BaseJsonRepository):
     def folder(self, folder: str):
         self._folder = folder
         self.__create_folder()
-
-    def load(self, filename: str):
-        if self.__is_valid(filename=filename, content=streams):
-            raise ValueError(f"`{filename}` non rispetta la struttura")
-        with open(join(self._folder, filename), "r") as file:
-            return json.load(file)
