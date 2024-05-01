@@ -28,15 +28,16 @@ const VMManager = {
     if(response)
     {
       vueComponent.setToastMessage('Dictionary deleted successfully');
-      vueComponent.scrollToTop('top');
+      vueComponent.scrollTo('top');
       vueComponent.handleDictionary();
     }
     else
     {
       vueComponent.setToastMessage('Internal Server Error');
-      vueComponent.scrollToTop('top');
+      vueComponent.scrollTo('top');
     }
   },
+
   handleLoadDictionary(id) {
     if (!MManager.loadDictionary(id)) {
       console.log('Errore interno al server, non è stato possibile caricare il dizionario');
@@ -46,21 +47,35 @@ const VMManager = {
       console.log('Dizionario caricato con successo');
     }
   },
-  /*Ritorna la lista dei dizionari presenti a sistema*/
+  
+  
+  /**
+   * Handles the dictionary functionality.
+   * Retrieves dictionaries from MManager, resets the entry, prints the dictionary,
+   * sets the refreshing status, and displays an alert message.
+   * @returns {Promise<void>} A promise that resolves when the dictionary handling is complete.
+   */
   async handleDictionary(){
     const response = await MManager.getDictionaries();
     if(response && response.length > 0)
     {
+      vueComponent.resetEntry();
       vueComponent.printDictionary(response);
+      vueComponent.setIsRefreshingStop();
+      const currentTime = new Date().toLocaleTimeString();
+      const message = `Update success at: ${currentTime}`;
+      vueComponent.setAlertMessage(message);
     }
     else
     {
       vueComponent.resetEntry();
       const currentTime = new Date().toLocaleTimeString();
       const message = `No dictionaries found at: ${currentTime}`;
-      vueComponent.alertmsgDictionary(message);
+      vueComponent.setAlertMessage(message);
+      vueComponent.setIsRefreshingStop();
     }
   }
+  
 };
 
 export default VMManager;

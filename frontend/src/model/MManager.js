@@ -28,7 +28,11 @@ export default {
       return 'Internal Server Error';
     }
   },
-  /*Ritorna la lista dei dizionari presenti a sistema*/
+  
+  /**
+   * Retrieves dictionaries from the backend server.
+   * @returns {Promise<Array>} A promise that resolves to an array of dictionaries.
+   */
   async getDictionaries()
   {
     try 
@@ -37,20 +41,18 @@ export default {
       console.log('Backend response status:', response.status);  
       if (response.status === 200 || response.status === 201) 
       {
-        /*Se lo stato 200 || 201 la richiesta è andata a buon fine e ritorno la lista dei dizionari*/
         return response.data;
       } else 
       {
-        /*Altrimenti ritorno un messaggio di errore*/
         return ;
       }
     } catch (error) 
     {
-      /*Errore interno al server*/
       console.error('Internal Server Error:', error);
       return ;
     }
   },
+
   convalidateFile(file) {
     console.log('Convalida del file:', file.name);
     const flag = this.isExtensionAllowed(file) && this.isSizeValid(file);
@@ -83,11 +85,12 @@ export default {
       {
         return false; 
       }
-    } catch (error) {
-      console.error('Internal Server Error:', error);
+    } catch (error) 
+    {
       return false; 
     }
   },
+
   async loadDictionary(id) {
     console.log('Caricamento del dizionario con id:', id);
     //implementazione della chiamata al backend

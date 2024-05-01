@@ -54,15 +54,23 @@ export default {
       if(index)
         VMManager.handleDeleteDictionary(index);
     },
+
+    /**
+     * Handles the update of an entry.
+     * Calls the `handleDictionary` method of the `VMManager` object.
+     */
     handleUpdateEntry(){
       VMManager.handleDictionary();
     },
+
+    /**
+     * Prints the dictionary entries based on the provided response.
+     * 
+     * @param {Array} response - The response containing the dictionary entries.
+     */
     printDictionary(response) {
       if(response && response.length > 0)
       {
-        //elimino le entry attuali (possibile ottimizzazione ma complesso da implementare)
-        this.$refs.Dictionary.resetEntry();
-        /*Se ci sono dizionari presenti allora li aggiungo alla tabella*/
         for(const row of response)
         {
           /*
@@ -71,30 +79,51 @@ export default {
           */
           this.$refs.Dictionary.addNewEntry(1,row.name,row.extension,row.date,row.size,row.loaded);
         }
-        const currentTime = new Date().toLocaleTimeString();
-        const message = `Update success at: ${currentTime}`;
-        this.$refs.Dictionary.isRefreshingStop();
-        this.$refs.Dictionary.setAlertMessage(message);
       }
     },
-    alertmsgDictionary(message){
-      if(message)
-      {
-        this.$refs.Dictionary.setAlertMessage(message);
-      }
 
+    /**
+     * Sets the isRefreshingStop flag to stop refreshing the dictionary.
+     */
+    setIsRefreshingStop(){
+      this.$refs.Dictionary.isRefreshingStop();
     },
+
+    /**
+     * Sets the alert message for the ManagerPage component.
+     * 
+     * @param {string} message - The message to be set as the alert message.
+     */
+    setAlertMessage(message){
+      if(message)
+        this.$refs.Dictionary.setAlertMessage(message);
+    },
+
+    /**
+     * Resets the entry by calling the `resetEntry` method of the `Dictionary` component.
+     */
     resetEntry(){
       this.$refs.Dictionary.resetEntry();
     },
-    alert(message){
-      alert(message);
-    },
+
     setToastMessage(message){
       this.$refs.Toast.setTest(message);
       this.$refs.Toast.showToast();
     },
-    scrollToTop(elementId) {
+
+    /**
+     * Shows a toast message.
+     * Calls the `showToast` method of the `Toast` component referenced by `$refs`.
+     */
+    showToast(){
+      this.$refs.Toast.showToast();
+    },
+
+    /**
+     * Scrolls the page to the specified element.
+     * @param {string} elementId - The ID of the element to scroll to.
+     */
+    scrollTo(elementId) {
       const element = document.getElementById(elementId); 
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
