@@ -32,11 +32,6 @@ jobs:
           cd frontend
           npm install
 
-      - name: Build Unit Test
-        run: |
-          cd frontend
-          npm run test:unit
-          
       - name: Build FrontEnd
         run: |
           cd frontend
@@ -46,6 +41,11 @@ jobs:
         run: |
           cd frontend
           npm run lint
+
+      - name: Build Unit Test
+        run: |
+          cd frontend
+          npm run test:unit
 
       - name: Run Vue.js tests and generate coverage report
         run: |
