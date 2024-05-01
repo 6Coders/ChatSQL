@@ -7,6 +7,12 @@ export default {
    * @param {File} file - The file to be uploaded.
    * @returns {Promise<string>} A promise that resolves to the response data or an error message.
    */
+
+  /**
+   * Uploads a file to the server.
+   * @param {File} file - The file to be uploaded.
+   * @returns {Promise<string>} A promise that resolves to the response data or an error message.
+   */
   async uploadFile(file) 
   {
     try 
@@ -23,9 +29,13 @@ export default {
         return response.data;
       } 
       else 
+      } 
+      else 
       {
         return 'Internal Server Error';
       }
+    } 
+    catch (error) 
     } 
     catch (error) 
     {
@@ -60,7 +70,21 @@ export default {
    * @param {File} file - The file to be validated.
    * @returns {boolean} - Returns true if the file is valid, otherwise false.
    */
+  /**
+   * Validates a file based on its extension and size.
+   * @param {File} file - The file to be validated.
+   * @returns {boolean} - Returns true if the file is valid, otherwise false.
+   */
   convalidateFile(file) {
+    return this.isExtensionAllowed(file) && this.isSizeValid(file);
+  },
+
+  /**
+   * Checks if the extension of a file is allowed.
+   *
+   * @param {File} file - The file to check.
+   * @returns {boolean} - Returns true if the extension is allowed, false otherwise.
+   */
     return this.isExtensionAllowed(file) && this.isSizeValid(file);
   },
 
@@ -75,6 +99,12 @@ export default {
     const extension = file.name.split('.').pop().toLowerCase();
     return allowedExtensions.includes('.' + extension);
   },
+
+  /**
+   * Checks if the size of a file is valid.
+   * @param {File} file - The file to check the size of.
+   * @returns {boolean} - Returns true if the file size is valid, false otherwise.
+   */
 
   /**
    * Checks if the size of a file is valid.

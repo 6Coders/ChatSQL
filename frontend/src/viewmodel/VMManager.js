@@ -4,9 +4,18 @@ import MManager from '@/model/MManager.js';
  * The Vue component instance.
  * @type {null|object}
  */
+/**
+ * The Vue component instance.
+ * @type {null|object}
+ */
 let vueComponent = null;
 
 const VMManager = {
+  /**
+   * Sets the Vue component for the VMManager.
+   *
+   * @param {Object} component - The Vue component to set.
+   */
   /**
    * Sets the Vue component for the VMManager.
    *
@@ -21,9 +30,18 @@ const VMManager = {
    * @param {File} file - The selected file.
    * @returns {Promise<void>} - A promise that resolves when the file is handled.
    */
+
+  /**
+   * Handles the selection of a file.
+   * @param {File} file - The selected file.
+   * @returns {Promise<void>} - A promise that resolves when the file is handled.
+   */
   async handleFileSelected(file) {
     if (!MManager.convalidateFile(file)) 
     {
+      vueComponent.setIsUploading(false);
+      vueComponent.setToastMessage('Invalid extension or file too large (max 500KB)');
+      vueComponent.showToast();
       vueComponent.setIsUploading(false);
       vueComponent.setToastMessage('Invalid extension or file too large (max 500KB)');
       vueComponent.showToast();
@@ -39,8 +57,18 @@ const VMManager = {
       vueComponent.setIsUploading(false);
       vueComponent.setToastMessage(message);
       vueComponent.showToast();
+      const msg = await MManager.uploadFile(file);
+      let message = 'File uploaded successfully';
+      if(!msg)
+      {
+        message = 'Internal Server Error';
+      }
+      vueComponent.setIsUploading(false);
+      vueComponent.setToastMessage(message);
+      vueComponent.showToast();
     }
   },
+
 
   /**
    * Handles the deletion of a dictionary.
@@ -53,12 +81,14 @@ const VMManager = {
     {
       vueComponent.setToastMessage('Dictionary deleted successfully');
       vueComponent.showToast();
+      vueComponent.showToast();
       vueComponent.scrollTo('top');
       vueComponent.handleDictionary();
     }
     else
     {
       vueComponent.setToastMessage('Internal Server Error');
+      vueComponent.showToast();
       vueComponent.showToast();
       vueComponent.scrollTo('top');
     }
@@ -70,6 +100,10 @@ const VMManager = {
     }
     else
     {
+      vueComponent.setToastMessage('Dictionary loaded successfully');
+      vueComponent.showToast();
+      vueComponent.scrollTo('top');
+      vueComponent.handleUpdateEntry();
       vueComponent.setToastMessage('Dictionary loaded successfully');
       vueComponent.showToast();
       vueComponent.scrollTo('top');

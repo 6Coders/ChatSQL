@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <h1 id="top" data-cy="manager-page-title">Gestione dizionario dati</h1>
-    <input-file ref="fileInput" @file-selected="handleFileSelected" :uploadButtonClass="uploadButtonClass" data-cy="file-input"/>
-    <toast-popup ref="Toast" id="toast" data-cy="toast-popup"/> 
-    <view-dictionary ref="Dictionary" @load-button-clicked="handleLoadButton" @delete-button-clicked="handleDeleteButtonClicked" @update-entry="handleUpdateEntry"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass" data-cy="view-dictionary"/>  
+    <h1 id="top">Gestione dizionario dati</h1>
+    <input-file ref="fileInput" @file-selected="handleFileSelected" :uploadButtonClass="uploadButtonClass"/>
+    <toast-popup ref="Toast" id="toast"/> 
+    <view-dictionary ref="Dictionary" @load-button-clicked="handleLoadButton" @delete-button-clicked="handleDeleteButtonClicked" @update-entry="handleUpdateEntry"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass"/>  
   </div>
 </template>
 
@@ -31,6 +31,16 @@ export default {
      * Returns the initial data object for the ManagerPage component.
      * @returns {ManagerPageData} The initial data object.
      */
+    /**
+     * @property {string} loadButtonClass - The CSS class for the load button.
+     * @property {string} deleteButtonClass - The CSS class for the delete button.
+     * @property {string} uploadButtonClass - The CSS class for the upload button.
+     */
+
+    /**
+     * Returns the initial data object for the ManagerPage component.
+     * @returns {ManagerPageData} The initial data object.
+     */
     return {
       loadButtonClass: 'btn btn-success',
       deleteButtonClass: 'btn btn-danger',
@@ -44,21 +54,35 @@ export default {
      * 
      * @param {Object} component - The Vue component to set.
      */
+    /**
+     * Sets the Vue component for the VMManager.
+     * 
+     * @param {Object} component - The Vue component to set.
+     */
     VMManager.setVueComponent(this);
     this.handleUpdateEntry();
   },
   methods: {
 
-    async handleFileSelected(file) {
-      const message = await VMManager.handleFileSelected(file);
-      console.log('Message:', message);
-      this.$refs.fileInput.setIsUploading(false);
-      this.setToastMessage(message);
+    /**
+     * Handles the selection of a file.
+     * 
+     * @param {File} file - The selected file.
+     */
+    handleFileSelected(file) {
+      VMManager.handleFileSelected(file);
     },
-    handleLoadButtonClicked(filename) {
-      console.log('LoadButton clicked for row index:', filename);
-      VMManager.handleLoadDictionary(filename);
+
+    /**
+     * Handles the click event when the load button is clicked.
+     * Calls the `handleLoadDictionary` method of the `VMManager` object with the specified index.
+     *
+     * @param {number} index - The index of the dictionary to load.
+     */
+    handleLoadButton(index) {
+      VMManager.handleLoadDictionary(index);
     },
+
 
     /**
      * Handles the event when the delete button is clicked.
@@ -117,7 +141,23 @@ export default {
      * 
      * @param {string} message - The message to be displayed in the toast.
      */
+    /**
+     * Sets the toast message.
+     * 
+     * @param {string} message - The message to be displayed in the toast.
+     */
     setToastMessage(message){
+      if(message)
+        this.$refs.Toast.setTest(message);
+    },
+
+    /**
+     * Sets the value of `isUploading` for the file input component.
+     * 
+     * @param {boolean} isUploading - The new value of `isUploading`.
+     */
+    setIsUploading(isUploading){
+      this.$refs.fileInput.setIsUploading(isUploading);
       if(message)
         this.$refs.Toast.setTest(message);
     },
@@ -149,6 +189,7 @@ export default {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     },
+
 
   }
 };
