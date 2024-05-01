@@ -3,7 +3,7 @@
     <h1 id="top">Gestione dizionario dati</h1>
     <input-file ref="fileInput" @file-selected="handleFileSelected" :uploadButtonClass="uploadButtonClass"/>
     <toast-popup ref="Toast" id="toast"/> 
-    <view-dictionary ref="Dictionary" @load-button-clicked="handleLoadButtonClicked" @delete-button-clicked="handleDeleteButtonClicked" @update-entry="handleUpdateEntry"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass"/>  
+    <view-dictionary ref="Dictionary" @load-button-clicked="handleLoadButton" @delete-button-clicked="handleDeleteButtonClicked" @update-entry="handleUpdateEntry"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass"/>  
   </div>
 </template>
 
@@ -21,6 +21,16 @@ export default {
     ToastPopup
   },
   data() {
+    /**
+     * @property {string} loadButtonClass - The CSS class for the load button.
+     * @property {string} deleteButtonClass - The CSS class for the delete button.
+     * @property {string} uploadButtonClass - The CSS class for the upload button.
+     */
+
+    /**
+     * Returns the initial data object for the ManagerPage component.
+     * @returns {ManagerPageData} The initial data object.
+     */
     return {
       loadButtonClass: 'btn btn-success',
       deleteButtonClass: 'btn btn-danger',
@@ -29,23 +39,35 @@ export default {
   },
   mounted() 
   {
-    //Dependency Injection
+    /**
+     * Sets the Vue component for the VMManager.
+     * 
+     * @param {Object} component - The Vue component to set.
+     */
     VMManager.setVueComponent(this);
-    //Aggiorno la tabella con i dizionari presenti
     this.handleUpdateEntry();
   },
   methods: {
 
-    async handleFileSelected(file) {
-      const message = await VMManager.handleFileSelected(file);
-      console.log('Message:', message);
-      this.$refs.fileInput.setIsUploading(false);
-      this.setToastMessage(message);
+    /**
+     * Handles the selection of a file.
+     * 
+     * @param {File} file - The selected file.
+     */
+    handleFileSelected(file) {
+      VMManager.handleFileSelected(file);
     },
-    handleLoadButtonClicked(index) {
-      console.log('LoadButton clicked for row index:', index);
+
+    /**
+     * Handles the click event when the load button is clicked.
+     * Calls the `handleLoadDictionary` method of the `VMManager` object with the specified index.
+     *
+     * @param {number} index - The index of the dictionary to load.
+     */
+    handleLoadButton(index) {
       VMManager.handleLoadDictionary(index);
     },
+
     /**
      * Handles the event when the delete button is clicked.
      * @param {number} index - The index of the item to be deleted.
@@ -106,9 +128,23 @@ export default {
       this.$refs.Dictionary.resetEntry();
     },
 
+    /**
+     * Sets the toast message.
+     * 
+     * @param {string} message - The message to be displayed in the toast.
+     */
     setToastMessage(message){
-      this.$refs.Toast.setTest(message);
-      this.$refs.Toast.showToast();
+      if(message)
+        this.$refs.Toast.setTest(message);
+    },
+
+    /**
+     * Sets the value of `isUploading` for the file input component.
+     * 
+     * @param {boolean} isUploading - The new value of `isUploading`.
+     */
+    setIsUploading(isUploading){
+      this.$refs.fileInput.setIsUploading(isUploading);
     },
 
     /**
@@ -129,6 +165,7 @@ export default {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     },
+
   }
 };
 </script>
