@@ -25,7 +25,10 @@
       <tbody>
         <tr v-for="(entry, index) in dictionaryEntries" :key="index" :class="{'table-success':entry.load}">
           <th scope="row">{{ index + 1 }}</th>
-          <td>{{ entry.name }}</td>
+          <td>
+            {{ entry.name }}
+            <i v-if="entry.load" class="bi bi-check"/>
+          </td>
           <td>{{entry.extension}}</td>
           <td>{{entry.date}}</td>
           <td>{{entry.size}}</td>
