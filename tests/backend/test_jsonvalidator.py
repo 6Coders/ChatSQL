@@ -1,7 +1,6 @@
 import unittest
-from chatsql.utils.JSONValidator import JSONValidator
+from backend.chatsql.utils.JSONValidator import JSONValidator
 
-# Test di unità per JSONValidator
 class TestJSONValidator(unittest.TestCase):
     def test_is_valid_structure_valid(self):
         json_data = {
@@ -42,6 +41,5 @@ class TestJSONValidator(unittest.TestCase):
         }
         assert JSONValidator.is_valid_structure(json_data_invalid_foreign_keys) == False
 
-    # Aggiungi altri test per i metodi di validazione delle tabelle, delle chiavi primarie e delle chiavi esterne se necessario
 if __name__ == '__main__':
     unittest.main()
