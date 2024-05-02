@@ -54,7 +54,7 @@ class JSONRepositoryAdapter(BaseJsonRepository):
     def remove(self, filename: str) -> bool:
         
         if filename in self.list_all():
-            remove(filename)
+            remove(join(self._folder, filename))
             return True
 
         return False

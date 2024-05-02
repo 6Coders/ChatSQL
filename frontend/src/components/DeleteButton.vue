@@ -13,11 +13,11 @@
      *
      * @component DeleteButton
      * @props {String} DeleteButtonClass - The CSS class for styling the delete button.
-     * @props {String} id - The unique identifier for the item to be deleted.
+     * @props {String} filename - The filename for the item to be deleted.
      */
     props: {
       DeleteButtonClass: String,
-      id: String
+      filename: String
     },
     /**
      * Sets up the DeleteButton component.
@@ -32,10 +32,10 @@
        * Deletes the dictionary item.
        *
        * @emits delete-click - Event emitted when the delete button is clicked.
-       * @param {number} id - The ID of the dictionary item to be deleted.
+       * @param {number} filename - The filename of the dictionary item to be deleted.
        */
       function deleteDictionary() {
-        emit('delete-click', props.id);
+        emit('delete-click', props.filename);
       }
       return {
         deleteDictionary
