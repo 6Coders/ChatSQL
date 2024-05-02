@@ -1,52 +1,29 @@
 import axios from 'axios'
 
 export default function useRequestModel() {
-  let cancelTokenSource;
+  const controller = new AbortController();
 
-  const testApiCall = async () => {
-    cancelTokenSource = axios.CancelToken.source();
-    try {
-      const response = await axios.get('https://catfact.ninja/fact', {
-        cancelToken: cancelTokenSource.token
-      })
-      return response.data.fact
-    } catch (error) {
-      if (axios.isCancel(error)) {
-        console.log('Request cancelled:', error.message)
-        return 'Stopped'
+  const generatePrompt = async (requestMessage) => {
+    const output = await axios.post('/generateprompt', { userRequest: requestMessage }, {
+      signal: controller.signal
+    }).then(function (response) {
+      return response.data.result;
+    }).catch((error) => {
+      if (error.response) {
+        return error.message;
       } else {
-        return 'Error'
+        return error.message;
       }
-    }
-  }
+    });
 
-  const generatePrompt = (requestMessage) => {
-    cancelTokenSource = axios.CancelToken.source();
-    return new Promise((resolve, reject) => {
-      axios.post('/generateprompt', { userRequest: requestMessage }, {
-        cancelToken: cancelTokenSource.token
-      })
-        .then(response => {
-          resolve(response.data.result)
-        })
-        .catch(error => {
-          if (axios.isCancel(error)) {
-            reject('Request canceled')
-          } else {
-            reject(error)
-          }
-        })
-    })
+    return output;
   }
 
   const cancelRequest = () => {
-    if (cancelTokenSource) {
-      cancelTokenSource.cancel('Request cancelled.');
-    }
+    controller.abort()
   }
 
   return {
-    testApiCall,
     generatePrompt,
     cancelRequest
   }
