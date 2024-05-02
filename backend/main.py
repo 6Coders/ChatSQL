@@ -30,7 +30,6 @@ if __name__ == '__main__':
         eliminazioneDizionarioUseCase=jsonService,
         visualizzaListaDizionariUseCase=jsonService,
         visualizzaDizionarioCorrenteUseCase=jsonService,
-        loadDizionarioUseCase=jsonService
     )
 
 

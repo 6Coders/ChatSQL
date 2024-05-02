@@ -42,9 +42,9 @@ export default {
       this.$refs.fileInput.setIsUploading(false);
       this.setToastMessage(message);
     },
-    handleLoadButtonClicked(index) {
-      console.log('LoadButton clicked for row index:', index);
-      VMManager.handleLoadDictionary(index);
+    handleLoadButtonClicked(filename) {
+      console.log('LoadButton clicked for row index:', filename);
+      VMManager.handleLoadDictionary(filename);
     },
     /**
      * Handles the event when the delete button is clicked.

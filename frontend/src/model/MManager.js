@@ -91,10 +91,26 @@ export default {
     }
   },
 
-  async loadDictionary(id) {
-    console.log('Caricamento del dizionario con id:', id);
-    //implementazione della chiamata al backend
-    return true;
+  async loadDictionary(filename) {
+    console.log('Caricamento del dizionario:', filename);
+    try {
+      const formData = new FormData();
+      formData.append('selected', filename);
+      const response = await axios.post('http://localhost:5000/load', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      if (response.status === 200 || response.status === 204) {
+        return response.data;
+      } 
+      else 
+      {
+        return false; 
+      }
+    } catch (error){
+      return false; 
+    }
   }
 
   };

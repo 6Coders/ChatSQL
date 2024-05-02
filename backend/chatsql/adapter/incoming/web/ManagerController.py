@@ -19,14 +19,12 @@ class ManagerController:
                  inserimentoDizionarioUseCase: InserimentoDizionarioUseCase,
                  eliminazioneDizionarioUseCase: EliminazioneDizionarioUseCase,
                  visualizzaListaDizionariUseCase: VisualizzaListaDizionariUseCase,
-                 visualizzaDizionarioCorrenteUseCase: VisualizzaDizionarioCorrenteUseCase,
-                 loadDizionarioUseCase: LoadDizionarioUseCase) -> None:
+                 visualizzaDizionarioCorrenteUseCase: VisualizzaDizionarioCorrenteUseCase) -> None:
         
         self._inserimentoDizionarioUseCase = inserimentoDizionarioUseCase
         self._eliminazioneDizionarioUseCase = eliminazioneDizionarioUseCase
         self._visualizzaListaDizionariUseCase = visualizzaListaDizionariUseCase
         self._visualizzaDizionarioCorrenteUseCase = visualizzaDizionarioCorrenteUseCase
-        self._loadDizionarioUseCase = loadDizionarioUseCase
 
         self.blueprint = self.__create_blueprint()
 
@@ -71,6 +69,22 @@ class ManagerController:
                     })
 
                 return jsonify(data)
+                
+            except BaseException as e:
+                if hasattr(e, 'message'):
+                    return e.message
+                else:
+                    return e
+                
+
+        @manager_page.route('/load', methods=['POST'])
+        def handle_load():
+
+            try:
+
+                self._visualizzaDizionarioCorrenteUseCase.selected = request.form['selected']
+                
+                return 'ok'
                 
             except BaseException as e:
                 if hasattr(e, 'message'):

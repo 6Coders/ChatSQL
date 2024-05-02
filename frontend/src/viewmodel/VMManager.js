@@ -38,8 +38,8 @@ const VMManager = {
     }
   },
 
-  handleLoadDictionary(id) {
-    if (!MManager.loadDictionary(id)) {
+  handleLoadDictionary(filename) {
+    if (!MManager.loadDictionary(filename)) {
       console.log('Errore interno al server, non è stato possibile caricare il dizionario');
     }
     else
