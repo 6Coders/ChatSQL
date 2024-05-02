@@ -33,8 +33,8 @@ export default {
      *
      * @param {number} id - The ID of the dictionary to load.
      */
-    function loadDictionary(id) {
-      emit('load-click', id);
+    function loadDictionary() {
+      emit('load-click', props.id);
     }
 
     return {

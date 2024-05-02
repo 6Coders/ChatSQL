@@ -4,7 +4,6 @@
       <input type="file" class="form-control" ref="fileInput" @change="handleFileUpload" />
       <upload-button ref="uploadbtn" :class="uploadButtonClass" @upload-click="emitFile" :disabled="!file" :isuploading="isUploading"/>
     </div>
-    <p>{{ message }}</p>
   </div>
 </template>
 
@@ -33,7 +32,6 @@ export default {
      * @property {ref} isUploading - A reference to a boolean indicating if the file is currently being uploaded.
      */
     const file = ref(null);
-    const message = ref(' ');
     const isUploading = ref(false);
 
     /**
@@ -43,7 +41,6 @@ export default {
      * @param {Event} event - The file upload event.
      */
     function handleFileUpload(event) {
-      this.changeMessage('');
       file.value = event.target.files[0];
     }
 
@@ -54,19 +51,10 @@ export default {
      * @emits file-selected - Event emitted when a file is selected
      */
     function emitFile() {
-      if (file.value) {
+      if (file) {
         isUploading.value = true;
         emit('file-selected', file.value);
       }
-    }
-
-    /**
-     * Updates the value of the message.
-     *
-     * @param {string} newMessage - The new message value.
-     */
-    function changeMessage(newMessage) {
-      message.value = newMessage;
     }
 
     /**
@@ -81,10 +69,8 @@ export default {
 
     return {
       file,
-      message,
       handleFileUpload,
       emitFile,
-      changeMessage,
       isUploading,
       setIsUploading
     };
