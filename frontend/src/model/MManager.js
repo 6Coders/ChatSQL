@@ -37,7 +37,7 @@ export default {
   {
     try 
     {
-      const response = await axios.get('http://localhost:5000/list_all');
+      const response = await axios.get('http://localhost:5000/files');
       console.log('Backend response status:', response.status);  
       if (response.status === 200 || response.status === 201) 
       {

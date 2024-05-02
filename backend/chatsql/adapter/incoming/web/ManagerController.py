@@ -51,7 +51,7 @@ class ManagerController:
                 else:
                     return 'Non è possibile caricare il file'
 
-        @manager_page.route('/list_all', methods=['GET'])
+        @manager_page.route('/files', methods=['GET'])
         def handle_list_all():
             
             try:
@@ -65,6 +65,7 @@ class ManagerController:
                     return e.message
                 else:
                     return 'Non è possibile caricare il file'
+
 
 
         return manager_page
