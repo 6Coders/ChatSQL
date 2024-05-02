@@ -51,7 +51,7 @@ export default {
      * @emits file-selected - Event emitted when a file is selected
      */
     function emitFile() {
-      if (file) {
+      if (file.value) {
         isUploading.value = true;
         emit('file-selected', file.value);
       }
