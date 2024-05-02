@@ -4,12 +4,8 @@ import LoadButton from '@/components/LoadButton.vue';
 describe('LoadButton', () => {
   it('emits a "load-click" event when clicked', async () => {
     const id = '123';
-    const LoadButtonClass = 'custom-class';
     const wrapper = mount(LoadButton, {
-      props: {
-        id,
-        LoadButtonClass
-      }
+      props: { id }
     });
     await wrapper.find('button').trigger('click');
     expect(wrapper.emitted('load-click')).toBeTruthy();
