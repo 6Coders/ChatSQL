@@ -12,5 +12,9 @@ module.exports = {
    // Directory dove Jest deve mettere i risultati della copertura
    coverageDirectory: '<rootDir>/coverage',
 
-   transformIgnorePatterns: ['node_modules/(?!(axios)/)'],
+   transformIgnorePatterns: [
+    'node_modules/(?!(axios)/)',
+    '/node_modules/(?!(bootstrap)/)',
+    '\\.css$'
+  ],
 }
