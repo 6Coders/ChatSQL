@@ -33,7 +33,7 @@
           <td>{{entry.date}}</td>
           <td>{{entry.size}}</td>
           <td>
-            <LoadButton :id="entry.id" :name="entry.name" :class="loadButtonClass" @load-click="loadButtonClick(entry.id)" />
+            <LoadButton :id="entry.id" :name="entry.name" :class="loadButtonClass" @load-click="loadButtonClick(entry.name + '.' + entry.extension)" />
             <DeleteButton :id="entry.id" :name="entry.name" :class="deleteButtonClass" @delete-click="deleteButtonClick(entry.id)" />
           </td>
         </tr>

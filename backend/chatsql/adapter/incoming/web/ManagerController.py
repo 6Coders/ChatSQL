@@ -3,9 +3,9 @@ from chatsql.application.port.incoming.InserimentoDizionarioUseCase import Inser
 from chatsql.application.port.incoming.EliminazioneDizionarioUseCase import EliminazioneDizionarioUseCase
 from chatsql.application.port.incoming.VisualizzaListaDizionariUseCase import VisualizzaListaDizionariUseCase
 from chatsql.application.port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
-from chatsql.application.port.incoming.LoadDizionarioUseCase import LoadDizionarioUseCase
 
 from chatsql.utils import Exceptions
+from chatsql.utils.Common import Settings
 
 from flask import Blueprint, request, jsonify 
 import os
@@ -19,14 +19,12 @@ class ManagerController:
                  inserimentoDizionarioUseCase: InserimentoDizionarioUseCase,
                  eliminazioneDizionarioUseCase: EliminazioneDizionarioUseCase,
                  visualizzaListaDizionariUseCase: VisualizzaListaDizionariUseCase,
-                 visualizzaDizionarioCorrenteUseCase: VisualizzaDizionarioCorrenteUseCase,
-                 loadDizionarioUseCase: LoadDizionarioUseCase) -> None:
+                 visualizzaDizionarioCorrenteUseCase: VisualizzaDizionarioCorrenteUseCase) -> None:
         
         self._inserimentoDizionarioUseCase = inserimentoDizionarioUseCase
         self._eliminazioneDizionarioUseCase = eliminazioneDizionarioUseCase
         self._visualizzaListaDizionariUseCase = visualizzaListaDizionariUseCase
         self._visualizzaDizionarioCorrenteUseCase = visualizzaDizionarioCorrenteUseCase
-        self._loadDizionarioUseCase = loadDizionarioUseCase
 
         self.blueprint = self.__create_blueprint()
 
@@ -61,16 +59,31 @@ class ManagerController:
                 data = []
 
                 for filename in self._visualizzaListaDizionariUseCase.list_all():
-
+                    print(filename)
                     data.append({
                         'name': '.'.join(filename.split('.')[:-1]),
-                        'loaded': filename == self._visualizzaDizionarioCorrenteUseCase.selected(),
+                        'loaded': filename == self._visualizzaDizionarioCorrenteUseCase.selected,
                         'extension': filename.split('.')[-1],
-                        'date': datetime.datetime.fromtimestamp(os.stat(os.path.join(os.getcwd(), 'uploads', filename)).st_ctime),
-                        'size': f"{os.stat(os.path.join(os.getcwd(), 'uploads', filename)).st_size / 1024.0:.2f} Kb",
+                        'date': datetime.datetime.fromtimestamp(os.stat(os.path.join(Settings.folder, filename)).st_ctime),
+                        'size': f"{os.stat(os.path.join(Settings.folder, filename)).st_size / 1024.0:.2f} Kb",
                     })
 
                 return jsonify(data)
+                
+            except BaseException as e:
+                if hasattr(e, 'message'):
+                    return e.message
+                else:
+                    return e
+        
+        @manager_page.route('/select', methods=['POST'])
+        def handle_selection():
+            
+            try:
+                print(request.form['selected'])
+                self._visualizzaDizionarioCorrenteUseCase.selected = request.form['selected']
+
+                return 'ok'
                 
             except BaseException as e:
                 if hasattr(e, 'message'):
