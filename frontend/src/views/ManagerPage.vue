@@ -64,23 +64,15 @@ export default {
   },
   methods: {
 
-    /**
-     * Handles the selection of a file.
-     * 
-     * @param {File} file - The selected file.
-     */
-    handleFileSelected(file) {
-      VMManager.handleFileSelected(file);
+    async handleFileSelected(file) {
+      const message = await VMManager.handleFileSelected(file);
+      console.log('Message:', message);
+      this.$refs.fileInput.setIsUploading(false);
+      this.setToastMessage(message);
     },
-
-    /**
-     * Handles the click event when the load button is clicked.
-     * Calls the `handleLoadDictionary` method of the `VMManager` object with the specified index.
-     *
-     * @param {number} index - The index of the dictionary to load.
-     */
-    handleLoadButton(index) {
-      VMManager.handleLoadDictionary(index);
+    handleLoadButtonClicked(filename) {
+      console.log('LoadButton clicked for row index:', filename);
+      VMManager.handleLoadDictionary(filename);
     },
 
 
