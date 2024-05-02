@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="input-group">
-      <input type="file" class="form-control" ref="fileInput" @change="handleFileUpload" />
-      <upload-button ref="uploadbtn" :class="uploadButtonClass" @upload-click="emitFile" :disabled="!file" :isuploading="isUploading"/>
+      <input type="file" class="form-control" ref="fileInput" @change="handleFileUpload" data-cy="file-input" />
+      <upload-button ref="uploadbtn" :class="uploadButtonClass" @upload-click="emitFile" :disabled="!file" :isuploading="isUploading" data-cy="upload-button"/>
     </div>
   </div>
 </template>

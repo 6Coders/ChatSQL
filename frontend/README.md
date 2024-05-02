@@ -42,3 +42,8 @@ npx jest
 ```
 npx jest --coverage
 ```
+
+## Cypress
+```
+npx cypress open
+```
