@@ -77,12 +77,3 @@ class JSONRepositoryAdapter(BaseJsonRepository):
         if not os.path.exists(self._folder):
             os.mkdir(self._folder)
 
-
-    @property
-    def folder(self) -> str:
-        return self._folder
-    
-    @folder.setter
-    def folder(self, folder: str):
-        self._folder = folder
-        self.__create_folder()
