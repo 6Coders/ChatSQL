@@ -70,16 +70,8 @@ export default {
      */
     printDictionary(response) {
       if(response && response.length > 0)
-      {
         for(const row of response)
-        {
-          /*
-          Sotituire appena ci sarà la funzionalità nel backend
-          this.$refs.Dictionary.addNewEntry(row.id,row.name,row.extension,row.date,row.size,row.loaded);
-          */
-          this.$refs.Dictionary.addNewEntry(1,row.name,row.extension,row.date,row.size,row.loaded);
-        }
-      }
+          this.$refs.Dictionary.addNewEntry(row.name,row.extension,row.date,row.size,row.loaded);
     },
 
     /**

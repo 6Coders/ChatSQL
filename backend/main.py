@@ -21,7 +21,6 @@ if __name__ == '__main__':
     uploads_folder = os.path.join(os.getcwd(), 'uploads')
 
     jsonRepository = JSONRepositoryAdapter()
-    jsonRepository.folder = uploads_folder
     
     jsonService = JSONManagerService(jsonRepository)
 

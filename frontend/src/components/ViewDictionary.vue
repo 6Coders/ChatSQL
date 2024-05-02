@@ -83,9 +83,9 @@ export default {
      * @param {number} size - The size of the entry.
      * @param {boolean} load - The load status of the entry.
      */
-    function addNewEntry(id, name, extension, date, size, load) {
-      if (id && name && extension && date && size && load !== undefined) {
-        dictionaryEntries.value.push({ id: id, name: name, extension: extension, date: date, size: size, load: load });
+    function addNewEntry(name, extension, date, size, load) {
+      if (name && extension && date && size && load !== undefined) {
+        dictionaryEntries.value.push({ id: dictionaryEntries.value.length, name: name, extension: extension, date: date, size: size, load: load });
       }
     }
 
