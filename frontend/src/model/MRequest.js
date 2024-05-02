@@ -11,8 +11,6 @@ export default function useRequestModel() {
     }).catch((error) => {
       if (error.response) {
         return error.message;
-      } else if (error.request) {
-        return error.message;
       } else {
         return error.message;
       }

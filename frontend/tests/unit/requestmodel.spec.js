@@ -32,4 +32,24 @@ describe('useRequestModel', () => {
 
     expect(data).toEqual('Network Error');
   });
+
+  it('should handle error with response', async () => {
+      const { generatePrompt } = useRequestModel();
+      const mock = new MockAdapter(axios);
+      mock.onPost('/generateprompt').reply(404);
+
+    const result = await generatePrompt('A message');
+
+    expect(result).toBe('Request failed with status code 404');
+  });
+
+  it('should handle error with request', async () => {
+    const { generatePrompt } = useRequestModel();
+    const mock = new MockAdapter(axios);
+    mock.onPost('/generateprompt').replyOnce(500);
+
+    const result = await generatePrompt('A message');
+
+    expect(result).toBe('Request failed with status code 500');
+  });
 });
