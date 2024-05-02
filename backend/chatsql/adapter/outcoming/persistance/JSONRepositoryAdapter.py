@@ -4,7 +4,7 @@ from chatsql.application.port.outcoming.persistance.BaseJSONRepository import Ba
 
 from chatsql.utils.JSONValidator import JSONValidator
 
-from chatsql.utils import Exceptions
+from chatsql.utils import Exceptions, Utils
 
 import json
 from os import listdir, remove
@@ -18,7 +18,7 @@ class JSONRepositoryAdapter(BaseJsonRepository):
 
     def __init__(self) -> None:
         
-        self._folder = 'uploads'
+        self._folder = Utils.Settings.folder
         self.__create_folder()
 
 

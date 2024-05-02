@@ -5,7 +5,7 @@ from chatsql.application.port.incoming.VisualizzaListaDizionariUseCase import Vi
 from chatsql.application.port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
 from chatsql.application.port.incoming.LoadDizionarioUseCase import LoadDizionarioUseCase
 
-from chatsql.utils import Exceptions
+from chatsql.utils import Exceptions, Utils
 
 from flask import Blueprint, request, jsonify 
 import os
@@ -66,8 +66,8 @@ class ManagerController:
                         'name': '.'.join(filename.split('.')[:-1]),
                         'loaded': filename == self._visualizzaDizionarioCorrenteUseCase.selected(),
                         'extension': filename.split('.')[-1],
-                        'date': datetime.datetime.fromtimestamp(os.stat(os.path.join(os.getcwd(), 'uploads', filename)).st_ctime),
-                        'size': f"{os.stat(os.path.join(os.getcwd(), 'uploads', filename)).st_size / 1024.0:.2f} Kb",
+                        'date': datetime.datetime.fromtimestamp(os.stat(os.path.join(Utils.Settings.folder, filename)).st_ctime),
+                        'size': f"{os.stat(os.path.join(Utils.Settings.folder, filename)).st_size / 1024.0:.2f} Kb",
                     })
 
                 return jsonify(data)

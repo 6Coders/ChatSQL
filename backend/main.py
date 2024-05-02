@@ -6,6 +6,7 @@ from chatsql.adapter.outcoming.persistance.JSONRepositoryAdapter import JSONRepo
 
 from chatsql.application.JSONManagerService import JSONManagerService
 
+from chatsql.utils.Utils import Settings
 import os
 
 app = Flask(__name__, static_url_path='', template_folder='../frontend/src/views')
@@ -18,7 +19,7 @@ def heartbeat():
 
 if __name__ == '__main__':
 
-    uploads_folder = os.path.join(os.getcwd(), 'uploads')
+    Settings.folder = os.path.join(os.environ['TEMP'], 'uploads')
 
     jsonRepository = JSONRepositoryAdapter()
     
