@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '@/axios'
 
 export default function useRequestModel() {
   const controller = new AbortController();

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '@/axios';
 
 export default {
 
@@ -13,7 +13,7 @@ export default {
     {
       const formData = new FormData();
       formData.append('file', file);
-      const response = await axios.post('http://localhost:5000/upload', formData, {
+      const response = await axios.post('/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -41,7 +41,7 @@ export default {
   {
     try 
     {
-      const response = await axios.get('http://localhost:5000/files');
+      const response = await axios.get('/files');
       if (response.status === 200 || response.status === 201) 
       {
         return response.data;
