@@ -1,5 +1,8 @@
 <template>
   <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="position-fixed top-0 end-0 p-3 mt-5" style="z-index: 11">
+      <toast-popup ref="toast"></toast-popup>
+    </div>
     <div v-if="messages.length === 0" class="text-center text-black py-5 mt-5">
       <img src="../assets/6Coders-logo-original.png" alt="Logo" class="img-fluid" style="max-width: 100px;">
       <h4 class="mt-5">Come ti possiamo aiutare?</h4>
@@ -30,9 +33,13 @@
 
 <script>
 import { ref, onMounted, nextTick, watch } from 'vue'
+import ToastPopup from '@/components/ToastPopup'
 import useClipboard from 'vue-clipboard3'
 export default {
   name: 'ViewGeneratedPrompts',
+  components: {
+    ToastPopup
+  },
   props: {
     messages: {
       type: Array,
@@ -46,6 +53,12 @@ export default {
   setup(props) {
     const { toClipboard } = useClipboard()
     const messagebox = ref(null)
+    const toast = ref(null)
+
+    function showMessage(message) {
+      toast.value.Message = message;
+      toast.value.showToast();
+    }
 
     /**
      * Asynchronously copies the provided text to the clipboard.
@@ -56,6 +69,7 @@ export default {
     const copyToClipboard = async (text) => {
       try {
         await toClipboard(text)
+        showMessage('Copiato negli appunti')
       } catch (e) {
         console.error(e)
       }
@@ -68,7 +82,7 @@ export default {
      * @param {Ref<HTMLElement | null>} view - The view to scroll to.
      */
     function scrollTo(view) {
-      if(view.value) {
+      if (view.value) {
         view.value.scrollIntoView({ behavior: 'smooth' })
       }
     }
@@ -80,6 +94,19 @@ export default {
     watch(props.messages, async () => {
       await nextTick()
       scrollTo(messagebox)
+    })
+
+    /**
+     * Watcher that is triggere when the `messages` is emptied.
+     * It waits for the next DOM update cycle using `nextTick` before showing a message.
+     */
+    watch(props.messages, async (newVal) => {
+      await nextTick()
+      if (newVal.length === 0) {
+        showMessage('Messaggi eliminati')
+      } else {
+        scrollTo(messagebox)
+      }
     })
 
     /**
@@ -102,7 +129,8 @@ export default {
 
     return {
       copyToClipboard,
-      messagebox
+      messagebox,
+      toast
     }
   }
 }
