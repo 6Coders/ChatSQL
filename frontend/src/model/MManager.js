@@ -93,12 +93,10 @@ export default {
    */
   async deleteDictionary(filename) {
     try {
-      const formData = new FormData();
-      formData.append('filename', filename);
-      const response = await axios.post('http://localhost:5000/delete', formData, {
+      const response = await axios.delete('http://localhost:5000/delete', { data: filename }, {
         headers: {
           'Content-Type': 'multipart/form-data'
-        }
+        },
       });
       if (response.status === 200 || response.status === 204) {
         return response.data;

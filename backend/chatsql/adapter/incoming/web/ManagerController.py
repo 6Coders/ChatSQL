@@ -91,12 +91,12 @@ class ManagerController:
                 else:
                     return e
                         
-        @manager_page.route('/delete', methods=['POST'])
+        @manager_page.route('/delete', methods=['DELETE'])
         def handle_delete():
             
             try:
-
-                filename = request.form['filename']
+                print(request.data)
+                filename = request.data.decode()
                 
                 if self._visualizzaDizionarioCorrenteUseCase.selected == filename:
                     self._visualizzaDizionarioCorrenteUseCase.selected = None
