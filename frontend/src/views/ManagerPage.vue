@@ -3,7 +3,7 @@
     <h1 id="top" data-cy="manager-page-title">Gestione dizionario dati</h1>
     <input-file ref="fileInput" @file-selected="handleFileSelected" :uploadButtonClass="uploadButtonClass" data-cy="file-input"/>
     <toast-popup ref="Toast" id="toast" data-cy="toast-popup"/> 
-    <view-dictionary ref="Dictionary" @load-button-clicked="handleLoadButton" @delete-button-clicked="handleDeleteButtonClicked" @update-entry="handleUpdateEntry"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass" data-cy="view-dictionary"/>  
+    <view-dictionary ref="Dictionary" @load-button-clicked="handleLoadButton" @delete-button-clicked="handleDeleteButtonClicked" @update-entry="handleUpdateEntry"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass" data-cy="view-dictionary"/>
   </div>
 </template>
 
