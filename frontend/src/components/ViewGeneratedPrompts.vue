@@ -47,6 +47,12 @@ export default {
     const { toClipboard } = useClipboard()
     const messagebox = ref(null)
 
+    /**
+     * Asynchronously copies the provided text to the clipboard.
+     * If an error occurs during this process, it is caught and logged to the console.
+     * 
+     * @param {string} text - The text to be copied to the clipboard.
+     */
     const copyToClipboard = async (text) => {
       try {
         await toClipboard(text)
@@ -55,22 +61,40 @@ export default {
       }
     }
 
+    /**
+     * Scrolls to the provided view.
+     * It checks if the view exists before attempting to scroll to it.
+     * 
+     * @param {Ref<HTMLElement | null>} view - The view to scroll to.
+     */
     function scrollTo(view) {
       if(view.value) {
         view.value.scrollIntoView({ behavior: 'smooth' })
       }
     }
 
+    /**
+     * Watcher that is triggered when the `messages` prop changes.
+     * It waits for the next DOM update cycle using `nextTick` before scrolling to the `messagebox`.
+     */
     watch(props.messages, async () => {
       await nextTick()
       scrollTo(messagebox)
     })
 
+    /**
+     * Watcher that is triggered when the `status` prop changes.
+     * It waits for the next DOM update cycle using `nextTick` before scrolling to the `messagebox`.
+     */
     watch(props.status, async () => {
       await nextTick()
       scrollTo(messagebox)
     })
 
+    /**
+     * Lifecycle hook that is triggered when the component is mounted.
+     * It waits for the next DOM update cycle using `nextTick` before scrolling to the `messagebox`.
+     */
     onMounted(async () => {
       await nextTick()
       scrollTo(messagebox)
