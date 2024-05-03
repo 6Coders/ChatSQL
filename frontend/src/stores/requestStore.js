@@ -15,7 +15,7 @@ export const useRequestStore = defineStore({
       this.requestMessage = message
     },
     clearMessages() {
-      this.messages = []
+      this.messages.splice(0, this.messages.length)
     },
     setIsSending(value) {
       this.isSending = value

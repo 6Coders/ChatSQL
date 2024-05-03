@@ -5,30 +5,31 @@
       <h4 class="mt-5">Come ti possiamo aiutare?</h4>
     </div>
     <div v-else class="w-100 text-black">
-    <div v-for="(message, index) in messages" :key="index" class="border-bottom">
-      <div v-if="message.type === 'user'" class="w-100 p-3 text-black">
-        <i class="bi bi-person-fill me-2"></i>
-        <strong>User</strong>
-        <p>{{ message.text }}</p>
+      <div v-for="(message, index) in messages" :key="index" class="border-bottom">
+        <div v-if="message.type === 'user'" class="w-100 p-3 text-black">
+          <i class="bi bi-person-fill me-2"></i>
+          <strong>User</strong>
+          <p>{{ message.text }}</p>
+        </div>
+        <div v-else-if="message.type === 'response'" class="w-100 p-3 text-black bg-light border-start border-end">
+          <i class="bi bi-robot me-2"></i>
+          <strong>Response</strong>
+          <p>{{ message.text }}</p>
+          <i class="bi bi-clipboard me-2 copy-icon" @click="copyToClipboard(message.text)"></i>
+        </div>
       </div>
-      <div v-else-if="message.type === 'response'" class="w-100 p-3 text-black bg-light border-start border-end">
-        <i class="bi bi-robot me-2"></i>
-        <strong>Response</strong>
-        <p>{{ message.text }}</p>
-        <i class="bi bi-clipboard me-2 copy-icon" @click="copyToClipboard(message.text)"></i>
+      <div v-if="status" class="w-100 text-center text-black">
+        <div class="spinner-border text-primary mt-2" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
-      
-    </div>   
-    <div v-if="status" class="w-100 text-center text-black">
-      <div class="spinner-border text-primary mt-2" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
+      <div id="container" ref="messagebox"></div>
     </div>
-  </div> 
   </div>
 </template>
 
 <script>
+import { ref, onMounted, nextTick, watch } from 'vue'
 import useClipboard from 'vue-clipboard3'
 export default {
   name: 'ViewGeneratedPrompts',
@@ -42,9 +43,10 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
     const { toClipboard } = useClipboard()
-    
+    const messagebox = ref(null)
+
     const copyToClipboard = async (text) => {
       try {
         await toClipboard(text)
@@ -53,8 +55,30 @@ export default {
       }
     }
 
+    function scrollTo(view) {
+      if(view.value) {
+        view.value.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+
+    watch(props.messages, async () => {
+      await nextTick()
+      scrollTo(messagebox)
+    })
+
+    watch(props.status, async () => {
+      await nextTick()
+      scrollTo(messagebox)
+    })
+
+    onMounted(async () => {
+      await nextTick()
+      scrollTo(messagebox)
+    });
+
     return {
-      copyToClipboard
+      copyToClipboard,
+      messagebox
     }
   }
 }
