@@ -7,7 +7,9 @@ from chatsql.application.port.incoming.LoadDizionarioUseCase import LoadDizionar
 
 from chatsql.utils import Exceptions
 
-from flask import Blueprint, request    
+from flask import Blueprint, request, jsonify 
+import os
+import datetime
 
 class ManagerController:
 
@@ -44,7 +46,6 @@ class ManagerController:
                 self._inserimentoDizionarioUseCase.add(file.filename, file.stream)
 
                 return 'File aggiunto correttamente'
-            
 
             except BaseException as e:
                 if hasattr(e, 'message'):
@@ -52,5 +53,30 @@ class ManagerController:
                 else:
                     return 'Non è possibile caricare il file'
 
+        @manager_page.route('/files', methods=['GET'])
+        def handle_list_files():
+            
+            try:
+                
+                data = []
+
+                for filename in self._visualizzaListaDizionariUseCase.list_all():
+
+                    data.append({
+                        'name': '.'.join(filename.split('.')[:-1]),
+                        'loaded': filename == self._visualizzaDizionarioCorrenteUseCase.selected(),
+                        'extension': filename.split('.')[-1],
+                        'date': datetime.datetime.fromtimestamp(os.stat(os.path.join(os.getcwd(), 'uploads', filename)).st_ctime),
+                        'size': f"{os.stat(os.path.join(os.getcwd(), 'uploads', filename)).st_size / 1024.0:.2f} Kb",
+                    })
+
+                return jsonify(data)
+                
+            except BaseException as e:
+                if hasattr(e, 'message'):
+                    return e.message
+                else:
+                    return e
+                
 
         return manager_page
