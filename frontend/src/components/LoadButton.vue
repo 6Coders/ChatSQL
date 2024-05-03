@@ -12,11 +12,11 @@ export default {
    * Component for a load button.
    *
    * @props {String} LoadButtonClass - The CSS class for the load button.
-   * @props {String} id - The unique identifier for the load button.
+   * @props {String} filename - The name of the file to be loaded.
    */
   props: {
     LoadButtonClass: String,
-    id: String
+    filename: String 
   },
   /**
    * Sets up the component and defines the loadDictionary function.
@@ -29,12 +29,12 @@ export default {
   setup(props, { emit }) {
 
     /**
-     * Loads the dictionary by emitting a 'load-click' event with the provided ID.
+     * Loads the dictionary by emitting a 'load-click' event with the provided filename.
      *
-     * @param {number} id - The ID of the dictionary to load.
+     * @param {String} filename - The filename of the dictionary to load.
      */
     function loadDictionary() {
-      emit('load-click', props.id);
+      emit('load-click', props.filename);
     }
 
     return {

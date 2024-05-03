@@ -4,21 +4,21 @@ from chatsql.application.port.outcoming.persistance.BaseJSONRepository import Ba
 
 from chatsql.utils.JSONValidator import JSONValidator
 
+from chatsql.utils.Common import Settings
 from chatsql.utils import Exceptions
 
 import json
-from os import listdir, remove
-from os.path import isfile, join
+from os import listdir, remove, mkdir
+from os.path import isfile, join, exists
 
 from shutil import copyfileobj
 from werkzeug.utils import secure_filename
-import os
 
 class JSONRepositoryAdapter(BaseJsonRepository):
 
     def __init__(self) -> None:
         
-        self._folder = 'uploads'
+        self._folder = Settings.folder
         self.__create_folder()
 
 
@@ -54,7 +54,7 @@ class JSONRepositoryAdapter(BaseJsonRepository):
     def remove(self, filename: str) -> bool:
         
         if filename in self.list_all():
-            remove(filename)
+            remove(join(self._folder, filename))
             return True
 
         return False
@@ -74,6 +74,6 @@ class JSONRepositoryAdapter(BaseJsonRepository):
         return secured_filename in self.list_all()
 
     def __create_folder(self) -> bool:
-        if not os.path.exists(self._folder):
-            os.mkdir(self._folder)
+        if not exists(self._folder):
+            mkdir(self._folder)
 

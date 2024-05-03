@@ -47,14 +47,14 @@ const VMManager = {
    * @param {number} id - The ID of the dictionary to be deleted.
    * @returns {Promise<void>} - A promise that resolves when the dictionary is deleted.
    */
-  async handleDeleteDictionary(id) {
-    const response = await MManager.deleteDictionary(id);
+  async handleDeleteDictionary(filename) {
+    const response = await MManager.deleteDictionary(filename);
     if(response)
     {
       vueComponent.setToastMessage('Dictionary deleted successfully');
       vueComponent.showToast();
       vueComponent.scrollTo('top');
-      vueComponent.handleDictionary();
+      this.handleDictionary();
     }
     else
     {
@@ -70,9 +70,9 @@ const VMManager = {
    * @param {number} id - The ID of the dictionary to load.
    * @returns {Promise<void>} - A promise that resolves when the dictionary is loaded.
    */
-  async handleLoadDictionary(id) 
+  async handleLoadDictionary(filename) 
   {
-    const response = await MManager.loadDictionary(id);
+    const response = await MManager.loadDictionary(filename);
     if (!response) 
     {
       vueComponent.setToastMessage('Internal Server Error');

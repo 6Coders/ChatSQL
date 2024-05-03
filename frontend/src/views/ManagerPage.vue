@@ -64,17 +64,16 @@ export default {
      *
      * @param {number} index - The index of the dictionary to load.
      */
-    handleLoadButton(index) {
-      VMManager.handleLoadDictionary(index);
+    handleLoadButton(filename) {
+      VMManager.handleLoadDictionary(filename);
     },
 
     /**
      * Handles the event when the delete button is clicked.
      * @param {number} index - The index of the item to be deleted.
      */
-    handleDeleteButtonClicked(index) {
-      if(index)
-        VMManager.handleDeleteDictionary(index);
+    handleDeleteButtonClicked(filename) {
+      VMManager.handleDeleteDictionary(filename);
     },
 
     /**

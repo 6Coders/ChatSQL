@@ -1,8 +1,20 @@
-import axios from 'axios'
+import axios from '@/axios'
 
+/**
+ * useRequestModel returns an object with two methods: generatePrompt and cancelRequest.
+ * 
+ * @returns {Object} An object with two methods: generatePrompt and cancelRequest.
+ */
 export default function useRequestModel() {
+  // controller is an instance of AbortController, which can be used to cancel HTTP requests.
   const controller = new AbortController();
 
+  /**
+   * generatePrompt sends a POST request to '/generateprompt' with a user request message.
+   * 
+   * @param {string} requestMessage - The user request message.
+   * @returns {Promise<string>} A promise that resolves with the result of the request or an error message.
+   */
   const generatePrompt = async (requestMessage) => {
     const output = await axios.post('/generateprompt', { userRequest: requestMessage }, {
       signal: controller.signal
@@ -19,6 +31,9 @@ export default function useRequestModel() {
     return output;
   }
 
+  /**
+   * cancelRequest cancels the current HTTP request using the AbortController controller.
+   */
   const cancelRequest = () => {
     controller.abort()
   }

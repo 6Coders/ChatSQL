@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '@/axios';
 
 export default {
 
@@ -13,7 +13,7 @@ export default {
     {
       const formData = new FormData();
       formData.append('file', file);
-      const response = await axios.post('http://localhost:5000/upload', formData, {
+      const response = await axios.post('/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -41,7 +41,7 @@ export default {
   {
     try 
     {
-      const response = await axios.get('http://localhost:5000/files');
+      const response = await axios.get('/files');
       if (response.status === 200 || response.status === 201) 
       {
         return response.data;
@@ -91,9 +91,13 @@ export default {
    * @param {number} id - The ID of the dictionary to delete.
    * @returns {Promise<boolean|any>} - A promise that resolves to either the deleted dictionary data or false if the deletion fails.
    */
-  async deleteDictionary(id) {
+  async deleteDictionary(filename) {
     try {
-      const response = await axios.delete(`http://localhost:5000/files/${id}`);
+      const response = await axios.delete('http://localhost:5000/delete', { data: filename }, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+      });
       if (response.status === 200 || response.status === 204) {
         return response.data;
       } 
@@ -112,9 +116,15 @@ export default {
    * @param {number} index - The index of the dictionary to load.
    * @returns {Promise<Boolean>} - A promise that resolves with the loaded dictionary data, or false if the loading fails.
    */
-  async loadDictionary(index) {
+  async loadDictionary(filename) {
     try {
-      const response = await axios.post('http://localhost:5000/load', { data: index });
+      const formData = new FormData();
+      formData.append('selected', filename);
+      const response = await axios.post('http://localhost:5000/select', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       console.log('Backend response status:', response.status);  
       if (response.status === 200) {
         return true; 

@@ -1,5 +1,10 @@
 <template>
   <div class="container mt-5 px-5">
+    <!--
+    This Vue.js component is the home page of the application.
+    It contains two cards: one for managing data dictionaries and one for making natural language requests.
+    Each card has a title, a description, and a button that redirects to the corresponding page.
+    -->
     <img src="../assets/6Coders-logo.png" alt="Logo" class="img-fluid mt-5 mb-5 mx-auto d-block" style="max-width: 100px;">
     <div class="row justify-content-center">
       <div class="col-md-6 mb-3">
@@ -38,8 +43,20 @@ export default {
   },
   setup() {
     return {
-      buttonClass: "btn btn-primary mt-auto",
+      /**
+       * CSS class for the redirect buttons.
+       * @type {String}
+       */
+       buttonClass: "btn btn-primary mt-auto",
+      /**
+       * Destination path for the "Manager" redirect button.
+       * @type {String}
+       */
       destinationManager: "/manager",
+      /**
+       * Destination path for the "Request" redirect button.
+       * @type {String}
+       */
       destinationRequest: "/request"
     };
   }
