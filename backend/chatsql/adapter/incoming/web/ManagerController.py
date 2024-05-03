@@ -80,7 +80,7 @@ class ManagerController:
         def handle_selection():
             
             try:
-                print(request.form['selected'])
+                
                 self._visualizzaDizionarioCorrenteUseCase.selected = request.form['selected']
 
                 return 'ok'
@@ -95,7 +95,7 @@ class ManagerController:
         def handle_delete():
             
             try:
-                print(request.data)
+                
                 filename = request.data.decode()
                 
                 if self._visualizzaDizionarioCorrenteUseCase.selected == filename:
