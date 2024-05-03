@@ -59,7 +59,7 @@ class ManagerController:
                 data = []
 
                 for filename in self._visualizzaListaDizionariUseCase.list_all():
-                    print(filename)
+                    
                     data.append({
                         'name': '.'.join(filename.split('.')[:-1]),
                         'loaded': filename == self._visualizzaDizionarioCorrenteUseCase.selected,
@@ -80,8 +80,28 @@ class ManagerController:
         def handle_selection():
             
             try:
-                print(request.form['selected'])
+                
                 self._visualizzaDizionarioCorrenteUseCase.selected = request.form['selected']
+
+                return 'ok'
+                
+            except BaseException as e:
+                if hasattr(e, 'message'):
+                    return e.message
+                else:
+                    return e
+                        
+        @manager_page.route('/delete', methods=['DELETE'])
+        def handle_delete():
+            
+            try:
+                
+                filename = request.data.decode()
+                
+                if self._visualizzaDizionarioCorrenteUseCase.selected == filename:
+                    self._visualizzaDizionarioCorrenteUseCase.selected = None
+
+                self._eliminazioneDizionarioUseCase.remove(filename)
 
                 return 'ok'
                 

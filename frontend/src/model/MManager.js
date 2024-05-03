@@ -91,9 +91,13 @@ export default {
    * @param {number} id - The ID of the dictionary to delete.
    * @returns {Promise<boolean|any>} - A promise that resolves to either the deleted dictionary data or false if the deletion fails.
    */
-  async deleteDictionary(id) {
+  async deleteDictionary(filename) {
     try {
-      const response = await axios.delete(`http://localhost:5000/files/${id}`);
+      const response = await axios.delete('http://localhost:5000/delete', { data: filename }, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+      });
       if (response.status === 200 || response.status === 204) {
         return response.data;
       } 

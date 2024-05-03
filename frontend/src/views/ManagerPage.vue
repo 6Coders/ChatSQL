@@ -72,9 +72,8 @@ export default {
      * Handles the event when the delete button is clicked.
      * @param {number} index - The index of the item to be deleted.
      */
-    handleDeleteButtonClicked(index) {
-      if(index)
-        VMManager.handleDeleteDictionary(index);
+    handleDeleteButtonClicked(filename) {
+      VMManager.handleDeleteDictionary(filename);
     },
 
     /**
