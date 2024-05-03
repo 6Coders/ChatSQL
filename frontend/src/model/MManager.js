@@ -61,7 +61,8 @@ export default {
    * @returns {boolean} - Returns true if the file is valid, otherwise false.
    */
   convalidateFile(file) {
-    return this.isExtensionAllowed(file) && this.isSizeValid(file);
+    const boolean = (this.isExtensionAllowed(file) && this.isSizeValid(file));
+    return boolean;
   },
 
   /**
@@ -82,8 +83,10 @@ export default {
    * @returns {boolean} - Returns true if the file size is valid, false otherwise.
    */
   isSizeValid(file) {
-    const maxSize = 500 * 1024; 
-    return file.size <= maxSize;
+    const maxSize = 500 * 1024;
+    const boolean = file.size < maxSize; 
+    console.log('File size:', file.size, 'Max size:', maxSize, 'Result:', boolean);
+    return boolean;
   },
 
   /**
