@@ -3,13 +3,13 @@ import LoadButton from '@/components/LoadButton.vue';
 
 describe('LoadButton', () => {
   it('emits a "load-click" event when clicked', async () => {
-    const id = '123';
+    const filename = 'TestFile';
     const wrapper = mount(LoadButton, {
-      props: { id }
+      props: { filename }
     });
     await wrapper.find('button').trigger('click');
     expect(wrapper.emitted('load-click')).toBeTruthy();
-    expect(wrapper.emitted('load-click')[0]).toEqual([id]);
+    expect(wrapper.emitted('load-click')[0]).toEqual([filename]);
   });
 
   it('renders the button with the provided class', () => {
