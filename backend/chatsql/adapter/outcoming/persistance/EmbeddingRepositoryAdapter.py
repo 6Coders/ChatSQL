@@ -3,12 +3,13 @@ import os
 import numpy as np
 from chatsql.domain.Embedding import Embedding
 from chatsql.application.port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
-from chatsql.utils import Exceptions
+
+from chatsql.utils import Exceptions, Common
 
 class EmbeddingRepositoryAdapter(BaseEmbeddingRepository):
 
-    def __init__(self, folder: str) -> None:
-        self._folder = folder
+    def __init__(self) -> None:
+        self._folder = Common.Settings.folder
 
     def save(self, filename: str, embeddings: List[Embedding]) -> bool:
         try:
