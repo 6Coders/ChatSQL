@@ -12,6 +12,14 @@ module.exports = {
    // Directory dove Jest deve mettere i risultati della copertura
    coverageDirectory: '<rootDir>/coverage',
 
+   transform: {
+    '^.+\\.jsx?$': 'babel-jest',
+  },
+
+  moduleNameMapper: {
+    "^axios$": "axios/dist/node/axios.cjs"
+  },
+
    transformIgnorePatterns: [
     'node_modules/(?!(axios)/)',
     '/node_modules/(?!(bootstrap)/)',

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '@/axios';
 import useRequestModel from '@/model/MRequest'
 import MockAdapter from 'axios-mock-adapter'
 

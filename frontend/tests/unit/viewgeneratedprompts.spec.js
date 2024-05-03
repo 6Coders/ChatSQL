@@ -14,12 +14,8 @@ describe('ViewGeneratedPrompts.vue', () => {
         status: true
       }
     })
+    window.HTMLElement.prototype.scrollIntoView = function() {};
   })
-
-  /*
-  it('renders correctly', () => {
-    expect(wrapper.element).toMatchSnapshot()
-  })*/
 
   it('renders user message correctly', () => {
     expect(wrapper.find('.bi-person-fill').exists()).toBe(true)
@@ -37,8 +33,9 @@ describe('ViewGeneratedPrompts.vue', () => {
     // Mock navigator.clipboard
     global.navigator.clipboard = {
       writeText: jest.fn(),
-    }
-  
+    }  
+    global.Element.prototype.scrollIntoView = jest.fn();
+
     const copyToClipboardSpy = jest.spyOn(wrapper.vm, 'copyToClipboard')
     await wrapper.find('.copy-icon').trigger('click')
     expect(copyToClipboardSpy).toHaveBeenCalled()

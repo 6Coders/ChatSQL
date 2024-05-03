@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { ref, onMounted, nextTick, watch } from 'vue'
+import { ref, onMounted, nextTick, watch, computed } from 'vue'
 import ToastPopup from '@/components/ToastPopup'
 import useClipboard from 'vue-clipboard3'
 export default {
@@ -54,6 +54,8 @@ export default {
     const { toClipboard } = useClipboard()
     const messagebox = ref(null)
     const toast = ref(null)
+    const messagesList = computed(() => props.items)
+    const statusLocal = computed(() => props.status)
 
     function showMessage(message) {
       toast.value.Message = message;
@@ -91,7 +93,7 @@ export default {
      * Watcher that is triggered when the `messages` prop changes.
      * It waits for the next DOM update cycle using `nextTick` before scrolling to the `messagebox`.
      */
-    watch(props.messages, async () => {
+    watch(messagesList, async () => {
       await nextTick()
       scrollTo(messagebox)
     })
@@ -100,7 +102,7 @@ export default {
      * Watcher that is triggere when the `messages` is emptied.
      * It waits for the next DOM update cycle using `nextTick` before showing a message.
      */
-    watch(props.messages, async (newVal) => {
+    watch(messagesList, async (newVal) => {
       await nextTick()
       if (newVal.length === 0) {
         showMessage('Messaggi eliminati')
@@ -113,7 +115,7 @@ export default {
      * Watcher that is triggered when the `status` prop changes.
      * It waits for the next DOM update cycle using `nextTick` before scrolling to the `messagebox`.
      */
-    watch(props.status, async () => {
+    watch(statusLocal, async () => {
       await nextTick()
       scrollTo(messagebox)
     })
