@@ -1,6 +1,7 @@
 import axios from '@/axios';
 
 export default {
+  
 
   /**
    * Uploads a file to the server.
@@ -85,7 +86,6 @@ export default {
   isSizeValid(file) {
     const maxSize = 500 * 1024;
     const boolean = file.size < maxSize; 
-    console.log('File size:', file.size, 'Max size:', maxSize, 'Result:', boolean);
     return boolean;
   },
 
