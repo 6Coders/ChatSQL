@@ -70,9 +70,9 @@ const VMManager = {
    * @param {number} id - The ID of the dictionary to load.
    * @returns {Promise<void>} - A promise that resolves when the dictionary is loaded.
    */
-  async handleLoadDictionary(id) 
+  async handleLoadDictionary(filename) 
   {
-    const response = await MManager.loadDictionary(id);
+    const response = await MManager.loadDictionary(filename);
     if (!response) 
     {
       vueComponent.setToastMessage('Internal Server Error');

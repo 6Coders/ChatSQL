@@ -64,8 +64,8 @@ export default {
      *
      * @param {number} index - The index of the dictionary to load.
      */
-    handleLoadButton(index) {
-      VMManager.handleLoadDictionary(index);
+    handleLoadButton(filename) {
+      VMManager.handleLoadDictionary(filename);
     },
 
     /**

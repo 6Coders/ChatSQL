@@ -13,8 +13,7 @@ class JSONManagerService(
     InserimentoDizionarioUseCase,
     EliminazioneDizionarioUseCase,
     VisualizzaListaDizionariUseCase,
-    VisualizzaDizionarioCorrenteUseCase,
-    LoadDizionarioUseCase
+    VisualizzaDizionarioCorrenteUseCase
 ):
     
     def __init__(self, jsonRepository: BaseJsonRepository) -> None:
@@ -40,6 +39,11 @@ class JSONManagerService(
             raise ValueError(f"`{filename}` non esistente")
         return True
 
+    @property
     def selected(self) -> str:
         return self._selectedFile
+    
+    @selected.setter
+    def selected(self, filename: str) -> None:
+        self._selectedFile = filename
     

@@ -112,9 +112,15 @@ export default {
    * @param {number} index - The index of the dictionary to load.
    * @returns {Promise<Boolean>} - A promise that resolves with the loaded dictionary data, or false if the loading fails.
    */
-  async loadDictionary(index) {
+  async loadDictionary(filename) {
     try {
-      const response = await axios.post('http://localhost:5000/load', { data: index });
+      const formData = new FormData();
+      formData.append('selected', filename);
+      const response = await axios.post('http://localhost:5000/select', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       console.log('Backend response status:', response.status);  
       if (response.status === 200) {
         return true; 
