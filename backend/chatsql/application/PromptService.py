@@ -21,7 +21,7 @@ class PromptService(RichiestaPromptUseCase):
 
 
     def query(self, query: str, filename: str) -> str:
-        embeddings = self._embeddingGeneratorPort.generate([query_richiesta])
+        embeddings = self._embeddingGeneratorPort.generate([query])
         query_embedding = embeddings[0]
         context = self._embeddingRepository.load(filename)
         match = KNN(top_k=3)
