@@ -8,7 +8,7 @@ import useRequestModel from '@/model/MRequest'
  */
 export default function RequestPageViewModel() {
   const requestStore = useRequestStore()
-  const { generatePrompt, cancelRequest } = useRequestModel()
+  const { generatePrompt, getSelectedDictionary, cancelRequest } = useRequestModel()
 
   /**
    * handleMessage adds a user and a response message to the messages array in the requestStore.
@@ -19,7 +19,7 @@ export default function RequestPageViewModel() {
     if (responseMessage != 'Stopped') {
       requestStore.addMessage('user', requestStore.requestMessage)
       requestStore.addMessage('response', responseMessage)
-    }else{
+    } else {
       requestStore.addMessage('user', requestStore.requestMessage)
       requestStore.addMessage('response', 'errore o stoppato') //il messaggio è di prova per test
     }
@@ -31,15 +31,14 @@ export default function RequestPageViewModel() {
    */
   const submitForm = async () => {
     requestStore.setIsSending(true)
-    try {
-      const result = await generatePrompt(requestStore.requestMessage)
-      handleMessage(result)
-    } catch (error) {
-      handleMessage('Stopped')
-      console.error(error)
-    } finally {
-      requestStore.setIsSending(false)
-    }
+    const result = await generatePrompt(requestStore.requestMessage)
+    handleMessage(result)
+    requestStore.setIsSending(false)
+  }
+
+  const fetchSelectedDictionary = async () => {
+    const result = await getSelectedDictionary()
+    requestStore.setSelectedDictionary(result)
   }
 
   function stopSending() {
@@ -55,6 +54,7 @@ export default function RequestPageViewModel() {
     submitForm,
     stopSending,
     clearMessages,
+    fetchSelectedDictionary,
     handleMessage
   }
 }

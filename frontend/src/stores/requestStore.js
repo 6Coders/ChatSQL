@@ -11,6 +11,7 @@ export const useRequestStore = defineStore({
     requestMessage: '',
     messages: [],
     isSending: false,
+    selectedDictionary: ''
   }),
   actions: {
     /**
@@ -43,6 +44,14 @@ export const useRequestStore = defineStore({
      */
     setIsSending(value) {
       this.isSending = value
+    },
+    /**
+     * setSelectedDictionary sets the selectedDictionary state.
+     * 
+     * @param {string} dictionary - The new selected dictionary.
+     */
+    setSelectedDictionary(dictionary) {
+      this.selectedDictionary = dictionary
     }
   }
 })
