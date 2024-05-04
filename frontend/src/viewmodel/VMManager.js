@@ -31,13 +31,9 @@ const VMManager = {
     else 
     {
       const msg = await MManager.uploadFile(file);
-      let message = 'File uploaded successfully';
-      if(!msg)
-      {
-        message = 'Internal Server Error';
-      }
       vueComponent.setIsUploading(false);
-      vueComponent.setToastMessage(message);
+      vueComponent.setToastMessage(msg);
+      this.handleDictionary();
       vueComponent.showToast();
     }
   },

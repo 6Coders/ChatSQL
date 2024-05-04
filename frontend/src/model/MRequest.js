@@ -31,6 +31,22 @@ export default function useRequestModel() {
     return output;
   }
 
+  const getSelectedDictionary = async () => {
+    const output = await axios.get('/selected', {
+      signal: controller.signal
+    }).then(function (response) {
+      return response.data.result;
+    }).catch((error) => {
+      if (error.response) {
+        return error.message;
+      } else {
+        return error.message;
+      }
+    });
+
+    return output;
+  }
+
   /**
    * cancelRequest cancels the current HTTP request using the AbortController controller.
    */
@@ -40,6 +56,7 @@ export default function useRequestModel() {
 
   return {
     generatePrompt,
+    getSelectedDictionary,
     cancelRequest
   }
 }
