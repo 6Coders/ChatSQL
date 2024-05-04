@@ -2,7 +2,6 @@ import RequestPageViewModel from '@/viewmodel/VMRequest'
 import { createPinia, setActivePinia } from 'pinia'
 import axios from '@/axios'
 import MockAdapter from 'axios-mock-adapter'
-import useRequestModel from '@/model/MRequest'
 
 describe('RequestPageViewModel', () => {
   beforeEach(() => {
