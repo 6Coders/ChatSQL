@@ -90,6 +90,7 @@ const VMManager = {
    * @returns {Promise<void>} A promise that resolves when the dictionary handling is complete.
    */
   async handleDictionary(){
+    try{
     const response = await MManager.getDictionaries();
     if(response && response.length > 0)
     {
@@ -107,6 +108,11 @@ const VMManager = {
       const message = `No dictionaries found at: ${currentTime}`;
       vueComponent.setAlertMessage(message);
       vueComponent.setIsRefreshingStop();
+    }
+
+    }
+    catch(error){
+      console.log(error);
     }
   }
   
