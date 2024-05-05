@@ -1,13 +1,13 @@
 <template>
   <div class="d-flex flex-column justify-content-center align-items-center">
-    <div class="position-fixed top-0 end-0 p-3 mt-5" style="z-index: 11">
+    <div id="toast" class="position-fixed top-0 end-0 p-3 mt-5" style="z-index: 11">
       <toast-popup ref="toast"></toast-popup>
     </div>
     <div v-if="messages.length === 0" class="text-center text-black py-5 mt-5">
       <img src="../assets/6Coders-logo-original.png" alt="Logo" class="img-fluid" style="max-width: 100px;">
       <h4 class="mt-5">Come ti possiamo aiutare?</h4>
     </div>
-    <div v-else class="w-100 text-black">
+    <div id="message-list" v-else class="w-100 text-black">
       <div v-for="(message, index) in messages" :key="index" class="border-bottom">
         <div v-if="message.type === 'user'" class="w-100 p-3 text-black">
           <i class="bi bi-person-fill me-2"></i>
@@ -18,7 +18,7 @@
           <i class="bi bi-robot me-2"></i>
           <strong>Response</strong>
           <p>{{ message.text }}</p>
-          <i class="bi bi-clipboard me-2 copy-icon" @click="copyToClipboard(message.text)"></i>
+          <i class="bi bi-clipboard me-2 copy-icon" @click="copyToClipboard(message.text)" data-cy="copy-button"></i>
         </div>
       </div>
       <div v-if="status" class="w-100 text-center text-black">

@@ -1,21 +1,21 @@
 <template>
-  <div class="d-flex flex-column vh-80">
+  <div class="d-flex flex-column vh-80" data-cy="request-page">
     <!-- Messaggi chat -->
-    <div class="overflow-auto flex-grow-1 px-md-5 mb-5 chat-height">
+    <div class="overflow-auto flex-grow-1 px-md-5 mb-5 chat-height" data-cy="chat">
       <ViewGeneratedPrompts :messages="requestStore.messages" :status="requestStore.isSending" />
     </div>
 
     <!-- Input per l'utente -->
     <div class="input-group mt-2 px-md-5 pb-5 bg-white fixed-bottom" style="height: 100px;">
       <input type="text" class="form-control" v-model="requestStore.requestMessage" name="requestMessage"
-        autocomplete="off" placeholder="Inserisci un prompt qui...">
+        autocomplete="off" placeholder="Inserisci un prompt qui..." data-cy="request-input" />
       <SendRequestButton :submitMethod="submitForm" :stopSubmitMethod="stopSending" :sendButtonClass="sendButtonClass"
         :stopSendButtonClass="stopSendButtonClass" :status="requestStore.isSending"
-        :disabled="!requestStore.requestMessage" />
+        :disabled="!requestStore.requestMessage" data-cy="send-request-button" />
       <button class="btn btn-secondary rounded mx-2" type="button" @click="clearMessages"
-        v-if="requestStore.messages && requestStore.messages.length > 0">Cancella <i class="bi bi-trash"></i> </button>
+        v-if="requestStore.messages && requestStore.messages.length > 0" data-cy="clear-button" >Cancella <i class="bi bi-trash"></i> </button>
       <div class="w-100 text-center mt-2">
-        <small>Dizionario dati caricato: <b>{{ requestStore.selectedDictionary }}</b></small>
+        <small data-cy="selected-dictionary" >Dizionario dati caricato: <b>{{ requestStore.selectedDictionary }}</b></small>
         <small class="d-block">Made by <a href="https://github.com/6Coders/ChatSQL">6Coders</a></small>
       </div>
     </div>
