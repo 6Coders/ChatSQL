@@ -30,11 +30,16 @@ const VMManager = {
     }
     else 
     {
+      try{
       const msg = await MManager.uploadFile(file);
       vueComponent.setIsUploading(false);
       vueComponent.setToastMessage(msg);
       this.handleDictionary();
       vueComponent.showToast();
+      }
+      catch(error){
+        console.log(error);
+      }
     }
   },
 
@@ -44,6 +49,7 @@ const VMManager = {
    * @returns {Promise<void>} - A promise that resolves when the dictionary is deleted.
    */
   async handleDeleteDictionary(filename) {
+    try{
     const response = await MManager.deleteDictionary(filename);
     if(response)
     {
@@ -58,6 +64,10 @@ const VMManager = {
       vueComponent.showToast();
       vueComponent.scrollTo('top');
     }
+    }
+    catch(error){
+      console.log(error);
+    }
   },
 
   /**
@@ -68,6 +78,7 @@ const VMManager = {
    */
   async handleLoadDictionary(filename) 
   {
+    try{
     const response = await MManager.loadDictionary(filename);
     if (!response) 
     {
@@ -81,6 +92,10 @@ const VMManager = {
       vueComponent.scrollTo('top');
       vueComponent.handleUpdateEntry();
     }
+  }
+  catch(error){
+    console.log(error);
+  }
   },
   
   /**
