@@ -2,6 +2,8 @@ from typing import List, IO
 
 from chatsql.application.port.outcoming.persistance.BaseJSONRepository import BaseJsonRepository
 
+from chatsql.application.port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
+
 from chatsql.utils.JSONValidator import JSONValidator
 
 from chatsql.utils.Common import Settings

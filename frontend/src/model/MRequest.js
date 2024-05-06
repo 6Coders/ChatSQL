@@ -4,8 +4,13 @@ export default function useRequestModel() {
   const controller = new AbortController();
 
   const generatePrompt = async (requestMessage) => {
-    const output = await axios.post('/generateprompt', { userRequest: requestMessage }, {
-      signal: controller.signal
+    const formData = new FormData();
+    formData.append('userRequest', requestMessage);
+    const output = await axios.post('http://localhost:5000/generatePrompt', formData, {
+      signal: controller.signal,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     }).then(function (response) {
       return response.data.result;
     }).catch((error) => {

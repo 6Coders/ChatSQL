@@ -14,7 +14,7 @@
       <div v-else-if="message.type === 'response'" class="w-100 p-3 text-black bg-light border-start border-end">
         <i class="bi bi-robot me-2"></i>
         <strong>Response</strong>
-        <p>{{ message.text }}</p>
+        <p style="white-space: pre-line">{{ message.text }}</p>
         <i class="bi bi-clipboard me-2 copy-icon" @click="copyToClipboard(message.text)"></i>
       </div>
       

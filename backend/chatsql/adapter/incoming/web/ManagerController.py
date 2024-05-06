@@ -3,6 +3,7 @@ from chatsql.application.port.incoming.InserimentoDizionarioUseCase import Inser
 from chatsql.application.port.incoming.EliminazioneDizionarioUseCase import EliminazioneDizionarioUseCase
 from chatsql.application.port.incoming.VisualizzaListaDizionariUseCase import VisualizzaListaDizionariUseCase
 from chatsql.application.port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
+from chatsql.application.EmbeddingSaver import EmbeddingSaver
 
 from chatsql.utils import Exceptions
 from chatsql.utils.Common import Settings
@@ -19,12 +20,14 @@ class ManagerController:
                  inserimentoDizionarioUseCase: InserimentoDizionarioUseCase,
                  eliminazioneDizionarioUseCase: EliminazioneDizionarioUseCase,
                  visualizzaListaDizionariUseCase: VisualizzaListaDizionariUseCase,
-                 visualizzaDizionarioCorrenteUseCase: VisualizzaDizionarioCorrenteUseCase) -> None:
+                 visualizzaDizionarioCorrenteUseCase: VisualizzaDizionarioCorrenteUseCase,
+                 embeddingSaver: EmbeddingSaver) -> None:
         
         self._inserimentoDizionarioUseCase = inserimentoDizionarioUseCase
         self._eliminazioneDizionarioUseCase = eliminazioneDizionarioUseCase
         self._visualizzaListaDizionariUseCase = visualizzaListaDizionariUseCase
         self._visualizzaDizionarioCorrenteUseCase = visualizzaDizionarioCorrenteUseCase
+        self._embeddingSaver = embeddingSaver
 
         self.blueprint = self.__create_blueprint()
 
@@ -42,7 +45,8 @@ class ManagerController:
                 file = request.files['file']
 
                 self._inserimentoDizionarioUseCase.add(file.filename, file.stream)
-
+                self._embeddingSaver.save(file.filename)
+                
                 return 'File aggiunto correttamente'
 
             except BaseException as e:

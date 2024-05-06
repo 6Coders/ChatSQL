@@ -34,3 +34,8 @@ class FileNotRemoved(CustomException):
 
     def __init__(self, message="Error removing file. Check if permissions are correct"):
         super().__init__(message)
+
+class NoFileSelected(CustomException):
+
+    def __init__(self, message="No file has been selected"):
+        super().__init__(message)
