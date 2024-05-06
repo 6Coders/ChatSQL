@@ -1,13 +1,13 @@
 <template ref="Dictionary">
   <div class="mt-5">
     <div>
-      <button class="btn btn-primary mb-3" @click="updateEntry">
+      <button class="btn btn-primary mb-3" @click="updateEntry" data-cy="refresh-button">
         Aggiorna 
         <i v-if="!isRefreshing" class="bi bi-arrow-clockwise"/>
         <span v-else class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"/>
       </button>
       <div v-if="alertMessage.value!=''" style="display: inline-block; margin-left: 10px;">
-        <p class="text-secondary">{{ alertMessage.value }}</p>
+        <p class="text-secondary"  data-cy="alert-message">{{ alertMessage.value }}</p>
       </div>
     <div class="table-responsive">
     </div>
