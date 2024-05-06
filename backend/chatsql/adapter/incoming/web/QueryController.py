@@ -31,11 +31,7 @@ class QueryController:
             
             try:
 
-                self._loadDizionarioUseCase.load(
-                    self._visualizzaDizionarioCorrenteUseCase.selected
-                )
-
-                return 'ok'
+                return jsonify({"selected": self._visualizzaDizionarioCorrenteUseCase.selected})
                 
             except BaseException as e:
                 if hasattr(e, 'message'):
