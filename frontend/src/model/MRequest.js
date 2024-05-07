@@ -16,7 +16,7 @@ export default function useRequestModel() {
    * @returns {Promise<string>} A promise that resolves with the result of the request or an error message.
    */
   const generatePrompt = async (requestMessage) => {
-    const output = await axios.post('/generateprompt', { userRequest: requestMessage }, {
+    const output = await axios.post('/generatePrompt', { userRequest: requestMessage }, {
       signal: controller.signal
     }).then(function (response) {
       return response.data.result;

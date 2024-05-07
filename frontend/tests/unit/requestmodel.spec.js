@@ -6,7 +6,7 @@ describe('useRequestModel', () => {
   it('returns data when request is successful', async () => {
     const { generatePrompt } = useRequestModel();
     const mock = new MockAdapter(axios);
-    mock.onPost('/generateprompt').reply(200, { result: 'A fact' });
+    mock.onPost('/generatePrompt').reply(200, { result: 'A fact' });
 
     const data = await generatePrompt('A message');
 
@@ -16,7 +16,7 @@ describe('useRequestModel', () => {
   it('returns "Stopped" when request is cancelled', async () => {
     const { generatePrompt } = useRequestModel();
     const mock = new MockAdapter(axios);
-    mock.onPost('/generateprompt').abortRequest();
+    mock.onPost('/generatePrompt').abortRequest();
 
     const data = await generatePrompt('A message');
 
@@ -26,7 +26,7 @@ describe('useRequestModel', () => {
   it('returns "Error" when there is a network error', async () => {
     const { generatePrompt } = useRequestModel();
     const mock = new MockAdapter(axios);
-    mock.onPost('/generateprompt').networkError();
+    mock.onPost('/generatePrompt').networkError();
 
     const data = await generatePrompt('A message');
 
@@ -36,7 +36,7 @@ describe('useRequestModel', () => {
   it('should handle error with response', async () => {
     const { generatePrompt } = useRequestModel();
     const mock = new MockAdapter(axios);
-    mock.onPost('/generateprompt').reply(404);
+    mock.onPost('/generatePrompt').reply(404);
 
     const result = await generatePrompt('A message');
 
@@ -46,7 +46,7 @@ describe('useRequestModel', () => {
   it('should handle error with request', async () => {
     const { generatePrompt } = useRequestModel();
     const mock = new MockAdapter(axios);
-    mock.onPost('/generateprompt').replyOnce(500);
+    mock.onPost('/generatePrompt').replyOnce(500);
 
     const result = await generatePrompt('A message');
 
