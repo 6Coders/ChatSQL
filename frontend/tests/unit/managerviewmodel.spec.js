@@ -20,7 +20,7 @@ describe('VMManager', () => {
 
     it('should handle valid file selection', async () => {
       const file = new File(['dummy content'], 'test.json', { type: 'application/json', size: 1024 });
-      jest.spyOn(MManager, 'convalidateFile').mockReturnValue(true);
+      jest.spyOn(MManager, 'convalidateFile').mockReturnValue({ isValid: true, message: '' });
       jest.spyOn(MManager, 'uploadFile').mockResolvedValue('File uploaded successfully');
 
       await VMManager.handleFileSelected(file);
@@ -30,13 +30,13 @@ describe('VMManager', () => {
 
     it('should handle invalid file selection', async () => {
       const file = new File(['dummy content'], 'test.txt', { type: 'text/plain', size: 600 * 1024 });
-      jest.spyOn(MManager, 'convalidateFile').mockReturnValue(false);
+      jest.spyOn(MManager, 'convalidateFile').mockReturnValue({ isValid: false, message: 'Invalid extension. Only .json is allowed' });
       const setToastMessageMock = jest.spyOn(wrapper.vm, 'setToastMessage');
       const showToastMock = jest.spyOn(wrapper.vm, 'showToast');
 
       await VMManager.handleFileSelected(file);
 
-      expect(setToastMessageMock).toHaveBeenCalledWith('Invalid extension or file too large (max 500KB)');
+      expect(setToastMessageMock).toHaveBeenCalledWith('Invalid extension. Only .json is allowed');
       expect(showToastMock).toHaveBeenCalled();
     });
   });

@@ -212,7 +212,7 @@ describe('useManagerModel', () => {
       Object.defineProperty(file, 'size', { value: 1024 });
       const result = useManagerModel.convalidateFile(file);
 
-      expect(result).toBe(true);
+      expect(result).toStrictEqual({"isValid": true, "message": ""});
     });
 
     it('should invalidate a file with disallowed extension', () => {
@@ -220,7 +220,7 @@ describe('useManagerModel', () => {
       Object.defineProperty(file, 'size', { value: 1024 });
       const result = useManagerModel.convalidateFile(file);
 
-      expect(result).toBe(false);
+      expect(result).toStrictEqual({"isValid": false, "message": "Invalid extension. Only .json is allowed"});
     });
 
     it('should invalidate a file with invalid size', () => {
@@ -228,7 +228,7 @@ describe('useManagerModel', () => {
       Object.defineProperty(file, 'size', { value: 600 * 1024 });
       const result = useManagerModel.convalidateFile(file);
 
-      expect(result).toBe(false);
+      expect(result).toStrictEqual({"isValid": false, "message": "File too large (max 500KB)"});
     });
   });
 
