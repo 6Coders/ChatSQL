@@ -8,7 +8,7 @@
     <!-- Input per l'utente -->
     <div class="input-group mt-2 px-md-5 pb-5 bg-white fixed-bottom" style="height: 100px;">
       <input type="text" class="form-control" v-model="requestStore.requestMessage" name="requestMessage"
-        autocomplete="off" placeholder="Inserisci un prompt qui..." data-cy="request-input" />
+        autocomplete="off" placeholder="Inserisci un prompt qui..." data-cy="request-input" @keyup.enter="submitForm" />
       <SendRequestButton :submitMethod="submitForm" :stopSubmitMethod="stopSending" :sendButtonClass="sendButtonClass"
         :stopSendButtonClass="stopSendButtonClass" :status="requestStore.isSending"
         :disabled="!requestStore.requestMessage" data-cy="send-request-button" />
