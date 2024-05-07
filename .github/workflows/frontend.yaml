@@ -52,6 +52,19 @@ jobs:
           cd frontend
           npx jest --coverage
 
+      - name: Start Backend Server
+        run: |
+          cd backend
+          python .\main.py
+          sleep 10
+      
+      - name: Run Cypress Tests
+        run: |
+          cd frontend
+          npm install
+          npm run serve &
+          npm run cypress:run
+
       - name: Upload frontend coverage report to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
