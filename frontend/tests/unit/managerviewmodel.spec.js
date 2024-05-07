@@ -3,16 +3,16 @@ import VMManager from '@/viewmodel/VMManager';
 import MManager from '@/model/MManager.js';
 import MockAdapter from 'axios-mock-adapter';
 import { mount } from '@vue/test-utils';
-import ManagerPage from '@/views/ManagerPage.vue'; 
+import ManagerPage from '@/views/ManagerPage.vue';
 
 const mock = new MockAdapter(axios);
 
 describe('VMManager', () => {
-    let wrapper;
-    beforeEach(() => {
-      wrapper = mount(ManagerPage); 
-    });
-  
+  let wrapper;
+  beforeEach(() => {
+    wrapper = mount(ManagerPage);
+  });
+
   describe('handleFileSelected', () => {
     afterEach(() => {
       mock.reset();

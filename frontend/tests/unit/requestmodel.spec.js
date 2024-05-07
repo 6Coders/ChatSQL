@@ -34,9 +34,9 @@ describe('useRequestModel', () => {
   });
 
   it('should handle error with response', async () => {
-      const { generatePrompt } = useRequestModel();
-      const mock = new MockAdapter(axios);
-      mock.onPost('/generateprompt').reply(404);
+    const { generatePrompt } = useRequestModel();
+    const mock = new MockAdapter(axios);
+    mock.onPost('/generateprompt').reply(404);
 
     const result = await generatePrompt('A message');
 
@@ -84,9 +84,9 @@ describe('useRequestModel', () => {
   });
 
   it('should handle error with response', async () => {
-      const { getSelectedDictionary } = useRequestModel();
-      const mock = new MockAdapter(axios);
-      mock.onGet('/selected').reply(404);
+    const { getSelectedDictionary } = useRequestModel();
+    const mock = new MockAdapter(axios);
+    mock.onGet('/selected').reply(404);
 
     const result = await getSelectedDictionary();
 

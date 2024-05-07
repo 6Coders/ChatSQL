@@ -2,43 +2,45 @@
   <div class="mt-5">
     <div>
       <button class="btn btn-primary mb-3" @click="updateEntry" data-cy="refresh-button">
-        Aggiorna 
-        <i v-if="!isRefreshing" class="bi bi-arrow-clockwise"/>
-        <span v-else class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"/>
+        Aggiorna
+        <i v-if="!isRefreshing" class="bi bi-arrow-clockwise" />
+        <span v-else class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" />
       </button>
-      <div v-if="alertMessage.value!=''" style="display: inline-block; margin-left: 10px;">
-        <p class="text-secondary"  data-cy="alert-message">{{ alertMessage.value }}</p>
+      <div v-if="alertMessage.value != ''" style="display: inline-block; margin-left: 10px;">
+        <p class="text-secondary" data-cy="alert-message">{{ alertMessage.value }}</p>
       </div>
-    <div class="table-responsive">
-    </div>
+      <div class="table-responsive">
+      </div>
       <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Estensione</th>
-          <th scope="col">Data di caricamento</th>
-          <th scope="col">Dimensione</th>
-          <th scope="col">Azioni</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(entry, index) in dictionaryEntries" :key="index" :class="{'table-success':entry.load}">
-          <th scope="row">{{ index + 1 }}</th>
-          <td>
-            {{ entry.name }}
-            <i v-if="entry.load" class="bi bi-check"/>
-          </td>
-          <td>{{entry.extension}}</td>
-          <td>{{entry.date}}</td>
-          <td>{{entry.size}}</td>
-          <td>
-            <LoadButton :id="entry.id" :name="entry.name" :class="loadButtonClass" @load-click="loadButtonClick(entry.name + '.' + entry.extension)" />
-            <DeleteButton :id="entry.id" :name="entry.name" :class="deleteButtonClass" @delete-click="deleteButtonClick(entry.name + '.' + entry.extension)" />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Estensione</th>
+            <th scope="col">Data di caricamento</th>
+            <th scope="col">Dimensione</th>
+            <th scope="col">Azioni</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(entry, index) in dictionaryEntries" :key="index" :class="{ 'table-success': entry.load }">
+            <th scope="row">{{ index + 1 }}</th>
+            <td>
+              {{ entry.name }}
+              <i v-if="entry.load" class="bi bi-check" />
+            </td>
+            <td>{{ entry.extension }}</td>
+            <td>{{ entry.date }}</td>
+            <td>{{ entry.size }}</td>
+            <td>
+              <LoadButton :id="entry.id" :name="entry.name" :class="loadButtonClass"
+                @load-click="loadButtonClick(entry.name + '.' + entry.extension)" />
+              <DeleteButton :id="entry.id" :name="entry.name" :class="deleteButtonClass"
+                @delete-click="deleteButtonClick(entry.name + '.' + entry.extension)" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -115,9 +117,9 @@ export default {
      * Clears the alert message and sets the `isRefreshing` flag to true.
      * Emits the 'update-entry' event.
      */
-    function updateEntry(){
+    function updateEntry() {
       this.setAlertMessage('');
-      isRefreshing.value=true;
+      isRefreshing.value = true;
       emit('update-entry');
     }
 
@@ -125,9 +127,9 @@ export default {
      * Resets the dictionary entries.
      * If the dictionary entries array has elements, it clears the array.
      */
-    function resetEntry(){
-      if(dictionaryEntries.value.length>0)
-        dictionaryEntries.value=[];
+    function resetEntry() {
+      if (dictionaryEntries.value.length > 0)
+        dictionaryEntries.value = [];
     }
 
     /**
@@ -135,15 +137,15 @@ export default {
      *
      * @param {string} message - The message to be set as the alert message.
      */
-    function setAlertMessage(message){
+    function setAlertMessage(message) {
       alertMessage.value = message;
     }
 
     /**
      * Stops the refreshing process.
      */
-    function isRefreshingStop(){
-      isRefreshing.value=false;
+    function isRefreshingStop() {
+      isRefreshing.value = false;
     }
 
     return {
