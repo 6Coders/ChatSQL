@@ -14,6 +14,7 @@ class EmbeddingRepositoryAdapter(BaseEmbeddingRepository):
     def save(self, filename: str, embeddings: List[Embedding]) -> bool:
         try:
             filepath = os.path.join(self._folder, '.'.join(filename.split('.')[:-1]))
+            print(filepath)
             np.save(filepath, embeddings)
             return True
         except Exception as e:

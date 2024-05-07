@@ -18,7 +18,7 @@ import os
 
 app = Flask(__name__, static_url_path='', template_folder='../frontend/src/views')
 CORS(app, resources={r'/*': {'origins': '*'}})
-    
+
 @app.route('/heartbeat')
 def heartbeat():
     return True
@@ -42,11 +42,10 @@ if __name__ == '__main__':
     )
 
 
-    embeddingGeneratorService = EmbeddingManager(
-        embeddingRepository=embeddingRepository
+    embeddingSaver = EmbeddingManager(
+        embeddingRepository=embeddingRepository,
+        embeddingGeneratorPort=embeddingGeneratorPort
     )
-
-    embeddingSaver = EmbeddingManager(embeddingRepository=embeddingRepository)
 
     managerController = ManagerController(
         inserimentoDizionarioUseCase=managerService,
@@ -65,4 +64,4 @@ if __name__ == '__main__':
     app.register_blueprint(managerController.blueprint)
     app.register_blueprint(queryController.blueprint)
     app.run(debug=True)
-    
+
