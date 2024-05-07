@@ -1,17 +1,15 @@
 import axios from '@/axios';
 
 export default {
-  
+
 
   /**
    * Uploads a file to the server.
    * @param {File} file - The file to be uploaded.
    * @returns {Promise<string>} A promise that resolves to the response data or an error message.
    */
-  async uploadFile(file) 
-  {
-    try 
-    {
+  async uploadFile(file) {
+    try {
       const formData = new FormData();
       formData.append('file', file);
       const response = await axios.post('/upload', formData, {
@@ -19,40 +17,32 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       });
-      if (response.status === 200 || response.status === 201) 
-      {
+      if (response.status === 200 || response.status === 201) {
         return response.data;
-      } 
-      else 
-      {
+      }
+      else {
         return 'Internal Server Error';
       }
-    } 
-    catch (error) 
-    {
+    }
+    catch (error) {
       return 'Internal Server Error';
     }
   },
-  
+
   /**
    * Retrieves dictionaries from the backend server.
    * @returns {Promise<Array>} A promise that resolves to an array of dictionaries.
    */
-  async getDictionaries()
-  {
-    try 
-    {
+  async getDictionaries() {
+    try {
       const response = await axios.get('/files');
-      if (response.status === 200 || response.status === 201) 
-      {
+      if (response.status === 200 || response.status === 201) {
         return response.data;
-      } else 
-      {
-        return ;
+      } else {
+        return;
       }
-    } catch (error) 
-    {
-      return ;
+    } catch (error) {
+      return;
     }
   },
 
@@ -62,8 +52,13 @@ export default {
    * @returns {boolean} - Returns true if the file is valid, otherwise false.
    */
   convalidateFile(file) {
-    const boolean = (this.isExtensionAllowed(file) && this.isSizeValid(file));
-    return boolean;
+    if (!this.isExtensionAllowed(file)) {
+      return { isValid: false, message: 'Invalid extension. Only .json is allowed' };
+    }
+    if (!this.isSizeValid(file)) {
+      return { isValid: false, message: 'File too large (max 500KB)' };
+    }
+    return { isValid: true, message: '' };
   },
 
   /**
@@ -85,7 +80,7 @@ export default {
    */
   isSizeValid(file) {
     const maxSize = 500 * 1024;
-    const boolean = file.size < maxSize; 
+    const boolean = file.size < maxSize;
     return boolean;
   },
 
@@ -103,14 +98,12 @@ export default {
       });
       if (response.status === 200 || response.status === 204) {
         return response.data;
-      } 
-      else 
-      {
-        return false; 
       }
-    } catch (error) 
-    {
-      return false; 
+      else {
+        return false;
+      }
+    } catch (error) {
+      return false;
     }
   },
 
@@ -128,9 +121,9 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       });
-      console.log('Backend response status:', response.status);  
+      console.log('Backend response status:', response.status);
       if (response.status === 200) {
-        return true; 
+        return true;
       } else {
         return false;
       }
@@ -139,4 +132,4 @@ export default {
     }
   }
 
-  };
+};

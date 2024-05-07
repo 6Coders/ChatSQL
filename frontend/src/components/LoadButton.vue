@@ -1,7 +1,7 @@
 <template>
   <button :class="LoadButtonClass" class="mx-2" type="button" @click="loadDictionary">
-    Load 
-    <i class="bi bi-file-earmark-plus"/>
+    Load
+    <i class="bi bi-file-earmark-plus" />
   </button>
 </template>
 
@@ -16,7 +16,7 @@ export default {
    */
   props: {
     LoadButtonClass: String,
-    filename: String 
+    filename: String
   },
   /**
    * Sets up the component and defines the loadDictionary function.

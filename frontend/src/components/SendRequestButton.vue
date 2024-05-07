@@ -4,8 +4,10 @@
   The send request button is only visible when the `status` is `false` and `disabled` is `false`.
   The stop request button is only visible when the `status` is `true`.
   -->
-  <button :class="sendButtonClass" type="button" @click="submitMethod" v-if="!status" :disabled="disabled" >Send <i class="bi bi-send"></i></button>
-  <button :class="stopSendButtonClass" type="button" title="Stop" @click="stopSubmitMethod" v-else>Stop <i class="bi bi-stop-circle"></i></button>
+  <button :class="sendButtonClass" type="button" @click="submitMethod" v-if="!status" :disabled="disabled">Send <i
+      class="bi bi-send"></i></button>
+  <button :class="stopSendButtonClass" type="button" title="Stop" @click="stopSubmitMethod" v-else>Stop <i
+      class="bi bi-stop-circle"></i></button>
 </template>
 
 <script>
@@ -16,7 +18,7 @@ export default {
      * CSS class for the send button.
      * @type {String}
      */
-     sendButtonClass: String,
+    sendButtonClass: String,
     /**
      * CSS class for the stop button.
      * @type {String}
@@ -42,5 +44,6 @@ export default {
      * @type {Boolean}
      */
     disabled: Boolean
-  }}
+  }
+}
 </script>

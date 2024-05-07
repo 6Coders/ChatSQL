@@ -2,9 +2,9 @@ import { mount } from '@vue/test-utils';
 import ToastPopup from '@/components/ToastPopup.vue';
 
 describe('ToastPopup', () => {
-    
+
   it('renders toast with message', async () => {
-    const wrapper = mount(ToastPopup);    
+    const wrapper = mount(ToastPopup);
     await wrapper.vm.setTest('Test Message');
     await wrapper.vm.showToast();
     expect(wrapper.find('.toast').isVisible()).toBe(true);

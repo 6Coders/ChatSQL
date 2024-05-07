@@ -46,7 +46,7 @@ describe('RequestPageViewModel', () => {
     const mock = new MockAdapter(axios)
     const { submitForm, requestStore } = RequestPageViewModel()
     requestStore.setRequestMessage('test message')
-    mock.onPost('/generateprompt').reply(200, { result: 'Success' })
+    mock.onPost('/generatePrompt').reply(200, { result: 'Success' })
     await submitForm()
     expect(requestStore.messages).toEqual([
       { text: 'test message', type: 'user' },
@@ -58,7 +58,7 @@ describe('RequestPageViewModel', () => {
     const mock = new MockAdapter(axios)
     const { submitForm, requestStore } = RequestPageViewModel()
     requestStore.setRequestMessage('test message')
-    mock.onPost('/generateprompt').reply(500)
+    mock.onPost('/generatePrompt').reply(500)
     await submitForm()
     expect(requestStore.messages).toEqual([
       { text: 'test message', type: 'user' },
@@ -70,7 +70,7 @@ describe('RequestPageViewModel', () => {
     const mock = new MockAdapter(axios)
     const { submitForm, requestStore } = RequestPageViewModel()
     requestStore.setRequestMessage('test message')
-    mock.onPost('/generateprompt').abortRequest()
+    mock.onPost('/generatePrompt').abortRequest()
     await submitForm()
     expect(requestStore.messages).toEqual([
       { text: 'test message', type: 'user' },

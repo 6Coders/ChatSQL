@@ -3,12 +3,12 @@ import ManagerPage from '@/views/ManagerPage.vue';
 import VMManager from '@/viewmodel/VMManager.js';
 
 jest.mock('@/viewmodel/VMManager.js', () => ({
-    handleFileSelected: jest.fn(),
-    handleLoadDictionary: jest.fn(),
-    handleDeleteDictionary: jest.fn(),
-    handleDictionary: jest.fn(),
-    setVueComponent: jest.fn(), // Simula la funzione setVueComponent
-  }));
+  handleFileSelected: jest.fn(),
+  handleLoadDictionary: jest.fn(),
+  handleDeleteDictionary: jest.fn(),
+  handleDictionary: jest.fn(),
+  setVueComponent: jest.fn(), // Simula la funzione setVueComponent
+}));
 
 describe('ManagerPage', () => {
   it('handles file selected', () => {
