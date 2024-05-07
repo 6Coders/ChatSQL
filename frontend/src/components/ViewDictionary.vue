@@ -12,35 +12,33 @@
       <div class="table-responsive">
       </div>
       <table class="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Estensione</th>
-            <th scope="col">Data di caricamento</th>
-            <th scope="col">Dimensione</th>
-            <th scope="col">Azioni</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(entry, index) in dictionaryEntries" :key="index" :class="{ 'table-success': entry.load }">
-            <th scope="row">{{ index + 1 }}</th>
-            <td>
-              {{ entry.name }}
-              <i v-if="entry.load" class="bi bi-check" />
-            </td>
-            <td>{{ entry.extension }}</td>
-            <td>{{ entry.date }}</td>
-            <td>{{ entry.size }}</td>
-            <td>
-              <LoadButton :id="entry.id" :name="entry.name" :class="loadButtonClass"
-                @load-click="loadButtonClick(entry.name + '.' + entry.extension)" />
-              <DeleteButton :id="entry.id" :name="entry.name" :class="deleteButtonClass"
-                @delete-click="deleteButtonClick(entry.name + '.' + entry.extension)" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Estensione</th>
+          <th scope="col">Data di caricamento</th>
+          <th scope="col">Dimensione</th>
+          <th scope="col">Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(entry, index) in dictionaryEntries" :key="index" :class="{'table-success':entry.load}">
+          <th scope="row">{{ index + 1 }}</th>
+          <td>
+            {{ entry.name }}
+            <i v-if="entry.load" class="bi bi-check"/>
+          </td>
+          <td>{{entry.extension}}</td>
+          <td>{{entry.date}}</td>
+          <td>{{entry.size}}</td>
+          <td>
+            <LoadButton :id="entry.id" :name="entry.name" :class="loadButtonClass" @load-click="loadButtonClick(entry.name + '.' + entry.extension)" :data-cy="entry.name+'load'"/>
+            <DeleteButton :id="entry.id" :name="entry.name" :class="deleteButtonClass" @delete-click="deleteButtonClick(entry.name + '.' + entry.extension)" :data-cy="entry.name+'delete'" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
     </div>
   </div>
 </template>
