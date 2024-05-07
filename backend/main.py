@@ -10,30 +10,25 @@ from chatsql.utils.Common import Settings
 import os
 
 app = Flask(__name__, static_url_path='', template_folder='../frontend/src/views')
+
+# Abilita il supporto CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-@app.route('/heartbeat')
-def heartbeat():
-    return True
+# Imposta la cartella temporanea per gli upload
+Settings.folder = os.path.join(os.environ['TEMP'], 'uploads')
 
+# Inizializza il repository e il servizio JSON
+jsonRepository = JSONRepositoryAdapter()
+jsonService = JSONManagerService(jsonRepository)
 
-if __name__ == '__main__':
+# Crea il controller e registra il blueprint
+managerController = ManagerController(
+    inserimentoDizionarioUseCase=jsonService,
+    eliminazioneDizionarioUseCase=jsonService,
+    visualizzaListaDizionariUseCase=jsonService,
+    visualizzaDizionarioCorrenteUseCase=jsonService,
+)
+app.register_blueprint(managerController.blueprint)
 
-    Settings.folder = os.path.join(os.environ['TEMP'], 'uploads')
-
-    jsonRepository = JSONRepositoryAdapter()
-    
-    jsonService = JSONManagerService(jsonRepository)
-
-    managerController = ManagerController(
-        inserimentoDizionarioUseCase=jsonService,
-        eliminazioneDizionarioUseCase=jsonService,
-        visualizzaListaDizionariUseCase=jsonService,
-        visualizzaDizionarioCorrenteUseCase=jsonService,
-    )
-
-
-
-    app.register_blueprint(managerController.blueprint)
-    app.run(debug=True)
+app.testing = True
 
