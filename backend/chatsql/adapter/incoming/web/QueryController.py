@@ -31,13 +31,13 @@ class QueryController:
             
             try:
 
-                return jsonify({"selected": self._visualizzaDizionarioCorrenteUseCase.selected})
+                return jsonify({"result": self._visualizzaDizionarioCorrenteUseCase.selected})
                 
             except BaseException as e:
                 if hasattr(e, 'message'):
                     return e.message
                 else:
-                    return e
+                    return jsonify(e)
 
         @query_page.route('/generatePrompt', methods=['POST'])
         def handle_prompt_generation():
