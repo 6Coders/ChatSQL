@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_cors import CORS
 
 from chatsql.adapter.incoming.web.ManagerController import ManagerController
@@ -13,6 +13,7 @@ from chatsql.application.EmbeddingManager import EmbeddingManager
 
 from chatsql.adapter.incoming.SearchAlgorithmAdapters import KNN
 
+from chatsql.utils.Exceptions import CustomException
 from chatsql.utils.Common import Settings
 import os
 
@@ -23,6 +24,10 @@ CORS(app, resources={r'/*': {'origins': '*'}}, supports_credentials=True)
 @app.route('/heartbeat')
 def heartbeat():
     return True
+
+@app.errorhandler(CustomException)
+def handle(e):
+    return jsonify(400, e.message)
 
 from chatsql.adapter.incoming.EmbeddingGeneratorAdapters import HuggingfaceEmbeddingAdapter, TestEmbeddingAdapter
 
@@ -66,5 +71,6 @@ if __name__ == '__main__':
     app.register_blueprint(managerController.blueprint)
     app.register_blueprint(queryController.blueprint)
     app.testing = True
+
     app.run(port=8000, debug=True)
 

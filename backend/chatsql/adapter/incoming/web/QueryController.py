@@ -3,7 +3,7 @@ from chatsql.application.port.incoming.RichiestaPromptUseCase import RichiestaPr
 from chatsql.application.port.incoming.LoadDizionarioUseCase import LoadDizionarioUseCase
 from chatsql.application.port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
 
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
 
 class QueryController:
 
@@ -28,40 +28,23 @@ class QueryController:
 
         @query_page.route('/selected', methods=['GET'])
         def handle_load():
-            
-            try:
 
-                return jsonify({"result": self._visualizzaDizionarioCorrenteUseCase.selected})
-                
-            except BaseException as e:
-                if hasattr(e, 'message'):
-                    return e.message
-                else:
-                    return jsonify(e)
+            return {"result": self._visualizzaDizionarioCorrenteUseCase.selected}
 
         @query_page.route('/generatePrompt', methods=['POST'])
         def handle_prompt_generation():
             
-            try:
+            richiesta = request.form['userRequest']
 
-                richiesta = request.form['userRequest']
-                
-                self._loadDizionarioUseCase.load(
-                    self._visualizzaDizionarioCorrenteUseCase.selected
-                )
-                risposta = self._richiestaPromptUseCase.query(richiesta)
+            self._loadDizionarioUseCase.load(
+                self._visualizzaDizionarioCorrenteUseCase.selected
+            )
+            risposta = self._richiestaPromptUseCase.query(richiesta)
 
-                data = {
-                    'result': risposta
-                }
+            data = {
+                'result': risposta
+            }
 
-                return jsonify(data)
-                
-            except BaseException as e:
-                if hasattr(e, 'message'):
-                    return e.message
-                else:
-                    return e
-
+            return data
 
         return query_page
