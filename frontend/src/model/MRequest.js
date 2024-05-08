@@ -7,7 +7,7 @@ import axios from '@/axios'
  */
 export default function useRequestModel() {
   // controller is an instance of AbortController, which can be used to cancel HTTP requests.
-  const controller = new AbortController();
+  let controller
 
   /**
    * generatePrompt sends a POST request to '/generateprompt' with a user request message.
@@ -16,15 +16,21 @@ export default function useRequestModel() {
    * @returns {Promise<string>} A promise that resolves with the result of the request or an error message.
    */
   const generatePrompt = async (requestMessage) => {
+    if (controller) controller.abort();
+    controller = new AbortController();
     const formData = new FormData();
     formData.append('userRequest', requestMessage);
-    const output = await axios.post('http://localhost:5000/generatePrompt', formData, {
+    const output = await axios.post('/generatePrompt', formData, {
       signal: controller.signal,
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     }).then(function (response) {
-      return response.data.result;
+      if (response.data.result === undefined) {
+        return 'Errore: non è stato caricato alcun dizionario';
+      } else {
+        return response.data.result;
+      }
     }).catch((error) => {
       if (error.response) {
         return error.message;
@@ -32,11 +38,13 @@ export default function useRequestModel() {
         return error.message;
       }
     });
-
+    controller = undefined
     return output;
   }
 
   const getSelectedDictionary = async () => {
+    if (controller) controller.abort();
+    controller = new AbortController();
     const output = await axios.get('/selected', {
       signal: controller.signal
     }).then(function (response) {
@@ -48,7 +56,7 @@ export default function useRequestModel() {
         return error.message;
       }
     });
-
+    controller = undefined
     return output;
   }
 

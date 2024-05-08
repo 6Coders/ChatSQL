@@ -18,7 +18,7 @@ import os
 
 app = Flask(__name__, static_url_path='', template_folder='../frontend/src/views')
 
-CORS(app, resources={r'/*': {'origins': '*'}})
+CORS(app, resources={r'/*': {'origins': '*'}}, supports_credentials=True)
 
 @app.route('/heartbeat')
 def heartbeat():
@@ -66,5 +66,5 @@ if __name__ == '__main__':
     app.register_blueprint(managerController.blueprint)
     app.register_blueprint(queryController.blueprint)
     app.testing = True
-    app.run()
+    app.run(port=8000, debug=True)
 

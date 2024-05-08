@@ -137,7 +137,7 @@ describe('useManagerModel', () => {
     it('should delete dictionary successfully with status 200', async () => {
       const filename = 'example.json';
       const responseData = { message: 'Dictionary deleted successfully' };
-      mock.onDelete('http://localhost:5000/delete').reply(200, responseData);
+      mock.onDelete('/delete').reply(200, responseData);
 
       const result = await useManagerModel.deleteDictionary(filename);
 
@@ -146,7 +146,7 @@ describe('useManagerModel', () => {
 
     it('should delete dictionary successfully with status 204', async () => {
       const filename = 'example.json';
-      mock.onDelete('http://localhost:5000/delete').reply(204);
+      mock.onDelete('/delete').reply(204);
 
       const result = await useManagerModel.deleteDictionary(filename);
 
@@ -155,7 +155,7 @@ describe('useManagerModel', () => {
 
     it('should handle server error during dictionary deletion', async () => {
       const filename = 'example.json';
-      mock.onDelete('http://localhost:5000/delete').reply(500);
+      mock.onDelete('/delete').reply(500);
 
       const result = await useManagerModel.deleteDictionary(filename);
 
@@ -164,7 +164,7 @@ describe('useManagerModel', () => {
 
     it('should handle request error during dictionary deletion', async () => {
       const filename = 'example.json';
-      mock.onDelete('http://localhost:5000/delete').networkError();
+      mock.onDelete('/delete').networkError();
 
       const result = await useManagerModel.deleteDictionary(filename);
 
@@ -179,7 +179,7 @@ describe('useManagerModel', () => {
 
     it('should load dictionary successfully with status 200', async () => {
       const filename = 'example.json';
-      mock.onPost('http://localhost:5000/select').reply(200);
+      mock.onPost('/select').reply(200);
 
       const result = await useManagerModel.loadDictionary(filename);
 
@@ -188,7 +188,7 @@ describe('useManagerModel', () => {
 
     it('should handle server error during dictionary loading', async () => {
       const filename = 'example.json';
-      mock.onPost('http://localhost:5000/select').reply(500);
+      mock.onPost('/select').reply(500);
 
       const result = await useManagerModel.loadDictionary(filename);
 
@@ -197,7 +197,7 @@ describe('useManagerModel', () => {
 
     it('should handle request error during dictionary loading', async () => {
       const filename = 'example.json';
-      mock.onPost('http://localhost:5000/select').networkError();
+      mock.onPost('/select').networkError();
 
       const result = await useManagerModel.loadDictionary(filename);
 

@@ -7,7 +7,7 @@
       <img src="../assets/6Coders-logo-original.png" alt="Logo" class="img-fluid" style="max-width: 100px;">
       <h4 class="mt-5">Come ti possiamo aiutare?</h4>
     </div>
-    <div v-else class="w-100 text-black">
+    <div id="message-list" v-else class="w-100 text-black">
       <div v-for="(message, index) in messages" :key="index" class="border-bottom">
         <div v-if="message.type === 'user'" class="w-100 p-3 text-black">
           <i class="bi bi-person-fill me-2"></i>
@@ -17,17 +17,17 @@
         <div v-else-if="message.type === 'response'" class="w-100 p-3 text-black bg-light border-start border-end">
           <i class="bi bi-robot me-2"></i>
           <strong>Response</strong>
-          <p style="white-space: pre-line">{{ message.text }}</p>
-          <i class="bi bi-clipboard me-2 copy-icon" @click="copyToClipboard(message.text)"></i>
+          <p>{{ message.text }}</p>
+          <i class="bi bi-clipboard me-2 copy-icon" @click="copyToClipboard(message.text)" data-cy="copy-button"></i>
         </div>
-        <div v-if="status" class="w-100 text-center text-black">
-          <div class="spinner-border text-primary mt-2" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
+      </div>
+      <div v-if="status" class="w-100 text-center text-black">
+        <div class="spinner-border text-primary mt-2" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
-        <div id="container" ref="messagebox"></div>
+      </div>
+      <div id="container" ref="messagebox"></div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -146,5 +146,10 @@ export default {
 
 .copy-icon:hover {
   color: #007BFF;
+}
+
+#message-list {
+  overflow: auto;
+  word-wrap: break-word;
 }
 </style>
