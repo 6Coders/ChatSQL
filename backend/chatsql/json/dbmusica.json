@@ -1,0 +1,160 @@
+{
+  "tables_info": {
+    "Album": {
+      "table_description": "Represents a collection of songs created by a specific artist.",
+      "columns": [
+        {"column_name": "AlbumId", "column_description": "Unique identifier for the album.", "attribute_type": "integer", "index": true},
+        {"column_name": "Title", "column_description": "Title of the album.", "attribute_type": "character varying(160)", "index": false},
+        {"column_name": "ArtistId", "column_description": "Unique identifier for the artist associated with the album.", "attribute_type": "integer", "index": true}
+      ],
+      "attribute_types": ["integer", "character varying(160)", "integer"]
+    },
+    "Artist": {
+      "table_description": "Stores information about music artists who create songs.",
+      "columns": [
+        {"column_name": "ArtistId", "column_description": "Unique identifier for the artist.", "attribute_type": "integer", "index": true},
+        {"column_name": "Name", "column_description": "Name of the artist.", "attribute_type": "character varying(120)", "index": false}
+      ],
+      "attribute_types": ["integer", "character varying(120)"]
+    },
+    "Customer": {
+      "table_description": "Contains details and private information about customers who make purchases.",
+      "columns": [
+        {"column_name": "CustomerId", "column_description": "Unique identifier for the customer.", "attribute_type": "integer", "index": true},
+        {"column_name": "FirstName", "column_description": "First name of the customer.", "attribute_type": "character varying(40)", "index": false},
+        {"column_name": "LastName", "column_description": "Last name of the customer.", "attribute_type": "character varying(20)", "index": false},
+        {"column_name": "Company", "column_description": "Company of the customer.", "attribute_type": "character varying(80)", "index": false},
+        {"column_name": "Address", "column_description": "Address of the customer.", "attribute_type": "character varying(70)", "index": false},
+        {"column_name": "City", "column_description": "City of the customer.", "attribute_type": "character varying(40)", "index": false},
+        {"column_name": "State", "column_description": "State of the customer.", "attribute_type": "character varying(40)", "index": false},
+        {"column_name": "Country", "column_description": "Country of the customer.", "attribute_type": "character varying(40)", "index": false},
+        {"column_name": "PostalCode", "column_description": "Postal code of the customer.", "attribute_type": "character varying(10)", "index": false},
+        {"column_name": "Phone", "column_description": "Phone number of the customer.", "attribute_type": "character varying(24)", "index": false},
+        {"column_name": "Fax", "column_description": "Fax number of the customer.", "attribute_type": "character varying(24)", "index": false},
+        {"column_name": "Email", "column_description": "Email address of the customer.", "attribute_type": "character varying(60)", "index": false},
+        {"column_name": "SupportRepId", "column_description": "Identifier for the customer's support representative.", "attribute_type": "integer", "index": false}
+      ],
+      "attribute_types": ["integer", "character varying(40)", "character varying(20)", "character varying(80)", "character varying(70)", "character varying(40)", "character varying(40)", "character varying(40)", "character varying(10)", "character varying(24)", "character varying(24)", "character varying(60)", "integer"]
+    },
+    "Employee": {
+      "table_description": "Stores details and personal information about employees who work for the company.",
+      "columns": [
+        {"column_name": "EmployeeId", "column_description": "Unique identifier for the employee.", "attribute_type": "integer", "index": true},
+        {"column_name": "LastName", "column_description": "Last name of the employee.", "attribute_type": "character varying(20)", "index": false},
+        {"column_name": "FirstName", "column_description": "First name of the employee.", "attribute_type": "character varying(20)", "index": false},
+        {"column_name": "Title", "column_description": "Title or position of the employee.", "attribute_type": "character varying(30)", "index": false},
+        {"column_name": "ReportsTo", "column_description": "Identifier for the manager of the employee.", "attribute_type": "integer", "index": false},
+        {"column_name": "BirthDate", "column_description": "Date of birth of the employee.", "attribute_type": "timestamp without time zone", "index": false},
+        {"column_name": "HireDate", "column_description": "Date when the employee was hired.", "attribute_type": "timestamp without time zone", "index": false},
+        {"column_name": "Address", "column_description": "Address of the employee.", "attribute_type": "character varying(70)", "index": false},
+        {"column_name": "City", "column_description": "City of the employee.", "attribute_type": "character varying(40)", "index": false},
+        {"column_name": "State", "column_description": "State of the employee.", "attribute_type": "character varying(40)", "index": false},
+        {"column_name": "Country", "column_description": "Country of the employee.", "attribute_type": "character varying(40)", "index": false},
+        {"column_name": "PostalCode", "column_description": "Postal code of the employee.", "attribute_type": "character varying(10)", "index": false},
+        {"column_name": "Phone", "column_description": "Phone number of the employee.", "attribute_type": "character varying(24)", "index": false},
+        {"column_name": "Fax", "column_description": "Fax number of the employee.", "attribute_type": "character varying(24)", "index": false},
+        {"column_name": "Email", "column_description": "Email address of the employee.", "attribute_type": "character varying(60)", "index": false}
+      ],
+      "attribute_types": ["integer", "character varying(20)", "character varying(20)", "character varying(30)", "integer", "timestamp without time zone", "timestamp without time zone", "character varying(70)", "character varying(40)", "character varying(40)", "character varying(40)", "character varying(10)", "character varying(24)", "character varying(24)", "character varying(60)"]
+    },
+    "Genre": {
+      "table_description": "Represents different music genres that define the type of music.",
+      "columns": [
+        {"column_name": "GenreId", "column_description": "Unique identifier for the genre.", "attribute_type": "integer", "index": true},
+        {"column_name": "Name", "column_description": "Name of the genre.", "attribute_type": "character varying(120)", "index": false}
+      ],
+      "attribute_types": ["integer", "character varying(120)"]
+    },
+    "Invoice": {
+      "table_description": "Stores details about invoices, including customer information and billing details.",
+      "columns": [
+        {"column_name": "InvoiceId", "column_description": "Unique identifier for the invoice.", "attribute_type": "integer", "index": true},
+        {"column_name": "CustomerId", "column_description": "Unique identifier for the customer associated with the invoice.", "attribute_type": "integer", "index": true},
+        {"column_name": "InvoiceDate", "column_description": "Date when the invoice was issued.", "attribute_type": "timestamp without time zone", "index": false},
+        {"column_name": "BillingAddress", "column_description": "Billing address for the invoice.", "attribute_type": "character varying(70)", "index": false},
+        {"column_name": "BillingCity", "column_description": "Billing city for the invoice.", "attribute_type": "character varying(40)", "index": false},
+        {"column_name": "BillingState", "column_description": "Billing state for the invoice.", "attribute_type": "character varying(40)", "index": false},
+        {"column_name": "BillingCountry", "column_description": "Billing country for the invoice.", "attribute_type": "character varying(40)", "index": false},
+        {"column_name": "BillingPostalCode", "column_description": "Billing postal code for the invoice.", "attribute_type": "character varying(10)", "index": false},
+        {"column_name": "Total", "column_description": "Total amount of the invoice.", "attribute_type": "numeric(10,2)", "index": false}
+      ],
+      "attribute_types": ["integer", "integer", "timestamp without time zone", "character varying(70)", "character varying(40)", "character varying(40)", "character varying(40)", "character varying(10)", "numeric(10,2)"]
+    },
+    "Product": {
+      "table_description": "Represents details of products, which are lines on an invoice.",
+      "columns": [
+        {"column_name": "ProductId", "column_description": "Unique identifier for the product.", "attribute_type": "integer", "index": true},
+        {"column_name": "InvoiceId", "column_description": "Unique identifier for the invoice associated with the product.", "attribute_type": "integer", "index": true},
+        {"column_name": "TrackId", "column_description": "Unique identifier for the track associated with the product.", "attribute_type": "integer", "index": false},
+        {"column_name": "UnitPrice", "column_description": "Unit price of the product in the invoice line.", "attribute_type": "numeric(10,2)", "index": false},
+        {"column_name": "Quantity", "column_description": "Quantity of the track in the invoice line.", "attribute_type": "integer", "index": false}
+      ],
+      "attribute_types": ["integer", "integer", "integer", "numeric(10,2)", "integer"]
+    },
+    "MediaType": {
+      "table_description": "Contains details about different media types used for listening to music.",
+      "columns": [
+        {"column_name": "MediaTypeId", "column_description": "Unique identifier for the media type.", "attribute_type": "integer", "index": true},
+        {"column_name": "Name", "column_description": "Name of the media type.", "attribute_type": "character varying(120)", "index": false}
+      ],
+      "attribute_types": ["integer", "character varying(120)"]
+    },
+    "Playlist": {
+      "table_description": "Represents details of playlists, which are collections of different songs.",
+      "columns": [
+        {"column_name": "PlaylistId", "column_description": "Unique identifier for the playlist.", "attribute_type": "integer", "index": true},
+        {"column_name": "Name", "column_description": "Name of the playlist.", "attribute_type": "character varying(120)", "index": false}
+      ],
+      "attribute_types": ["integer", "character varying(120)"]
+    },
+    "PlaylistTrack": {
+      "table_description": "Stores details about the association between playlists and tracks.",
+      "columns": [
+        {"column_name": "PlaylistId", "column_description": "Unique identifier for the playlist.", "attribute_type": "integer", "index": true},
+        {"column_name": "TrackId", "column_description": "Unique identifier for the track in the playlist.", "attribute_type": "integer", "index": true}
+      ],
+      "attribute_types": ["integer", "integer"]
+    },
+    "Track": {
+      "table_description": "Represents details about tracks, which are parts of songs.",
+      "columns": [
+        {"column_name": "TrackId", "column_description": "Unique identifier for the track.", "attribute_type": "integer", "index": true},
+        {"column_name": "Name", "column_description": "Name of the track.", "attribute_type": "character varying(200)", "index": false},
+        {"column_name": "AlbumId", "column_description": "Unique identifier for the album associated with the track.", "attribute_type": "integer", "index": false},
+        {"column_name": "MediaTypeId", "column_description": "Unique identifier for the media type associated with the track.", "attribute_type": "integer", "index": false},
+        {"column_name": "GenreId", "column_description": "Unique identifier for the genre associated with the track.", "attribute_type": "integer", "index": false},
+        {"column_name": "Composer", "column_description": "Composer of the track.", "attribute_type": "character varying(220)", "index": false},
+        {"column_name": "Milliseconds", "column_description": "Duration of the track in milliseconds.", "attribute_type": "integer", "index": false},
+        {"column_name": "Bytes", "column_description": "Size of the track in bytes.", "attribute_type": "integer", "index": false},
+        {"column_name": "UnitPrice", "column_description": "Unit price of the track.", "attribute_type": "numeric(10,2)", "index": false}
+      ],
+      "attribute_types": ["integer", "character varying(200)", "integer", "integer", "integer", "character varying(220)", "integer", "integer", "numeric(10,2)"]
+    }
+  },
+  "primary_key": {
+    "Album": ["AlbumId"],
+    "Artist": ["ArtistId"],
+    "Customer": ["CustomerId"],
+    "Employee": ["EmployeeId"],
+    "Genre": ["GenreId"],
+    "Invoice": ["InvoiceId"],
+    "Product": ["ProductId"],
+    "MediaType": ["MediaTypeId"],
+    "Playlist": ["PlaylistId"],
+    "PlaylistTrack": ["PlaylistId", "TrackId"],
+    "Track": ["TrackId"]
+  },
+  "foreign_keys": [
+    {"table": "Album", "foreign_key": "FK_AlbumArtistId", "attribute": "ArtistId", "reference_table": "Artist", "reference_attribute": "ArtistId"},
+    {"table": "Customer", "foreign_key": "FK_CustomerSupportRepId", "attribute": "SupportRepId", "reference_table": "Employee", "reference_attribute": "EmployeeId"},
+    {"table": "Employee", "foreign_key": "FK_EmployeeReportsTo", "attribute": "ReportsTo", "reference_table": "Employee", "reference_attribute": "EmployeeId"},
+    {"table": "Invoice", "foreign_key": "FK_InvoiceCustomerId", "attribute": "CustomerId", "reference_table": "Customer", "reference_attribute": "CustomerId"},
+    {"table": "Product", "foreign_key": "FK_InvoiceLineInvoiceId", "attribute": "InvoiceId", "reference_table": "Invoice", "reference_attribute": "InvoiceId"},
+    {"table": "Product", "foreign_key": "FK_InvoiceLineTrackId", "attribute": "TrackId", "reference_table": "Track", "reference_attribute": "TrackId"},
+    {"table": "PlaylistTrack", "foreign_key": "FK_PlaylistTrackPlaylistId", "attribute": "PlaylistId", "reference_table": "Playlist", "reference_attribute": "PlaylistId"},
+    {"table": "PlaylistTrack", "foreign_key": "FK_PlaylistTrackTrackId", "attribute": "TrackId", "reference_table": "Track", "reference_attribute": "TrackId"},
+    {"table": "Track", "foreign_key": "FK_TrackAlbumId", "attribute": "AlbumId", "reference_table": "Album", "reference_attribute": "AlbumId"},
+    {"table": "Track", "foreign_key": "FK_TrackGenreId", "attribute": "GenreId", "reference_table": "Genre", "reference_attribute": "GenreId"},
+    {"table": "Track", "foreign_key": "FK_TrackMediaTypeId", "attribute": "MediaTypeId", "reference_table": "MediaType", "reference_attribute": "MediaTypeId"}
+  ]
+}

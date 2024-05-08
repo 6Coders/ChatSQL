@@ -40,7 +40,7 @@ class PromptService(RichiestaPromptUseCase,
 
         return f"""
             Act as a SQL engineer. \n
-            Given the context below, answer the following question: {question}. \n
+            Given the context below, generate a query for MariaDB to answer the following question: {question}. \n
             {context}
         """
     
