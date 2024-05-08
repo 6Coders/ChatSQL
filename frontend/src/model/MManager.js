@@ -91,7 +91,7 @@ export default {
    */
   async deleteDictionary(filename) {
     try {
-      const response = await axios.delete('http://localhost:5000/delete', { data: filename }, {
+      const response = await axios.delete('/delete', { data: filename }, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -116,7 +116,7 @@ export default {
     try {
       const formData = new FormData();
       formData.append('selected', filename);
-      const response = await axios.post('http://localhost:5000/select', formData, {
+      const response = await axios.post('/select', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

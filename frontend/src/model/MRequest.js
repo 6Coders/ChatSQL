@@ -18,7 +18,7 @@ export default function useRequestModel() {
   const generatePrompt = async (requestMessage) => {
     const formData = new FormData();
     formData.append('userRequest', requestMessage);
-    const output = await axios.post('http://localhost:5000/generatePrompt', formData, {
+    const output = await axios.post('/generatePrompt', formData, {
       signal: controller.signal,
       headers: {
         'Content-Type': 'multipart/form-data'
