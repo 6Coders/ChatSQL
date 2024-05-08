@@ -28,7 +28,7 @@ from chatsql.adapter.incoming.EmbeddingGeneratorAdapters import HuggingfaceEmbed
 
 if __name__ == '__main__':
 
-    Settings.folder = os.path.join(os.environ['TMPDIR'], 'uploads')
+    Settings.folder = os.path.join(os.environ.get('TMP', 'TMPDIR'), 'uploads')
 
     jsonRepository = JSONRepositoryAdapter()
     managerService = JSONManagerService(jsonRepository)
