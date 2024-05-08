@@ -147,4 +147,9 @@ export default {
 .copy-icon:hover {
   color: #007BFF;
 }
+
+#message-list {
+  overflow: auto;
+  word-wrap: break-word;
+}
 </style>

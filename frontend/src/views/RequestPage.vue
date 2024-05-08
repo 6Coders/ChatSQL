@@ -16,8 +16,10 @@
         v-if="requestStore.messages && requestStore.messages.length > 0" data-cy="clear-button">Cancella <i
           class="bi bi-trash"></i> </button>
       <div class="w-100 text-center mt-2">
-        <small data-cy="selected-dictionary">Dizionario dati caricato: <b>{{ requestStore.selectedDictionary
+        <small v-if="requestStore.selectedDictionary" data-cy="selected-dictionary" class="d-block">Dizionario dati
+          caricato: <b>{{ requestStore.selectedDictionary
             }}</b></small>
+        <small v-else data-cy="selected-dictionary" class="d-block"><b>Non è stato caricato alcun dizionario</b></small>
         <small class="d-block">Made by <a href="https://github.com/6Coders/ChatSQL">6Coders</a></small>
       </div>
     </div>
