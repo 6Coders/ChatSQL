@@ -1,25 +1,25 @@
 
 from typing import List
 from transformers import AutoTokenizer, AutoModel
-from transformers.tokenization_utils_base import torch
-from backend.chatsql.domain.Embedding import Embedding
+import torch
+from chatsql.domain.Embedding import Embedding
 from chatsql.application.port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
 import numpy as np
 
 class TestEmbeddingAdapter(EmbeddingGeneratorPort):
 
     def generate(self, texts: List[str]) -> List[Embedding]:
-        return Embedding(
-            text='tets', 
+        return [Embedding(
+            text='test', 
             data=np.array([1, 2, 3], dtype=np.float32)
-        )
+        ) for _ in texts]
     
 
 class HuggingfaceEmbeddingAdapter(EmbeddingGeneratorPort):
 
-    def __init__(self, model_name: str) -> None:
-        self.tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
-        self.model = AutoModel.from_pretrained("bert-base-uncased")
+    def __init__(self, model_name: str = "sentence-transformers/all-MiniLM-L6-v2") -> None:
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModel.from_pretrained(model_name)
 
     def generate(self, texts: List[str]) -> List[Embedding]:
         embeddings = []
