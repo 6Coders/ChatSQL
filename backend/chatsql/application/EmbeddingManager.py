@@ -24,7 +24,6 @@ class EmbeddingManager(EmbeddingSaver):
                 content = file.readlines()
 
             embeddings = self._embeddingGeneratorPort.generate(content)
-            print(embeddings)
             self._embeddingRepository.save(filename, embeddings)
         except BaseException as e:
             return e

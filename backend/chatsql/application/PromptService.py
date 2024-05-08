@@ -36,12 +36,12 @@ class PromptService(RichiestaPromptUseCase,
             self._embeddingGeneratorPort.generate(question)[0],
             self._context
         )
-        context = "\n".join([e.text for e in context])
+        context = ' '.join([e.text for e in context])
 
         return f"""
             Act as a SQL engineer. \n
             Given the context below, answer the following question: {question}. \n
-            {context}. 
+            {context}
         """
     
     def load(self, filename: str) -> List[Embedding]:
