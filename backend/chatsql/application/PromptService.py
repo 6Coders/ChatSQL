@@ -3,9 +3,9 @@ from typing import List
 from .port.incoming.RichiestaPromptUseCase import RichiestaPromptUseCase
 from .port.incoming.LoadDizionarioUseCase import LoadDizionarioUseCase
 
-from port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
-from port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
-from port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
+from .port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
+from .port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
+from .port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
 
 
 from chatsql.utils import Exceptions
