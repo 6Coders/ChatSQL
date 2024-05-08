@@ -17,6 +17,7 @@ from chatsql.utils.Common import Settings
 import os
 
 app = Flask(__name__, static_url_path='', template_folder='../frontend/src/views')
+
 CORS(app, resources={r'/*': {'origins': '*'}})
 
 @app.route('/heartbeat')
@@ -63,5 +64,5 @@ if __name__ == '__main__':
 
     app.register_blueprint(managerController.blueprint)
     app.register_blueprint(queryController.blueprint)
-    app.run(debug=True)
+    app.testing = True
 

@@ -3,12 +3,12 @@ import ManagerPage from '@/views/ManagerPage.vue';
 import VMManager from '@/viewmodel/VMManager.js';
 
 jest.mock('@/viewmodel/VMManager.js', () => ({
-    handleFileSelected: jest.fn(),
-    handleLoadDictionary: jest.fn(),
-    handleDeleteDictionary: jest.fn(),
-    handleDictionary: jest.fn(),
-    setVueComponent: jest.fn(), // Simula la funzione setVueComponent
-  }));
+  handleFileSelected: jest.fn(),
+  handleLoadDictionary: jest.fn(),
+  handleDeleteDictionary: jest.fn(),
+  handleDictionary: jest.fn(),
+  setVueComponent: jest.fn(), // Simula la funzione setVueComponent
+}));
 
 describe('ManagerPage', () => {
   it('handles file selected', () => {
@@ -40,10 +40,10 @@ describe('ManagerPage', () => {
     const wrapper = mount(ManagerPage);
     const addNewEntrySpy = jest.spyOn(wrapper.vm.$refs.Dictionary, 'addNewEntry');
     const response = [
-      { id: 1, name: 'Test', extension: 'txt', date: '2024-05-03', size: 1024, loaded: true }
+      { name: 'Test', extension: 'txt', date: '2024-05-03', size: 1024, loaded: true }
     ];
     wrapper.vm.printDictionary(response);
-    expect(addNewEntrySpy).toHaveBeenCalledWith(1, 'Test', 'txt', '2024-05-03', 1024, true);
+    expect(addNewEntrySpy).toHaveBeenCalledWith('Test', 'txt', '2024-05-03', 1024, true);
     addNewEntrySpy.mockRestore();
   });
 

@@ -3,17 +3,17 @@ import DeleteButton from '@/components/DeleteButton.vue';
 
 describe('DeleteButton', () => {
   it('emits a "delete-click" event when clicked', async () => {
-    const id = '123';
+    const filename = 'TestFile';
     const DeleteButtonClass = 'custom-class';
     const wrapper = mount(DeleteButton, {
       props: {
-        id,
+        filename,
         DeleteButtonClass
       }
     });
     await wrapper.find('button').trigger('click');
     expect(wrapper.emitted('delete-click')).toBeTruthy();
-    expect(wrapper.emitted('delete-click')[0]).toEqual([id]);
+    expect(wrapper.emitted('delete-click')[0]).toEqual([filename]);
   });
 
   it('renders the button with the provided class', () => {

@@ -1,16 +1,16 @@
 <template ref="Dictionary">
   <div class="mt-5">
     <div>
-      <button class="btn btn-primary mb-3" @click="updateEntry">
-        Aggiorna 
-        <i v-if="!isRefreshing" class="bi bi-arrow-clockwise"/>
-        <span v-else class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"/>
+      <button class="btn btn-primary mb-3" @click="updateEntry" data-cy="refresh-button">
+        Aggiorna
+        <i v-if="!isRefreshing" class="bi bi-arrow-clockwise" />
+        <span v-else class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" />
       </button>
-      <div v-if="alertMessage.value!=''" style="display: inline-block; margin-left: 10px;">
-        <p class="text-secondary">{{ alertMessage.value }}</p>
+      <div v-if="alertMessage.value != ''" style="display: inline-block; margin-left: 10px;">
+        <p class="text-secondary" data-cy="alert-message">{{ alertMessage.value }}</p>
       </div>
-    <div class="table-responsive">
-    </div>
+      <div class="table-responsive">
+      </div>
       <table class="table table-striped table-hover">
       <thead>
         <tr>
@@ -33,8 +33,8 @@
           <td>{{entry.date}}</td>
           <td>{{entry.size}}</td>
           <td>
-            <LoadButton :id="entry.id" :name="entry.name" :class="loadButtonClass" @load-click="loadButtonClick(entry.name + '.' + entry.extension)" />
-            <DeleteButton :id="entry.id" :name="entry.name" :class="deleteButtonClass" @delete-click="deleteButtonClick(entry.name + '.' + entry.extension)" />
+            <LoadButton :id="entry.id" :name="entry.name" :class="loadButtonClass" @load-click="loadButtonClick(entry.name + '.' + entry.extension)" :data-cy="entry.name+'load'"/>
+            <DeleteButton :id="entry.id" :name="entry.name" :class="deleteButtonClass" @delete-click="deleteButtonClick(entry.name + '.' + entry.extension)" :data-cy="entry.name+'delete'" />
           </td>
         </tr>
       </tbody>
@@ -115,9 +115,9 @@ export default {
      * Clears the alert message and sets the `isRefreshing` flag to true.
      * Emits the 'update-entry' event.
      */
-    function updateEntry(){
+    function updateEntry() {
       this.setAlertMessage('');
-      isRefreshing.value=true;
+      isRefreshing.value = true;
       emit('update-entry');
     }
 
@@ -125,9 +125,9 @@ export default {
      * Resets the dictionary entries.
      * If the dictionary entries array has elements, it clears the array.
      */
-    function resetEntry(){
-      if(dictionaryEntries.value.length>0)
-        dictionaryEntries.value=[];
+    function resetEntry() {
+      if (dictionaryEntries.value.length > 0)
+        dictionaryEntries.value = [];
     }
 
     /**
@@ -135,15 +135,15 @@ export default {
      *
      * @param {string} message - The message to be set as the alert message.
      */
-    function setAlertMessage(message){
+    function setAlertMessage(message) {
       alertMessage.value = message;
     }
 
     /**
      * Stops the refreshing process.
      */
-    function isRefreshingStop(){
-      isRefreshing.value=false;
+    function isRefreshingStop() {
+      isRefreshing.value = false;
     }
 
     return {

@@ -3,12 +3,14 @@ from typing import List
 from .port.incoming.RichiestaPromptUseCase import RichiestaPromptUseCase
 from .port.incoming.LoadDizionarioUseCase import LoadDizionarioUseCase
 
-from .port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
-from .port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
-from .port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
+from port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
+from port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
+from port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
+
 
 from chatsql.utils import Exceptions
 from chatsql.domain.Embedding import Embedding
+
 
 
 class PromptService(RichiestaPromptUseCase,
@@ -22,6 +24,7 @@ class PromptService(RichiestaPromptUseCase,
         
         self._embeddingRepository = embeddingRepository
         self._embeddingGeneratorPort = embeddingGeneratorPort
+
         self._searchAlgorithm = searchAlgorithm
         
         self._loaded_file = None
@@ -54,3 +57,4 @@ class PromptService(RichiestaPromptUseCase,
                 pass
 
         return self._context
+

@@ -9,8 +9,8 @@ describe('SendRequestButton.vue', () => {
         disabled: false,
         sendButtonClass: 'send',
         stopSendButtonClass: 'stop',
-        submitMethod: () => {},
-        stopSubmitMethod: () => {}
+        submitMethod: () => { },
+        stopSubmitMethod: () => { }
       }
     })
 
@@ -25,8 +25,8 @@ describe('SendRequestButton.vue', () => {
         disabled: false,
         sendButtonClass: 'send',
         stopSendButtonClass: 'stop',
-        submitMethod: () => {},
-        stopSubmitMethod: () => {}
+        submitMethod: () => { },
+        stopSubmitMethod: () => { }
       }
     })
 
@@ -43,7 +43,7 @@ describe('SendRequestButton.vue', () => {
         sendButtonClass: 'send',
         stopSendButtonClass: 'stop',
         submitMethod,
-        stopSubmitMethod: () => {}
+        stopSubmitMethod: () => { }
       }
     })
 
@@ -59,7 +59,7 @@ describe('SendRequestButton.vue', () => {
         disabled: false,
         sendButtonClass: 'send',
         stopSendButtonClass: 'stop',
-        submitMethod: () => {},
+        submitMethod: () => { },
         stopSubmitMethod
       }
     })

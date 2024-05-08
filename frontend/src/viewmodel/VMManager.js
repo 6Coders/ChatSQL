@@ -22,23 +22,24 @@ const VMManager = {
    * @returns {Promise<void>} - A promise that resolves when the file is handled.
    */
   async handleFileSelected(file) {
-    if (!MManager.convalidateFile(file)) 
-    {
+    let validation = MManager.convalidateFile(file);
+    if (!validation.isValid) {
       vueComponent.setIsUploading(false);
-      vueComponent.setToastMessage('Invalid extension or file too large (max 500KB)');
+      vueComponent.setToastMessage(validation.message);
       vueComponent.showToast();
     }
-    else 
-    {
-      const msg = await MManager.uploadFile(file);
-      let message = 'File uploaded successfully';
-      if(!msg)
-      {
-        message = 'Internal Server Error';
+    else {
+      try {
+        const msg = await MManager.uploadFile(file);
+        vueComponent.setIsUploading(false);
+        vueComponent.setToastMessage(msg);
+        this.handleDictionary();
+        vueComponent.showToast();
       }
-      vueComponent.setIsUploading(false);
-      vueComponent.setToastMessage(message);
-      vueComponent.showToast();
+      catch (error) {
+        vueComponent.setToastMessage(`Upload failed: ${error.message}`);
+        vueComponent.showToast();
+      }
     }
   },
 
@@ -48,19 +49,22 @@ const VMManager = {
    * @returns {Promise<void>} - A promise that resolves when the dictionary is deleted.
    */
   async handleDeleteDictionary(filename) {
-    const response = await MManager.deleteDictionary(filename);
-    if(response)
-    {
-      vueComponent.setToastMessage('Dictionary deleted successfully');
-      vueComponent.showToast();
-      vueComponent.scrollTo('top');
-      this.handleDictionary();
+    try {
+      const response = await MManager.deleteDictionary(filename);
+      if (response) {
+        vueComponent.setToastMessage('Dictionary deleted successfully');
+        vueComponent.showToast();
+        vueComponent.scrollTo('top');
+        this.handleDictionary();
+      }
+      else {
+        vueComponent.setToastMessage('Internal Server Error');
+        vueComponent.showToast();
+        vueComponent.scrollTo('top');
+      }
     }
-    else
-    {
-      vueComponent.setToastMessage('Internal Server Error');
-      vueComponent.showToast();
-      vueComponent.scrollTo('top');
+    catch (error) {
+      console.log(error);
     }
   },
 
@@ -70,50 +74,56 @@ const VMManager = {
    * @param {number} id - The ID of the dictionary to load.
    * @returns {Promise<void>} - A promise that resolves when the dictionary is loaded.
    */
-  async handleLoadDictionary(filename) 
-  {
-    const response = await MManager.loadDictionary(filename);
-    if (!response) 
-    {
-      vueComponent.setToastMessage('Internal Server Error');
-      vueComponent.showToast();
+  async handleLoadDictionary(filename) {
+    try {
+      const response = await MManager.loadDictionary(filename);
+      if (!response) {
+        vueComponent.setToastMessage('Internal Server Error');
+        vueComponent.showToast();
+      }
+      else {
+        vueComponent.setToastMessage('Dictionary loaded successfully');
+        vueComponent.showToast();
+        vueComponent.scrollTo('top');
+        vueComponent.handleUpdateEntry();
+      }
     }
-    else
-    {
-      vueComponent.setToastMessage('Dictionary loaded successfully');
-      vueComponent.showToast();
-      vueComponent.scrollTo('top');
-      vueComponent.handleUpdateEntry();
+    catch (error) {
+      console.log(error);
     }
   },
-  
+
   /**
    * Handles the dictionary functionality.
    * Retrieves dictionaries from MManager, resets the entry, prints the dictionary,
    * sets the refreshing status, and displays an alert message.
    * @returns {Promise<void>} A promise that resolves when the dictionary handling is complete.
    */
-  async handleDictionary(){
-    const response = await MManager.getDictionaries();
-    if(response && response.length > 0)
-    {
-      vueComponent.resetEntry();
-      vueComponent.printDictionary(response);
-      vueComponent.setIsRefreshingStop();
-      const currentTime = new Date().toLocaleTimeString();
-      const message = `Update success at: ${currentTime}`;
-      vueComponent.setAlertMessage(message);
+  async handleDictionary() {
+    try {
+      const response = await MManager.getDictionaries();
+      if (response && response.length > 0) {
+        vueComponent.resetEntry();
+        vueComponent.printDictionary(response);
+        vueComponent.setIsRefreshingStop();
+        const currentTime = new Date().toLocaleTimeString();
+        const message = `Update success at: ${currentTime}`;
+        vueComponent.setAlertMessage(message);
+      }
+      else {
+        vueComponent.resetEntry();
+        const currentTime = new Date().toLocaleTimeString();
+        const message = `No dictionaries found at: ${currentTime}`;
+        vueComponent.setAlertMessage(message);
+        vueComponent.setIsRefreshingStop();
+      }
+
     }
-    else
-    {
-      vueComponent.resetEntry();
-      const currentTime = new Date().toLocaleTimeString();
-      const message = `No dictionaries found at: ${currentTime}`;
-      vueComponent.setAlertMessage(message);
-      vueComponent.setIsRefreshingStop();
+    catch (error) {
+      console.log(error);
     }
   }
-  
+
 };
 
 export default VMManager;

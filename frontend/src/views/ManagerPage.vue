@@ -1,9 +1,14 @@
 <template>
   <div class="container">
     <h1 id="top" data-cy="manager-page-title">Gestione dizionario dati</h1>
-    <input-file ref="fileInput" @file-selected="handleFileSelected" :uploadButtonClass="uploadButtonClass" data-cy="file-input"/>
-    <toast-popup ref="Toast" id="toast" data-cy="toast-popup"/> 
-    <view-dictionary ref="Dictionary" @load-button-clicked="handleLoadButton" @delete-button-clicked="handleDeleteButtonClicked" @update-entry="handleUpdateEntry"  :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass" data-cy="view-dictionary"/>  
+    <input-file ref="fileInput" @file-selected="handleFileSelected" :uploadButtonClass="uploadButtonClass"
+      data-cy="file-input" />
+    <div id="toast" class="position-fixed top-0 end-0 p-3 mt-5" style="z-index: 11">
+      <toast-popup ref="Toast" id="toast" data-cy="toast-popup" />
+    </div>
+    <view-dictionary ref="Dictionary" @load-button-clicked="handleLoadButton"
+      @delete-button-clicked="handleDeleteButtonClicked" @update-entry="handleUpdateEntry"
+      :load-button-class="loadButtonClass" :delete-button-class="deleteButtonClass" data-cy="view-dictionary" />
   </div>
 </template>
 
@@ -37,8 +42,7 @@ export default {
       uploadButtonClass: 'btn btn-outline-secondary',
     };
   },
-  mounted() 
-  {
+  mounted() {
     /**
      * Sets the Vue component for the VMManager.
      * 
@@ -80,7 +84,7 @@ export default {
      * Handles the update of an entry.
      * Calls the `handleDictionary` method of the `VMManager` object.
      */
-    handleUpdateEntry(){
+    handleUpdateEntry() {
       VMManager.handleDictionary();
     },
 
@@ -90,15 +94,15 @@ export default {
      * @param {Array} response - The response containing the dictionary entries.
      */
     printDictionary(response) {
-      if(response && response.length > 0)
-        for(const row of response)
-          this.$refs.Dictionary.addNewEntry(row.name,row.extension,row.date,row.size,row.loaded);
+      if (response && response.length > 0)
+        for (const row of response)
+          this.$refs.Dictionary.addNewEntry(row.name, row.extension, row.date, row.size, row.loaded);
     },
 
     /**
      * Sets the isRefreshingStop flag to stop refreshing the dictionary.
      */
-    setIsRefreshingStop(){
+    setIsRefreshingStop() {
       this.$refs.Dictionary.isRefreshingStop();
     },
 
@@ -107,15 +111,15 @@ export default {
      * 
      * @param {string} message - The message to be set as the alert message.
      */
-    setAlertMessage(message){
-      if(message)
+    setAlertMessage(message) {
+      if (message)
         this.$refs.Dictionary.setAlertMessage(message);
     },
 
     /**
      * Resets the entry by calling the `resetEntry` method of the `Dictionary` component.
      */
-    resetEntry(){
+    resetEntry() {
       this.$refs.Dictionary.resetEntry();
     },
 
@@ -124,8 +128,8 @@ export default {
      * 
      * @param {string} message - The message to be displayed in the toast.
      */
-    setToastMessage(message){
-      if(message)
+    setToastMessage(message) {
+      if (message)
         this.$refs.Toast.setTest(message);
     },
 
@@ -134,7 +138,7 @@ export default {
      * 
      * @param {boolean} isUploading - The new value of `isUploading`.
      */
-    setIsUploading(isUploading){
+    setIsUploading(isUploading) {
       this.$refs.fileInput.setIsUploading(isUploading);
     },
 
@@ -142,7 +146,7 @@ export default {
      * Shows a toast message.
      * Calls the `showToast` method of the `Toast` component referenced by `$refs`.
      */
-    showToast(){
+    showToast() {
       this.$refs.Toast.showToast();
     },
 
@@ -151,7 +155,7 @@ export default {
      * @param {string} elementId - The ID of the element to scroll to.
      */
     scrollTo(elementId) {
-      const element = document.getElementById(elementId); 
+      const element = document.getElementById(elementId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }

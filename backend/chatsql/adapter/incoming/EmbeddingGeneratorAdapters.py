@@ -4,8 +4,6 @@ from transformers import AutoTokenizer, AutoModel
 import torch
 from chatsql.domain.Embedding import Embedding
 from chatsql.application.port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
-
-
 import numpy as np
 
 class TestEmbeddingAdapter(EmbeddingGeneratorPort):

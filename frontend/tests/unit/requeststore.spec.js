@@ -30,4 +30,10 @@ describe('requestPageStore', () => {
     store.setIsSending(true);
     expect(store.isSending).toBe(true);
   });
+
+  it('should set selected dictionary', () => {
+    const store = useRequestStore();
+    store.setSelectedDictionary('Test dictionary');
+    expect(store.selectedDictionary).toBe('Test dictionary');
+  });
 });
