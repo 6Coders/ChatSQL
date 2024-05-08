@@ -31,12 +31,8 @@ export default function RequestPageViewModel() {
    */
   const submitForm = async () => {
     requestStore.setIsSending(true)
-    if (requestStore.selectedDictionary) {
-      const result = await generatePrompt(requestStore.requestMessage)
-      handleMessage(result)
-    } else {
-      //handleMessage('Seleziona un dizionario per completare la richiesta')
-    }
+    const result = await generatePrompt(requestStore.requestMessage)
+    handleMessage(result)
     requestStore.setIsSending(false)
   }
 

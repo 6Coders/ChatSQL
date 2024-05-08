@@ -26,7 +26,11 @@ export default function useRequestModel() {
         'Content-Type': 'multipart/form-data'
       }
     }).then(function (response) {
-      return response.data.result;
+      if (response.data.result === '') {
+        return 'Errore: non è stato caricato alcun dizionario';
+      } else {
+        return response.data.result;
+      }
     }).catch((error) => {
       if (error.response) {
         return error.message;
