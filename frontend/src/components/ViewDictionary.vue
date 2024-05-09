@@ -10,41 +10,72 @@
         <p class="text-secondary" data-cy="alert-message">{{ alertMessage.value }}</p>
       </div>
       <div class="table-responsive">
+        <div v-if="isMobile" class="d-block d-sm-none">
+          <div v-for="(entry, index) in dictionaryEntries" :key="index" class="card my-3" :class="{ 'border-success': entry.load }">
+            <div class="card-header" :class="{ 'text-white': entry.load, 'bg-success': entry.load }">
+              <h5 class="mb-0">
+                {{ entry.name }}.{{ entry.extension }}
+                <i v-if="entry.load" class="bi bi-check" />
+              </h5>
+            </div>
+            <div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between">
+                    <strong>Dimensione:</strong> <span class="text-end">{{ entry.size }}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between">
+                    <strong>Data di caricamento:</strong> <span class="text-end">{{ entry.date }}</span>
+                  </li>
+                </ul>
+                <div class="text-end mt-1">
+                  <LoadButton :id="entry.id" :name="entry.name" :class="loadButtonClass"
+                    @load-click="loadButtonClick(entry.name + '.' + entry.extension)" :data-cy="entry.name + 'load'" />
+                  <DeleteButton :id="entry.id" :name="entry.name" :class="deleteButtonClass"
+                    @delete-click="deleteButtonClick(entry.name + '.' + entry.extension)"
+                    :data-cy="entry.name + 'delete'" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <table v-else class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Data di caricamento</th>
+              <th scope="col">Dimensione</th>
+              <th scope="col">Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(entry, index) in dictionaryEntries" :key="index" :class="{ 'table-success': entry.load }">
+              <th scope="row">{{ index + 1 }}</th>
+              <td>
+                {{ entry.name }}.{{ entry.extension }}
+                <i v-if="entry.load" class="bi bi-check" />
+              </td>
+              <td>{{ entry.date }}</td>
+              <td>{{ entry.size }}</td>
+              <td>
+                <LoadButton :id="entry.id" :name="entry.name" :class="loadButtonClass"
+                  @load-click="loadButtonClick(entry.name + '.' + entry.extension)" :data-cy="entry.name + 'load'" />
+                <DeleteButton :id="entry.id" :name="entry.name" :class="deleteButtonClass"
+                  @delete-click="deleteButtonClick(entry.name + '.' + entry.extension)"
+                  :data-cy="entry.name + 'delete'" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Estensione</th>
-          <th scope="col">Data di caricamento</th>
-          <th scope="col">Dimensione</th>
-          <th scope="col">Azioni</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(entry, index) in dictionaryEntries" :key="index" :class="{'table-success':entry.load}">
-          <th scope="row">{{ index + 1 }}</th>
-          <td>
-            {{ entry.name }}
-            <i v-if="entry.load" class="bi bi-check"/>
-          </td>
-          <td>{{entry.extension}}</td>
-          <td>{{entry.date}}</td>
-          <td>{{entry.size}}</td>
-          <td>
-            <LoadButton :id="entry.id" :name="entry.name" :class="loadButtonClass" @load-click="loadButtonClick(entry.name + '.' + entry.extension)" :data-cy="entry.name+'load'"/>
-            <DeleteButton :id="entry.id" :name="entry.name" :class="deleteButtonClass" @delete-click="deleteButtonClick(entry.name + '.' + entry.extension)" :data-cy="entry.name+'delete'" />
-          </td>
-        </tr>
-      </tbody>
-    </table>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { reactive } from 'vue';
 import LoadButton from '@/components/LoadButton.vue';
 import DeleteButton from '@/components/DeleteButton.vue';
@@ -146,6 +177,11 @@ export default {
       isRefreshing.value = false;
     }
 
+    const isMobile = computed(() => {
+      return screen.width <= 760;
+    });
+
+
     return {
       dictionaryEntries,
       addNewEntry,
@@ -156,8 +192,8 @@ export default {
       setAlertMessage,
       alertMessage,
       isRefreshing,
-      isRefreshingStop
-
+      isRefreshingStop,
+      isMobile
     };
   }
 };

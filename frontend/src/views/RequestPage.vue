@@ -1,12 +1,12 @@
 <template>
-  <div class="d-flex flex-column vh-80" data-cy="request-page">
+  <div class="container d-flex flex-column vh-80" data-cy="request-page">
     <!-- Messaggi chat -->
     <div class="overflow-auto flex-grow-1 px-md-5 mb-5 chat-height" data-cy="chat">
       <ViewGeneratedPrompts :messages="requestStore.messages" :status="requestStore.isSending" />
     </div>
 
     <!-- Input per l'utente -->
-    <div class="input-group mt-2 px-md-5 pb-5 bg-white fixed-bottom" style="height: 100px;">
+    <div class="container input-group mt-2 px-md-5 pb-5 bg-white fixed-bottom" style="height: 100px;">
       <input type="text" class="form-control" v-model="requestStore.requestMessage" name="requestMessage"
         autocomplete="off" placeholder="Inserisci un prompt qui..." data-cy="request-input" @keyup.enter="submitForm" />
       <SendRequestButton :submitMethod="submitForm" :stopSubmitMethod="stopSending" :sendButtonClass="sendButtonClass"

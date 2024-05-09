@@ -1,14 +1,14 @@
 <template>
-  <div class="container mt-5 px-5">
+  <div class="container">
     <!--
     This Vue.js component is the home page of the application.
     It contains two cards: one for managing data dictionaries and one for making natural language requests.
     Each card has a title, a description, and a button that redirects to the corresponding page.
     -->
-    <img src="../assets/6Coders-logo.png" alt="Logo" class="img-fluid mt-5 mb-5 mx-auto d-block"
-      style="max-width: 100px;">
+    <img src="../assets/6Coders-logo.png" alt="Logo 6Coders" class="img-fluid mt-5 mb-5 mx-auto d-block"
+      style="max-width: 100px;" loading="lazy">
     <div class="row justify-content-center">
-      <div class="col-md-6 mb-3">
+      <div class="cols-sm-12 col-md-6 mb-3">
         <div class="card h-100" data-cy="gestione-dizionario">
           <div class="card-body">
             <h2 class="card-title">Gestione dizionario dati</h2>
@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6 mb-3">
+      <div class="col-sm-12 col-md-6 mb-3">
         <div class="card h-100" data-cy="chatsql">
           <div class="card-body">
             <h2 class="card-title">ChatSQL</h2>
