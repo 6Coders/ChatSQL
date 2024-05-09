@@ -43,6 +43,12 @@ class TestEmbedding(TestCase):
 
             embedding = Embedding(text='default', data=None)
 
+    def test_zero_elements_in_data(self):
+
+        with self.assertRaises(ValueError) as context:
+
+            embedding = Embedding(text='default', data=np.array([]))
+
 
 if __name__ == '__main__':
     unittest.main()
