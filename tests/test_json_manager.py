@@ -36,8 +36,10 @@ class TestJSONManager(unittest.TestCase):
 
 	def test_handle_upload_success(self):
 
+		filepath = os.path.join(os.path.dirname(__file__), 'res', 'dbmusica.json')
+
 		response = self.client.post('/upload', data={
-			'file': open('res/dbmusica.json', 'rb')
+			'file': open(filepath, 'rb')
 		})
 
 		self.assertEquals(response.status_code, 200)
