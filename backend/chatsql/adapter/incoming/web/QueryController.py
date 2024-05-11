@@ -3,7 +3,7 @@ from chatsql.application.port.incoming.RichiestaPromptUseCase import RichiestaPr
 from chatsql.application.port.incoming.LoadDizionarioUseCase import LoadDizionarioUseCase
 from chatsql.application.port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
 
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
 
 class QueryController:
 
@@ -18,50 +18,21 @@ class QueryController:
         self._loadDizionarioUseCase = loadDizionarioUseCase
         self._visualizzaDizionarioCorrenteUseCase = visualizzaDizionarioCorrenteUseCase
 
-        self.blueprint = self.__create_blueprint()
+    def handle_selected(self):
 
-    
-    def __create_blueprint(self):
+        return {"result": self._visualizzaDizionarioCorrenteUseCase.selected}
 
-        query_page = Blueprint('QueryPage', __name__)
-    
+    def handle_prompt_generation(self):
 
-        @query_page.route('/selected', methods=['GET'])
-        def handle_load():
-            
-            try:
+        richiesta = request.form['userRequest']
 
-                return jsonify({"result": self._visualizzaDizionarioCorrenteUseCase.selected})
-                
-            except BaseException as e:
-                if hasattr(e, 'message'):
-                    return e.message
-                else:
-                    return jsonify(e)
+        self._loadDizionarioUseCase.load(
+            self._visualizzaDizionarioCorrenteUseCase.selected
+        )
+        risposta = self._richiestaPromptUseCase.query(richiesta)
 
-        @query_page.route('/generatePrompt', methods=['POST'])
-        def handle_prompt_generation():
-            
-            try:
+        data = {
+            'result': risposta
+        }
 
-                richiesta = request.form['userRequest']
-                
-                self._loadDizionarioUseCase.load(
-                    self._visualizzaDizionarioCorrenteUseCase.selected
-                )
-                risposta = self._richiestaPromptUseCase.query(richiesta)
-
-                data = {
-                    'result': risposta
-                }
-
-                return jsonify(data)
-                
-            except BaseException as e:
-                if hasattr(e, 'message'):
-                    return e.message
-                else:
-                    return e
-
-
-        return query_page
+        return data

@@ -14,14 +14,13 @@ class EmbeddingRepositoryAdapter(BaseEmbeddingRepository):
     def save(self, filename: str, embeddings: List[Embedding]) -> bool:
         try:
             filepath = os.path.join(self._folder, '.'.join(filename.split('.')[:-1]))
-            print(filepath)
             np.save(filepath, embeddings)
             return True
         except Exception as e:
             raise Exceptions.FileNotSaved(f"Error while saving embeddings to {filename}: {e}")
 
     def load(self, filename: str) -> List[Embedding]:
-        if filename == None:
+        if filename is None:
             raise Exceptions.EmbeddingsNotLoaded(f"Error while loading embeddings from {filename}: {e}")
 
         filepath = os.path.join(self._folder, '.'.join(filename.split('.')[:-1]) + '.npy')

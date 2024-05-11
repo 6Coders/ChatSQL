@@ -67,7 +67,7 @@ class JSONRepositoryAdapter(BaseJsonRepository):
                     filename.split('.')[-1] == 'json']
 
 
-    def __is_valid(self, content: List[str]) -> bool:
+    def __is_valid(self, content: str) -> bool:
         content = json.loads(content)
         return JSONValidator.is_valid_structure(content)
 
@@ -75,7 +75,6 @@ class JSONRepositoryAdapter(BaseJsonRepository):
         secured_filename = secure_filename(filename)
         return secured_filename in self.list_all()
 
-    def __create_folder(self) -> bool:
+    def __create_folder(self) -> None:
         if not exists(self._folder):
             mkdir(self._folder)
-

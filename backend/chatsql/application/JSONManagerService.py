@@ -24,7 +24,7 @@ class JSONManagerService(
     
     def remove(self, filename: str) -> bool:
         if not self._repository.remove(filename=filename):
-            raise ValueError(f"`{filename}` non esistente")
+            raise FileNotFoundError(f"`{filename}` non esistente")
         return True
     
     def list_all(self) -> List[str]:
@@ -34,13 +34,13 @@ class JSONManagerService(
         self._selectedFile = filename
         loaded = self._repository.load(filename)
         if not loaded:
-            raise ValueError(f"`{filename}` non esistente")
+            raise FileNotFoundError(f"`{filename}` non esistente")
         return True
 
     @property
     def selected(self) -> str:
         return self._selectedFile
-    
+
     @selected.setter
     def selected(self, filename: str) -> None:
         self._selectedFile = filename

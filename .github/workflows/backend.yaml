@@ -30,7 +30,6 @@ jobs:
 
       - name: Install dependecies for test
         run: |
-          pip install pytest
           pip install codecov
           pip install numpy
 
@@ -41,7 +40,7 @@ jobs:
 
       - name: Run Python tests and generate coverage report
         run: |
-          coverage run -m pytest
+          coverage run -m unittest discover -s tests\
 
       - name: Upload backend coverage report to Codecov
         uses: codecov/codecov-action@v4.0.1
