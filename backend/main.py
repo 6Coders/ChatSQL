@@ -68,13 +68,13 @@ if __name__ == '__main__':
         visualizzaDizionarioCorrenteUseCase=managerService
     )
 
-    app.register_blueprint(queryController.blueprint)
-    app.testing = True
-
     app.route('/upload', methods=["POST"])  (managerController.handle_upload)
     app.route('/files', methods=["GET"])    (managerController.handle_list_files)
     app.route('/select', methods=["POST"])  (managerController.handle_selection)
     app.route('/delete', methods=["DELETE"])(managerController.handle_delete)
+
+    app.route('/selected', methods=["GET"])         (queryController.handle_selected)
+    app.route('/generatePrompt', methods=["POST"])  (queryController.handle_prompt_generation)
 
     app.run(port=8000, debug=True)
 
