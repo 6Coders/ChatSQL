@@ -48,19 +48,12 @@ class ManagerController:
 
     def handle_list_files(self):
 
-        data = []
+        files = self._visualizzaListaDizionariUseCase.list_all()
 
-        for filename in self._visualizzaListaDizionariUseCase.list_all():
+        for data in files:
+            data['loaded'] = data['name'] == self._visualizzaDizionarioCorrenteUseCase.selected
 
-            data.append({
-                'name': '.'.join(filename.split('.')[:-1]),
-                'loaded': filename == self._visualizzaDizionarioCorrenteUseCase.selected,
-                'extension': filename.split('.')[-1],
-                'date': datetime.datetime.fromtimestamp(os.stat(os.path.join(Settings.folder, filename)).st_ctime),
-                'size': f"{os.stat(os.path.join(Settings.folder, filename)).st_size / 1024.0:.2f} Kb",
-            })
-
-        return data
+        return files
 
     def handle_selection(self):
 

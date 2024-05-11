@@ -30,9 +30,9 @@
                 </ul>
                 <div class="text-end mt-1">
                   <LoadButton :id="entry.id" :name="entry.name" :class="loadButtonClass"
-                    @load-click="loadButtonClick(entry.name + '.' + entry.extension)" :data-cy="entry.name + 'load'" />
+                    @load-click="loadButtonClick(entry.name)" :data-cy="entry.name + 'load'" />
                   <DeleteButton :id="entry.id" :name="entry.name" :class="deleteButtonClass"
-                    @delete-click="deleteButtonClick(entry.name + '.' + entry.extension)"
+                    @delete-click="deleteButtonClick(entry.name)"
                     :data-cy="entry.name + 'delete'" />
                 </div>
               </div>
@@ -117,9 +117,10 @@ export default {
      * @param {number} size - The size of the entry.
      * @param {boolean} load - The load status of the entry.
      */
-    function addNewEntry(name, extension, date, size, load) {
-      if (name && extension && date && size && load !== undefined) {
-        dictionaryEntries.value.push({ id: dictionaryEntries.value.length, name: name, extension: extension, date: date, size: size, load: load });
+    function addNewEntry(name, extension, date, size, loaded) {
+      console.log(loaded);
+      if (name && extension && date && size && loaded !== undefined) {
+        dictionaryEntries.value.push({ id: dictionaryEntries.value.length, name: name, extension: extension, date: date, size: size, load: loaded });
       }
     }
 

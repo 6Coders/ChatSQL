@@ -31,8 +31,4 @@ class QueryController:
         )
         risposta = self._richiestaPromptUseCase.query(richiesta)
 
-        data = {
-            'result': risposta
-        }
-
-        return data
+        return { 'result': risposta }
