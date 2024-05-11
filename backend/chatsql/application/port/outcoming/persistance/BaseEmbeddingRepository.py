@@ -1,6 +1,6 @@
 from typing import List
 from abc import ABC, abstractmethod
-from chatsql.domain.Embedding import Embedding
+from backend.chatsql.domain.Embedding import Embedding
 
 
 class BaseEmbeddingRepository(ABC):

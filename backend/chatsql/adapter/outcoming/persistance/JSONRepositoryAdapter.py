@@ -2,14 +2,14 @@ import os
 from datetime import datetime
 from typing import List, IO
 
-from chatsql.application.port.outcoming.persistance.BaseJSONRepository import BaseJsonRepository
+from backend.chatsql.application.port.outcoming.persistance.BaseJSONRepository import BaseJsonRepository
 
-from chatsql.application.port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
+from backend.chatsql.application.port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
 
-from chatsql.utils.JSONValidator import JSONValidator
+from backend.chatsql.utils.JSONValidator import JSONValidator
 
-from chatsql.utils.Common import Settings
-from chatsql.utils import Exceptions
+from backend.chatsql.utils.Common import Settings
+from backend.chatsql.utils import Exceptions
 
 import json
 from os import listdir, remove, mkdir

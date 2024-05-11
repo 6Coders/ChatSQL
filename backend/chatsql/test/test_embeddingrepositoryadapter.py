@@ -2,10 +2,10 @@ import os
 import numpy as np
 import pytest
 from unittest.mock import patch, MagicMock
-from chatsql.domain.Embedding import Embedding
-from chatsql.application.port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
-from chatsql.utils import Exceptions, Common
-from chatsql.adapter.outcoming.persistance.EmbeddingRepositoryAdapter import EmbeddingRepositoryAdapter
+from backend.chatsql.domain.Embedding import Embedding
+from backend.chatsql.application.port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
+from backend.chatsql.utils import Exceptions, Common
+from backend.chatsql.adapter.outcoming.persistance.EmbeddingRepositoryAdapter import EmbeddingRepositoryAdapter
 
 class TestEmbeddingRepositoryAdapter:
     @pytest.fixture

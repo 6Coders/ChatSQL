@@ -1,10 +1,10 @@
 from typing import List
 import os
 import numpy as np
-from chatsql.domain.Embedding import Embedding
-from chatsql.application.port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
+from backend.chatsql.domain.Embedding import Embedding
+from backend.chatsql.application.port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
 
-from chatsql.utils import Exceptions, Common
+from backend.chatsql.utils import Exceptions, Common
 
 class EmbeddingRepositoryAdapter(BaseEmbeddingRepository):
 

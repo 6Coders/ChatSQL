@@ -8,8 +8,8 @@ from .port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
 from .port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
 
 
-from chatsql.utils import Exceptions
-from chatsql.domain.Embedding import Embedding
+from backend.chatsql.utils import Exceptions
+from backend.chatsql.domain.Embedding import Embedding
 
 
 

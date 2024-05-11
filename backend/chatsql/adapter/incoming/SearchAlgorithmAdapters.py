@@ -3,9 +3,9 @@ from typing import List
 from sklearn.metrics.pairwise import cosine_similarity
 from transformers.tokenization_utils_base import np
 
-from chatsql.application.port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
+from backend.chatsql.application.port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
 
-from chatsql.domain.Embedding import Embedding
+from backend.chatsql.domain.Embedding import Embedding
 
 
 class TestSearchAlgorithm(SearchAlgorithmPort):
