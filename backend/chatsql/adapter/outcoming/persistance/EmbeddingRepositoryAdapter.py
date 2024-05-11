@@ -23,7 +23,7 @@ class EmbeddingRepositoryAdapter(BaseEmbeddingRepository):
         if filename is None:
             raise Exceptions.EmbeddingsNotLoaded(f"Error while loading embeddings from {filename}: {e}")
 
-        filepath = os.path.join(self._folder, '.'.join(filename.split('.')[:-1]) + '.npy')
+        filepath = os.path.join(self._folder, filename + '.npy')
         embeddings = np.load(filepath, allow_pickle=True)
         return embeddings.tolist()
 

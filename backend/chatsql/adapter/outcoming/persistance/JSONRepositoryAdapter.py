@@ -1,3 +1,5 @@
+import os
+from datetime import datetime
 from typing import List, IO
 
 from chatsql.application.port.outcoming.persistance.BaseJSONRepository import BaseJsonRepository
@@ -55,17 +57,33 @@ class JSONRepositoryAdapter(BaseJsonRepository):
 
     def remove(self, filename: str) -> bool:
         
-        if filename in self.list_all():
+        if filename in self.__filenames():
             remove(join(self._folder, filename))
             return True
 
         return False
         
     def list_all(self) -> List[str]:
-        return [filename for filename in listdir(self._folder) 
+
+        data = []
+
+        filenames = self.__filenames()
+
+        for filename in filenames:
+
+            data.append({
+                'name': '.'.join(filename.split('.')[:-1]),
+                'extension': filename.split('.')[-1],
+                'date': datetime.fromtimestamp(os.stat(os.path.join(Settings.folder, filename)).st_ctime),
+                'size': f"{os.stat(os.path.join(Settings.folder, filename)).st_size / 1024.0:.2f} Kb",
+            })
+
+        return data
+
+    def __filenames(self):
+        return [filename for filename in listdir(self._folder)
                 if isfile(join(self._folder, filename)) and
                     filename.split('.')[-1] == 'json']
-
 
     def __is_valid(self, content: str) -> bool:
         content = json.loads(content)
@@ -73,7 +91,7 @@ class JSONRepositoryAdapter(BaseJsonRepository):
 
     def __already_present(self, filename: str) -> bool:
         secured_filename = secure_filename(filename)
-        return secured_filename in self.list_all()
+        return secured_filename in self.__filenames()
 
     def __create_folder(self) -> None:
         if not exists(self._folder):
