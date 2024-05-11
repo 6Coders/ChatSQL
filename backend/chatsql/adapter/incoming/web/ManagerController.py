@@ -29,67 +29,54 @@ class ManagerController:
         self._visualizzaDizionarioCorrenteUseCase = visualizzaDizionarioCorrenteUseCase
         self._embeddingSaver = embeddingSaver
 
-        self.blueprint = self.__create_blueprint()
+    def handle_upload(self):
 
-    
-    def __create_blueprint(self):
+        try:
 
-        manager_page = Blueprint('ManagerPage', __name__)
+            file = request.files['file']
 
+            self._inserimentoDizionarioUseCase.add(file.filename, file.stream)
+            self._embeddingSaver.save(file.filename)
 
-        @manager_page.route('/upload', methods=['POST'])
-        def handle_upload():
-            
-            try:
-            
-                file = request.files['file']
+            return 'File aggiunto correttamente'
 
-                self._inserimentoDizionarioUseCase.add(file.filename, file.stream)
-                self._embeddingSaver.save(file.filename)
-                
-                return 'File aggiunto correttamente'
+        except BaseException as e:
+            if hasattr(e, 'message'):
+                return e.message
+            else:
+                return 'Non è possibile caricare il file'
 
-            except BaseException as e:
-                if hasattr(e, 'message'):
-                    return e.message
-                else:
-                    return 'Non è possibile caricare il file'
+    def handle_list_files(self):
 
-        @manager_page.route('/files', methods=['GET'])
-        def handle_list_files():
-            
-            data = []
+        data = []
 
-            for filename in self._visualizzaListaDizionariUseCase.list_all():
+        for filename in self._visualizzaListaDizionariUseCase.list_all():
 
-                data.append({
-                    'name': '.'.join(filename.split('.')[:-1]),
-                    'loaded': filename == self._visualizzaDizionarioCorrenteUseCase.selected,
-                    'extension': filename.split('.')[-1],
-                    'date': datetime.datetime.fromtimestamp(os.stat(os.path.join(Settings.folder, filename)).st_ctime),
-                    'size': f"{os.stat(os.path.join(Settings.folder, filename)).st_size / 1024.0:.2f} Kb",
-                })
+            data.append({
+                'name': '.'.join(filename.split('.')[:-1]),
+                'loaded': filename == self._visualizzaDizionarioCorrenteUseCase.selected,
+                'extension': filename.split('.')[-1],
+                'date': datetime.datetime.fromtimestamp(os.stat(os.path.join(Settings.folder, filename)).st_ctime),
+                'size': f"{os.stat(os.path.join(Settings.folder, filename)).st_size / 1024.0:.2f} Kb",
+            })
 
-            return data
+        return data
 
-        @manager_page.route('/select', methods=['POST'])
-        def handle_selection():
+    def handle_selection(self):
 
-            self._visualizzaDizionarioCorrenteUseCase.selected = request.form['selected']
+        self._visualizzaDizionarioCorrenteUseCase.selected = request.form['selected']
 
-            return 'ok'
+        return 'ok'
 
-        @manager_page.route('/delete', methods=['DELETE'])
-        def handle_delete():
-            
-            filename = request.data.decode()
+    def handle_delete(self):
 
-            if self._visualizzaDizionarioCorrenteUseCase.selected == filename:
-                self._visualizzaDizionarioCorrenteUseCase.selected = None
+        filename = request.data.decode()
 
-            self._eliminazioneDizionarioUseCase.remove(filename)
+        if self._visualizzaDizionarioCorrenteUseCase.selected == filename:
+            self._visualizzaDizionarioCorrenteUseCase.selected = None
 
-            return 'ok'
+        self._eliminazioneDizionarioUseCase.remove(filename)
+
+        return 'ok'
 
 
-        return manager_page
