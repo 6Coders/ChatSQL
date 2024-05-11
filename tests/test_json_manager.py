@@ -36,10 +36,8 @@ class TestJSONManager(unittest.TestCase):
 
 	def test_handle_upload_success(self):
 
-		filepath = os.path.join(os.path.dirname(os.getcwd()), 'backend', 'chatsql', 'json', 'dbmusica.json')
-
 		response = self.client.post('/upload', data={
-			'file': open(filepath, 'rb')
+			'file': open('res/dbmusica.json', 'rb')
 		})
 
 		self.assertEquals(response.status_code, 200)
