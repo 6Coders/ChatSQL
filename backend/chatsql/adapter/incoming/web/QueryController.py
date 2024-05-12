@@ -29,6 +29,10 @@ class QueryController:
         self._loadDizionarioUseCase.load(
             self._visualizzaDizionarioCorrenteUseCase.selected
         )
-        risposta = self._richiestaPromptUseCase.query(richiesta)
+        risposta = self._richiestaPromptUseCase.query(richiesta, self._visualizzaDizionarioCorrenteUseCase.selected)
 
-        return { 'result': risposta }
+        data = {
+            'result': risposta
+        }
+
+        return data
