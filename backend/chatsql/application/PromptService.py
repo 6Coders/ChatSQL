@@ -10,8 +10,8 @@ from .port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
 from chatsql.adapter.outcoming.persistance.JSONRepositoryAdapter import JSONRepositoryAdapter
 
 
-from chatsql.utils import Exceptions
-from chatsql.domain.Embedding import Embedding
+from backend.chatsql.utils import Exceptions
+from backend.chatsql.domain.Embedding import Embedding
 
 
 

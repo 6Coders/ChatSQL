@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
-from chatsql.adapter.incoming.SearchAlgorithmAdapters import TestSearchAlgorithm, KNN
-from chatsql.domain.Embedding import Embedding
+from backend.chatsql.adapter.incoming.SearchAlgorithmAdapters import TestSearchAlgorithm, KNN
+from backend.chatsql.domain.Embedding import Embedding
 
 class TestTestSearchAlgorithm:
     @pytest.fixture
