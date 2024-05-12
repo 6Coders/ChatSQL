@@ -1,7 +1,7 @@
 
-from chatsql.application.port.incoming.RichiestaPromptUseCase import RichiestaPromptUseCase
-from chatsql.application.port.incoming.LoadDizionarioUseCase import LoadDizionarioUseCase
-from chatsql.application.port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
+from backend.chatsql.application.port.incoming.RichiestaPromptUseCase import RichiestaPromptUseCase
+from backend.chatsql.application.port.incoming.LoadDizionarioUseCase import LoadDizionarioUseCase
+from backend.chatsql.application.port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
 
 from flask import Blueprint, request
 
@@ -29,10 +29,6 @@ class QueryController:
         self._loadDizionarioUseCase.load(
             self._visualizzaDizionarioCorrenteUseCase.selected
         )
-        risposta = self._richiestaPromptUseCase.query(richiesta, self._visualizzaDizionarioCorrenteUseCase.selected)
+        risposta = self._richiestaPromptUseCase.query(richiesta)
 
-        data = {
-            'result': risposta
-        }
-
-        return data
+        return {'result': risposta}

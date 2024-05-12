@@ -12,8 +12,8 @@ from .port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRep
 from .port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
 from .port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
 
-from chatsql.utils import Exceptions
-from chatsql.domain.Embedding import Embedding
+from backend.chatsql.utils import Exceptions
+from backend.chatsql.domain.Embedding import Embedding
 
 from ..adapter.outcoming.persistance.JSONRepositoryAdapter import JSONRepositoryAdapter
 from ..utils.Common import Settings
@@ -83,8 +83,8 @@ class PromptService(RichiestaPromptUseCase,
                 self._file_content = JSONManagerService.read(filename + '.json')
 
                 self._context = self._embeddingRepository.load(filename)
-            except Exception:
-                pass
+            except Exception as e:
+                return e
 
         return self._context
 

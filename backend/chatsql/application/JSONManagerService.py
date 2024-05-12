@@ -29,7 +29,7 @@ class JSONManagerService(
             raise FileNotFoundError(f"`{filename}` non esistente")
         return True
     
-    def list_all(self) -> List[str]:
+    def list_all(self) -> List[dict]:
         return self._repository.list_all()
 
     @staticmethod

@@ -1,14 +1,14 @@
 from os.path import join
 from typing import List
-from chatsql.application.port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
-from chatsql.application.port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
+from backend.chatsql.application.port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
+from backend.chatsql.application.port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
 
-from chatsql.adapter.outcoming.persistance.JSONRepositoryAdapter import JSONRepositoryAdapter
+from backend.chatsql.adapter.outcoming.persistance.JSONRepositoryAdapter import JSONRepositoryAdapter
 
-from chatsql.application.EmbeddingSaver import EmbeddingSaver
-from chatsql.domain.Embedding import Embedding
+from backend.chatsql.application.EmbeddingSaver import EmbeddingSaver
+from backend.chatsql.domain.Embedding import Embedding
 
-from chatsql.utils.Common import Settings
+from backend.chatsql.utils.Common import Settings
 import os
 import json
 

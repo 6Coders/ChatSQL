@@ -1,12 +1,12 @@
 
-from chatsql.application.port.incoming.InserimentoDizionarioUseCase import InserimentoDizionarioUseCase
-from chatsql.application.port.incoming.EliminazioneDizionarioUseCase import EliminazioneDizionarioUseCase
-from chatsql.application.port.incoming.VisualizzaListaDizionariUseCase import VisualizzaListaDizionariUseCase
-from chatsql.application.port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
-from chatsql.application.EmbeddingSaver import EmbeddingSaver
+from backend.chatsql.application.port.incoming.InserimentoDizionarioUseCase import InserimentoDizionarioUseCase
+from backend.chatsql.application.port.incoming.EliminazioneDizionarioUseCase import EliminazioneDizionarioUseCase
+from backend.chatsql.application.port.incoming.VisualizzaListaDizionariUseCase import VisualizzaListaDizionariUseCase
+from backend.chatsql.application.port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
+from backend.chatsql.application.EmbeddingSaver import EmbeddingSaver
 
-from chatsql.utils import Exceptions
-from chatsql.utils.Common import Settings
+from backend.chatsql.utils import Exceptions
+from backend.chatsql.utils.Common import Settings
 
 from flask import Blueprint, request, jsonify 
 import os
@@ -48,17 +48,10 @@ class ManagerController:
 
     def handle_list_files(self):
 
-        data = []
+        data = self._visualizzaListaDizionariUseCase.list_all()
 
-        for filename in self._visualizzaListaDizionariUseCase.list_all():
-
-            data.append({
-                'name': '.'.join(filename.split('.')[:-1]),
-                'loaded': filename == self._visualizzaDizionarioCorrenteUseCase.selected,
-                'extension': filename.split('.')[-1],
-                'date': datetime.datetime.fromtimestamp(os.stat(os.path.join(Settings.folder, filename)).st_ctime),
-                'size': f"{os.stat(os.path.join(Settings.folder, filename)).st_size / 1024.0:.2f} Kb",
-            })
+        for file in data:
+            file['loaded'] = file['name'] == self._visualizzaDizionarioCorrenteUseCase.selected
 
         return data
 

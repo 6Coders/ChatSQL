@@ -2,9 +2,9 @@ from typing import List
 
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
-from chatsql.application.port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
+from backend.chatsql.application.port.outcoming.SearchAlgorithmPort import SearchAlgorithmPort
 
-from chatsql.domain.Embedding import Embedding
+from backend.chatsql.domain.Embedding import Embedding
 
 
 class TestSearchAlgorithm(SearchAlgorithmPort):

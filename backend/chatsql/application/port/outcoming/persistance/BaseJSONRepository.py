@@ -12,5 +12,5 @@ class BaseJsonRepository(ABC):
         pass
     
     @abstractmethod
-    def list_all(self) -> List[str]:
+    def list_all(self) -> List[dict]:
         pass
