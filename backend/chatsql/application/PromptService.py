@@ -43,7 +43,7 @@ class PromptService(RichiestaPromptUseCase,
 
         file_content = JSONRepositoryAdapter.open(filename)
         tables = file_content['tables_info']
-        presult = " "
+        presult = "\n"
         #result = list(set([e.table_name for e in context]))
 
         for table_name, similarity in context:
@@ -68,9 +68,7 @@ class PromptService(RichiestaPromptUseCase,
             presult = presult +"\n\n"
             #print(presult)
 
-        return f"""Act as a SQL engineer.\n Given the context below, generate a query for MariaDB to answer the following question: {question}. \n
-            {presult}
-        """
+        return f"""Act as a SQL engineer.\nGiven the context below, generate a query for MariaDB to answer the following question: {question}.\n{presult}"""
     
     def load(self, filename: str) -> List[Embedding]:
         if filename == None:

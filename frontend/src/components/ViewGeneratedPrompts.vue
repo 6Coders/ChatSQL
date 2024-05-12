@@ -18,7 +18,7 @@
                     class="w-100 p-3 text-black bg-light border-start border-end">
                     <i class="bi bi-robot me-2"></i>
                     <strong>Response</strong>
-                    <p>{{ message.text }}</p>
+                    <pre>{{ message.text }}</pre>
                     <i class="bi bi-clipboard me-2 copy-icon" @click="copyToClipboard(message.text)"
                         data-cy="copy-button" aria-label="Copia"></i>
                 </div>
