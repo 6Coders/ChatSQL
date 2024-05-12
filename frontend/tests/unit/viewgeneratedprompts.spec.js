@@ -26,7 +26,7 @@ describe('ViewGeneratedPrompts.vue', () => {
   it('renders response message correctly', () => {
     expect(wrapper.find('.bi-robot').exists()).toBe(true)
     expect(wrapper.find('.bi-robot + strong').text()).toBe('Response')
-    expect(wrapper.find('.bi-robot + strong + p').text()).toBe('Test response')
+    expect(wrapper.find('.bi-robot + strong + pre').text()).toBe('Test response')
   })
 
   it('calls copyToClipboard when clipboard icon is clicked', async () => {

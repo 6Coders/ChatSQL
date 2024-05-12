@@ -118,7 +118,6 @@ export default {
      * @param {boolean} load - The load status of the entry.
      */
     function addNewEntry(name, extension, date, size, loaded) {
-      console.log(loaded);
       if (name && extension && date && size && loaded !== undefined) {
         dictionaryEntries.value.push({ id: dictionaryEntries.value.length, name: name, extension: extension, date: date, size: size, load: loaded });
       }

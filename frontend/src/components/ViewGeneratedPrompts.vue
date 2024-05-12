@@ -4,7 +4,8 @@
             <toast-popup ref="toast"></toast-popup>
         </div>
         <div v-if="messages.length === 0" class="text-center text-black py-5 mt-5">
-            <img src="../assets/6Coders-logo-original.png" alt="Logo" class="img-fluid" style="max-width: 100px" loading="lazy"/>
+            <img src="../assets/6Coders-logo-original.png" alt="Logo" class="img-fluid" style="max-width: 100px"
+                loading="lazy" />
             <h4 class="mt-5">Come ti possiamo aiutare?</h4>
         </div>
         <div id="message-list" v-else class="w-100 text-black">
@@ -18,7 +19,7 @@
                     class="w-100 p-3 text-black bg-light border-start border-end">
                     <i class="bi bi-robot me-2"></i>
                     <strong>Response</strong>
-                    <p>{{ message.text }}</p>
+                    <pre>{{ message.text }}</pre>
                     <i class="bi bi-clipboard me-2 copy-icon" @click="copyToClipboard(message.text)"
                         data-cy="copy-button" aria-label="Copia"></i>
                 </div>
@@ -61,7 +62,9 @@ export default {
 
         function showMessage(message) {
             toast.value.Message = message;
-            toast.value.showToast();
+            if (toast.value && typeof toast.value.showToast === 'function') {
+                toast.value.showToast()
+            }
         }
 
         /**
@@ -74,8 +77,8 @@ export default {
             try {
                 await toClipboard(text);
                 showMessage("Copiato negli appunti");
-            } catch (e) {
-                console.error(e);
+            } catch (error) {
+                console.error("Error copying text to clipboard:", error);
             }
         };
 
