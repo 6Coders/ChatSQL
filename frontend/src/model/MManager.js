@@ -121,7 +121,6 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       });
-      console.log('Backend response status:', response.status);
       if (response.status === 200) {
         return true;
       } else {
