@@ -12,6 +12,8 @@ class Embedding:
 
         if not isinstance(self.text, str):
             raise ValueError("'text' must be a string")
+        if not isinstance(self.table_name, str):
+            raise ValueError("'table_name' must be a string")
         if not isinstance(self.data, np.ndarray):
             raise ValueError("'data' must be a numpy array")
 
