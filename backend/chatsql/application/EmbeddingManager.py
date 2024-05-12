@@ -1,14 +1,23 @@
+from os.path import join
 from typing import List
-from backend.chatsql.application.port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
-from backend.chatsql.application.port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
+from chatsql.application.port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
+from chatsql.application.port.outcoming.persistance.BaseEmbeddingRepository import BaseEmbeddingRepository
 
-from backend.chatsql.application.EmbeddingSaver import EmbeddingSaver
-from backend.chatsql.domain.Embedding import Embedding
+from chatsql.adapter.outcoming.persistance.JSONRepositoryAdapter import JSONRepositoryAdapter
 
-from backend.chatsql.utils.Common import Settings
+from chatsql.application.EmbeddingSaver import EmbeddingSaver
+from chatsql.domain.Embedding import Embedding
+
+from chatsql.utils.Common import Settings
 import os
+import json
 
-class EmbeddingManager(EmbeddingSaver): 
+from werkzeug.utils import secure_filename
+
+from backend.chatsql.application.JSONManagerService import JSONManagerService
+
+
+class EmbeddingManager(EmbeddingSaver):
     
     def __init__(self, embeddingRepository: BaseEmbeddingRepository,
                  embeddingGeneratorPort: EmbeddingGeneratorPort) -> None:
@@ -20,11 +29,19 @@ class EmbeddingManager(EmbeddingSaver):
     def save(self, filename: str) -> bool:
         try:
 
-            with open(os.path.join(Settings.folder, filename), 'r') as file:
-                content = file.readlines()
+            data = JSONManagerService.read(filename)
 
-            embeddings = self._embeddingGeneratorPort.generate(content)
+            tables = data['tables_info']
+            table_descriptions =[]
+            table_names = []
+            for table_name, table_info in tables.items():
+                table_descriptions.append(table_info['table_description'])
+                table_names.append(table_name)
+
+            embeddings = self._embeddingGeneratorPort.generate(table_descriptions, table_names)
             self._embeddingRepository.save(filename, embeddings)
+
         except BaseException as e:
+            #print(e)
             return e
     

@@ -29,7 +29,7 @@ def heartbeat():
 def handle(e):
     return jsonify(400, e.message)
 
-from backend.chatsql.adapter.incoming.EmbeddingGeneratorAdapters import HuggingfaceEmbeddingAdapter, TestEmbeddingAdapter
+from backend.chatsql.adapter.incoming.EmbeddingGeneratorAdapters import HuggingfaceEmbeddingAdapter
 
 if __name__ == '__main__':
 

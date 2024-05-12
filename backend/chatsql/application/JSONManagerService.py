@@ -1,10 +1,12 @@
+import json
+from os.path import join
 from typing import List, IO
 from .port.incoming.InserimentoDizionarioUseCase import InserimentoDizionarioUseCase
 from .port.incoming.EliminazioneDizionarioUseCase import EliminazioneDizionarioUseCase
 from .port.incoming.VisualizzaListaDizionariUseCase import VisualizzaListaDizionariUseCase
 from .port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
-from .port.incoming.LoadDizionarioUseCase import LoadDizionarioUseCase
 from .port.outcoming.persistance.BaseJSONRepository import BaseJsonRepository
+from ..utils.Common import Settings
 
 
 class JSONManagerService(
@@ -23,19 +25,17 @@ class JSONManagerService(
         return self._repository.save(filename=filename, stream=stream)
     
     def remove(self, filename: str) -> bool:
-        if not self._repository.remove(filename=filename):
+        if not self._repository.remove(filename=filename + '.json'):
             raise FileNotFoundError(f"`{filename}` non esistente")
         return True
     
     def list_all(self) -> List[str]:
         return self._repository.list_all()
-    
-    def load(self, filename: str) -> bool:
-        self._selectedFile = filename
-        loaded = self._repository.load(filename)
-        if not loaded:
-            raise FileNotFoundError(f"`{filename}` non esistente")
-        return True
+
+    @staticmethod
+    def read(filename: str) -> bool:
+        with open(join(Settings.folder, filename), "r") as file:
+            return json.load(file)
 
     @property
     def selected(self) -> str:

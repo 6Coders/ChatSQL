@@ -1,3 +1,4 @@
+import pickle
 from typing import List
 import os
 import numpy as np
@@ -14,7 +15,8 @@ class EmbeddingRepositoryAdapter(BaseEmbeddingRepository):
     def save(self, filename: str, embeddings: List[Embedding]) -> bool:
         try:
             filepath = os.path.join(self._folder, '.'.join(filename.split('.')[:-1]))
-            np.save(filepath, embeddings)
+            with open(filepath, 'wb') as file:
+                pickle.dump(embeddings, file)
             return True
         except Exception as e:
             raise Exceptions.FileNotSaved(f"Error while saving embeddings to {filename}: {e}")
@@ -23,9 +25,9 @@ class EmbeddingRepositoryAdapter(BaseEmbeddingRepository):
         if filename is None:
             raise Exceptions.EmbeddingsNotLoaded(f"Error while loading embeddings from {filename}: {e}")
 
-        filepath = os.path.join(self._folder, filename + '.npy')
-        embeddings = np.load(filepath, allow_pickle=True)
-        return embeddings.tolist()
+        with open(os.path.join(self._folder, filename), 'rb') as file:
+            embeddings = pickle.load(file)
+        return embeddings
 
     def remove(self, filename: str) -> bool:
         try:

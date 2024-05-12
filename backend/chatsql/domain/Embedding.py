@@ -5,6 +5,7 @@ import numpy as np
 @dataclass
 class Embedding:
     text: str
+    table_name: str
     data: np.ndarray
 
     def __post_init__(self):
