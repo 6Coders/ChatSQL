@@ -49,7 +49,7 @@ if __name__ == '__main__':
     )
 
 
-    embeddingSaver = EmbeddingManager(
+    embeddingManager = EmbeddingManager(
         embeddingRepository=embeddingRepository,
         embeddingGeneratorPort=embeddingGeneratorPort
     )
@@ -59,7 +59,7 @@ if __name__ == '__main__':
         eliminazioneDizionarioUseCase=managerService,
         visualizzaListaDizionariUseCase=managerService,
         visualizzaDizionarioCorrenteUseCase=managerService,
-        embeddingSaver=embeddingSaver
+        embeddingSaver=embeddingManager
     )
 
     queryController = QueryController(

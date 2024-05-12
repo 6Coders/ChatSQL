@@ -45,3 +45,11 @@ class EmbeddingManager(EmbeddingSaver):
             #print(e)
             return e
     
+    def remove(self, filename: str) -> bool:
+
+        try:
+            folder = os.path.join(Settings.folder)
+            os.remove(os.path.join(folder, filename))
+
+        except Exception as e:
+            return e

@@ -69,6 +69,7 @@ class ManagerController:
             self._visualizzaDizionarioCorrenteUseCase.selected = None
 
         self._eliminazioneDizionarioUseCase.remove(filename)
+        self._embeddingSaver.remove(filename)
 
         return 'ok'
 
