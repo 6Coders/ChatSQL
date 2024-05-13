@@ -92,7 +92,7 @@ describe('VMManager', () => {
 
       await VMManager.handleLoadDictionary(filename);
 
-      expect(setToastMessageMock).toHaveBeenCalledWith('Dictionary loaded successfully');
+      expect(setToastMessageMock).toHaveBeenCalledWith('Dictionary selected successfully');
       expect(showToastMock).toHaveBeenCalled();
       expect(scrollToMock).toHaveBeenCalledWith('top');
       expect(handleUpdateEntryMock).toHaveBeenCalled();
