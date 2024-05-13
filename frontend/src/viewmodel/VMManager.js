@@ -82,7 +82,7 @@ const VMManager = {
         vueComponent.showToast();
       }
       else {
-        vueComponent.setToastMessage('Dictionary loaded successfully');
+        vueComponent.setToastMessage('Dictionary selected successfully');
         vueComponent.showToast();
         vueComponent.scrollTo('top');
         vueComponent.handleUpdateEntry();

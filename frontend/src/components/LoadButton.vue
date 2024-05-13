@@ -1,6 +1,6 @@
 <template>
   <button :class="LoadButtonClass" class="mx-2" type="button" @click="loadDictionary">
-    Load
+    Select
     <i class="bi bi-file-earmark-plus" />
   </button>
 </template>
