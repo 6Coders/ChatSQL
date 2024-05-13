@@ -1,6 +1,6 @@
 import unittest
 from unittest import TestCase
-from backend.chatsql.utils.Common import Settings
+from chatsql.utils.Common import Settings
 
 class TestSettings(TestCase):
     def test_settings_default_values(self):
@@ -16,7 +16,7 @@ class TestSettings(TestCase):
         settings = Settings(folder=custom_folder)
 
         # Assert
-        self.assertEquals(settings.folder, custom_folder)
+        self.assertEqual(settings.folder, custom_folder)
 
 
 if __name__ == '__main__':

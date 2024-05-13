@@ -1,9 +1,9 @@
 import pytest
 from unittest.mock import Mock, call
-from backend.chatsql.adapter.incoming.web.QueryController import QueryController
-from backend.chatsql.application.port.incoming.RichiestaPromptUseCase import RichiestaPromptUseCase
-from backend.chatsql.application.port.incoming.LoadDizionarioUseCase import LoadDizionarioUseCase
-from backend.chatsql.application.port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
+from chatsql.adapter.incoming.web.QueryController import QueryController
+from chatsql.application.port.incoming.RichiestaPromptUseCase import RichiestaPromptUseCase
+from chatsql.application.port.incoming.LoadDizionarioUseCase import LoadDizionarioUseCase
+from chatsql.application.port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
 
 def test_richiestaPromptUseCase_called():
     mock_richiestaPromptUseCase = Mock(RichiestaPromptUseCase)

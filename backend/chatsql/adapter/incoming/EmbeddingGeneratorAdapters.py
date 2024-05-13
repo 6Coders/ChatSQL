@@ -2,8 +2,8 @@
 from typing import List
 from sentence_transformers import SentenceTransformer
 import torch
-from backend.chatsql.domain.Embedding import Embedding
-from backend.chatsql.application.port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
+from chatsql.domain.Embedding import Embedding
+from chatsql.application.port.outcoming.EmbeddingGeneratorPort import EmbeddingGeneratorPort
 import numpy as np
     
 

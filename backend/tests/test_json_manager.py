@@ -5,7 +5,7 @@ from unittest.mock import MagicMock
 
 from flask import Flask
 
-from backend.chatsql.adapter.incoming.web.ManagerController import ManagerController
+from chatsql.adapter.incoming.web.ManagerController import ManagerController
 
 class TestJSONManager(unittest.TestCase):
 
@@ -36,13 +36,13 @@ class TestJSONManager(unittest.TestCase):
 
 	def test_handle_upload_success(self):
 
-		filepath = os.path.join(os.path.dirname(__file__), 'res', 'dbmusica.json')
+		filepath = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'json', 'dbmusica.json')
 
 		response = self.client.post('/upload', data={
 			'file': open(filepath, 'rb')
 		})
 
-		self.assertEquals(response.status_code, 200)
+		self.assertEqual(response.status_code, 200)
 		self.inserimentoDizionario.add.assert_called_once()
 		self.embeddingSaver.save.assert_called_once()
 
@@ -52,7 +52,7 @@ class TestJSONManager(unittest.TestCase):
 			'file': None
 		})
 
-		self.assertEquals(response.status_code, 200)
+		self.assertEqual(response.status_code, 200)
 		self.inserimentoDizionario.add.assert_not_called()
 		self.embeddingSaver.save.assert_not_called()
 
@@ -62,7 +62,7 @@ class TestJSONManager(unittest.TestCase):
 
 		response = self.client.get('/files')
 
-		self.assertEquals(response.status_code, 200)
+		self.assertEqual(response.status_code, 200)
 		self.visualizzaListaDizionari.list_all.assert_called_once()
 
 	def test_handle_list_files_example(self):
@@ -77,7 +77,7 @@ class TestJSONManager(unittest.TestCase):
 
 		response = self.client.get('/files')
 
-		self.assertEquals(response.status_code, 200)
+		self.assertEqual(response.status_code, 200)
 		self.visualizzaListaDizionari.list_all.assert_called_once()
 
 
@@ -89,7 +89,7 @@ class TestJSONManager(unittest.TestCase):
 			'selected': 'test'
 		})
 
-		self.assertEquals(response.status_code, 200)
+		self.assertEqual(response.status_code, 200)
 
 	def test_handle_delete_success(self):
 
@@ -97,7 +97,7 @@ class TestJSONManager(unittest.TestCase):
 
 		response = self.client.delete('/delete', data=b'ad')
 
-		self.assertEquals(response.status_code, 200)
+		self.assertEqual(response.status_code, 200)
 		self.eliminazioneDizionario.remove.assert_called_once()
 
 if __name__ == '__main__':

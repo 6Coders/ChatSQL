@@ -1,20 +1,20 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 
-from backend.chatsql.adapter.incoming.web.ManagerController import ManagerController
-from backend.chatsql.adapter.incoming.web.QueryController import QueryController
+from chatsql.adapter.incoming.web.ManagerController import ManagerController
+from chatsql.adapter.incoming.web.QueryController import QueryController
 
-from backend.chatsql.adapter.outcoming.persistance.JSONRepositoryAdapter import JSONRepositoryAdapter
-from backend.chatsql.adapter.outcoming.persistance.EmbeddingRepositoryAdapter import EmbeddingRepositoryAdapter
+from chatsql.adapter.outcoming.persistance.JSONRepositoryAdapter import JSONRepositoryAdapter
+from chatsql.adapter.outcoming.persistance.EmbeddingRepositoryAdapter import EmbeddingRepositoryAdapter
 
-from backend.chatsql.application.JSONManagerService import JSONManagerService
-from backend.chatsql.application.PromptService import PromptService
-from backend.chatsql.application.EmbeddingManager import EmbeddingManager
+from chatsql.application.JSONManagerService import JSONManagerService
+from chatsql.application.PromptService import PromptService
+from chatsql.application.EmbeddingManager import EmbeddingManager
 
-from backend.chatsql.adapter.incoming.SearchAlgorithmAdapters import KNN
+from chatsql.adapter.incoming.SearchAlgorithmAdapters import KNN
 
-from backend.chatsql.utils.Exceptions import CustomException
-from backend.chatsql.utils.Common import Settings
+from chatsql.utils.Exceptions import CustomException
+from chatsql.utils.Common import Settings
 import os
 
 app = Flask(__name__, static_url_path='', template_folder='../frontend/src/views')
@@ -29,7 +29,7 @@ def heartbeat():
 def handle(e):
     return jsonify(400, e.message)
 
-from backend.chatsql.adapter.incoming.EmbeddingGeneratorAdapters import HuggingfaceEmbeddingAdapter
+from chatsql.adapter.incoming.EmbeddingGeneratorAdapters import HuggingfaceEmbeddingAdapter
 
 if __name__ == '__main__':
 

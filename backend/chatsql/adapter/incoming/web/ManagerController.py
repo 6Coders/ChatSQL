@@ -1,12 +1,12 @@
 
-from backend.chatsql.application.port.incoming.InserimentoDizionarioUseCase import InserimentoDizionarioUseCase
-from backend.chatsql.application.port.incoming.EliminazioneDizionarioUseCase import EliminazioneDizionarioUseCase
-from backend.chatsql.application.port.incoming.VisualizzaListaDizionariUseCase import VisualizzaListaDizionariUseCase
-from backend.chatsql.application.port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
-from backend.chatsql.application.EmbeddingSaver import EmbeddingSaver
+from chatsql.application.port.incoming.InserimentoDizionarioUseCase import InserimentoDizionarioUseCase
+from chatsql.application.port.incoming.EliminazioneDizionarioUseCase import EliminazioneDizionarioUseCase
+from chatsql.application.port.incoming.VisualizzaListaDizionariUseCase import VisualizzaListaDizionariUseCase
+from chatsql.application.port.incoming.VisualizzaDizionarioCorrenteUseCase import VisualizzaDizionarioCorrenteUseCase
+from chatsql.application.EmbeddingSaver import EmbeddingSaver
 
-from backend.chatsql.utils import Exceptions
-from backend.chatsql.utils.Common import Settings
+from chatsql.utils import Exceptions
+from chatsql.utils.Common import Settings
 
 from flask import Blueprint, request, jsonify 
 import os

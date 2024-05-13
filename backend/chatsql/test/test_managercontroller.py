@@ -1,5 +1,5 @@
 import pytest
-from backend.chatsql.adapter.incoming.web.ManagerController import ManagerController
+from chatsql.adapter.incoming.web.ManagerController import ManagerController
 from unittest.mock import Mock
 from werkzeug.datastructures import FileStorage
 import io

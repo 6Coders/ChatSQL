@@ -1,7 +1,7 @@
 import unittest
 from unittest import TestCase
 
-from backend.chatsql.domain.Embedding import Embedding
+from chatsql.domain.Embedding import Embedding
 import numpy as np
 
 
@@ -17,8 +17,8 @@ class TestEmbedding(TestCase):
         embedding = Embedding(text=text, table_name=table_name, data=data)
 
         # Assert
-        self.assertEquals(embedding.text, text)
-        self.assertEquals(embedding.table_name, table_name)
+        self.assertEqual(embedding.text, text)
+        self.assertEqual(embedding.table_name, table_name)
         self.assertIsNone(
             # Returns None if the arrays are equal
             np.testing.assert_array_equal(

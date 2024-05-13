@@ -1,6 +1,6 @@
 import unittest
 from unittest import TestCase
-from backend.chatsql.utils.JSONValidator import JSONValidator
+from chatsql.utils.JSONValidator import JSONValidator
 
 class TestJSONValidator(TestCase):
     def test_is_valid_structure_valid(self):

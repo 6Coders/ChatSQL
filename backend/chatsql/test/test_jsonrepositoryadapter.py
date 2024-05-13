@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock, patch
-from backend.chatsql.utils import Exceptions
-from backend.chatsql.adapter.outcoming.persistance.JSONRepositoryAdapter import JSONRepositoryAdapter
+from chatsql.utils import Exceptions
+from chatsql.adapter.outcoming.persistance.JSONRepositoryAdapter import JSONRepositoryAdapter
 from io import BytesIO
 
 @patch('chatsql.adapter.outcoming.persistance.JSONRepositoryAdapter.Settings')

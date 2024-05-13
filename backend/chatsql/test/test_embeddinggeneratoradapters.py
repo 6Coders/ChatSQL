@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from backend.chatsql.adapter.incoming.EmbeddingGeneratorAdapters import TestEmbeddingAdapter, HuggingfaceEmbeddingAdapter
+from chatsql.adapter.incoming.EmbeddingGeneratorAdapters import TestEmbeddingAdapter, HuggingfaceEmbeddingAdapter
 
 class TestTestEmbeddingAdapter:
     @pytest.fixture
