@@ -74,8 +74,7 @@ class JSONRepositoryAdapter(BaseJsonRepository):
             return json.load(file)
 
     def _filenames(self):
-        return [filename for filename in os.listdir(Settings.folder)
-                if os.path.isfile(filename) and filename.split('.')[-1] == 'json']
+        return [filename for filename in os.listdir(Settings.folder) if filename.split('.')[-1] == 'json']
 
     def _is_valid(self, content: str) -> bool:
         content = json.loads(content)
