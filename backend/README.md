@@ -3,7 +3,7 @@
 # Installazione
 
 - Clonare la repository
-- Tramite Command Shell posizionarsi nel percorso ./backend;
+- Tramite Command Shell posizionarsi nel percorso ./backend
 - Installare le dipendeze con il comando:
   - **pip install -r ./requirements.txt**
 - Avviare il backend con il comando:
