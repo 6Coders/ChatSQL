@@ -1,49 +1,25 @@
-# frontend
+# Installazione 
 
-## Project setup
-```
-npm install
-```
+- Clonare la repository;
+- Tramite Command Shell posizionarsi nel percorso ./frontend;
+- Installare le dipendeze con il comando:
+  - **npm install**
+- Avviare il frontend con il comando:
+  - **npm run serve**
+  
+La web application sarà visibile all'indirizzo visualizzato sul terminale tramite browser.
+Per utilizzare le funzionalità dell'applicazione è necessario che il server sia in esecuzione 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+# Testing
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Per eseguire l'analisi statica eseguire il comando:
 
-### Run your unit tests
-```
-npm run test:unit
-```
+- **npm run lint**
 
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
+Per eseguire i test di unità e di integrazione eseguire il comando:
 
-### Lints and fixes files
-```
-npm run lint
-```
+- **npx jest**
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Per eseguire i test di sistema eseguire il comando:
 
-## Jest
-```
-npx jest
-```
-
-## Copertura del codice
-```
-npx jest --coverage
-```
-
-## Cypress
-```
-npx cypress open
-```
+- **npx cypress run**
