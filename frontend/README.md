@@ -1,8 +1,8 @@
 # Frontend
 ## Installazione 
 
-- Clonare la repository;
-- Tramite Command Shell posizionarsi nel percorso ./frontend;
+- Clonare la repository
+- Tramite Command Shell posizionarsi nel percorso ./frontend
 - Installare le dipendeze con il comando:
   - **npm install**
 - Avviare il frontend con il comando:
