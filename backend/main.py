@@ -19,7 +19,7 @@ import os
 
 app = Flask(__name__, static_url_path='', template_folder='../frontend/src/views')
 
-CORS(app, resources={r'/*': {'origins': '*'}}, supports_credentials=True)
+CORS(app, resources={r'/*': {"origins": "*", "allow_headers": "*", "expose_headers": "*"}}, supports_credentials=True)
 
 @app.route('/heartbeat')
 def heartbeat():
@@ -35,6 +35,8 @@ if __name__ == '__main__':
 
     temp_dir = os.environ.get('TMP') or os.environ.get('TMPDIR') or os.getcwd()
     Settings.folder = os.path.join(temp_dir, 'uploads')
+    os.makedirs(Settings.folder, exist_ok=True)
+
 
     jsonRepository = JSONRepositoryAdapter()
     managerService = JSONManagerService(jsonRepository)
@@ -77,4 +79,3 @@ if __name__ == '__main__':
     app.route('/generatePrompt', methods=["POST"])  (queryController.handle_prompt_generation)
 
     app.run(port=8000, debug=True)
-
